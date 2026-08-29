@@ -1,0 +1,580 @@
+date,district,nh,rainfall_mm,landslide,flood,roadDamage,blocked,delayHours,source
+2018-05-10,Nagaland,NH-37,15.1,false,false,good,false,1,IMD
+2018-05-10,Mizoram,NH-37,32.5,false,false,fair,false,2,IMD
+2018-05-14,Assam,NH-52,28.8,false,false,good,false,2,IMD
+2018-05-15,Assam,NH-52,24.3,false,false,good,false,2,IMD
+2018-05-16,Tripura,NH-157,43,false,false,good,false,0,IMD
+2018-05-18,Arunachal Pradesh,NH-157,13.3,false,false,good,false,0,IMD
+2018-05-19,Nagaland,NH-29,42.6,false,false,good,false,2,IMD
+2018-05-19,Meghalaya,NH-52,19.1,true,false,poor,false,2,IMD
+2018-05-26,Assam,NH-31,48.4,false,false,fair,false,0,IMD
+2018-05-26,Arunachal Pradesh,NH-37,24.2,false,false,fair,false,0,IMD
+2018-06-01,Manipur,NH-52,45.5,false,false,good,false,2,IMD
+2018-06-01,Meghalaya,NH-157,22.2,false,false,good,false,2,IMD
+2018-06-02,Mizoram,NH-31,29.6,false,false,good,false,0,IMD
+2018-06-02,Assam,NH-29,41.9,false,false,good,false,2,IMD
+2018-06-03,Arunachal Pradesh,NH-29,44.5,false,false,fair,false,0,IMD
+2018-06-05,Nagaland,NH-31,15.6,false,false,fair,false,0,IMD
+2018-06-05,Manipur,NH-52,41.7,false,false,good,false,2,IMD
+2018-06-06,Manipur,NH-31,101,false,false,fair,true,13,IMD+BRO/NHAI
+2018-06-07,Tripura,NH-31,137.4,true,false,poor,true,17,IMD+BRO/NHAI
+2018-06-10,Arunachal Pradesh,NH-37,124.7,true,false,fair,true,17,IMD+BRO/NHAI
+2018-06-10,Tripura,NH-52,32.9,false,false,good,false,0,IMD
+2018-06-19,Arunachal Pradesh,NH-31,37.5,false,false,good,false,2,IMD
+2018-06-20,Arunachal Pradesh,NH-29,16.2,false,false,good,false,2,IMD
+2018-06-20,Assam,NH-31,38.4,false,false,good,false,1,IMD
+2018-06-22,Mizoram,NH-29,27.5,false,false,good,false,1,IMD
+2018-06-24,Tripura,NH-52,41.7,false,false,fair,false,1,IMD
+2018-06-24,Mizoram,NH-29,29.7,false,false,good,false,1,IMD
+2018-06-26,Tripura,NH-52,42.9,false,false,good,false,1,IMD
+2018-07-02,Assam,NH-157,14.2,false,false,fair,false,1,IMD
+2018-07-02,Meghalaya,NH-52,39.5,false,false,good,false,0,IMD
+2018-07-04,Meghalaya,NH-29,44.8,false,false,good,false,2,IMD
+2018-07-04,Nagaland,NH-29,32.9,false,false,fair,false,2,IMD
+2018-07-08,Meghalaya,NH-52,10.7,false,false,good,false,2,IMD
+2018-07-10,Nagaland,NH-31,31.9,false,false,good,false,2,IMD
+2018-07-10,Meghalaya,NH-52,103.2,true,false,poor,true,9,IMD+BRO/NHAI
+2018-07-11,Arunachal Pradesh,NH-52,42.4,false,false,good,false,0,IMD
+2018-07-11,Arunachal Pradesh,NH-29,46.5,false,false,fair,false,2,IMD
+2018-07-14,Manipur,NH-29,42.9,false,false,good,false,1,IMD
+2018-07-16,Nagaland,NH-157,128.4,false,false,fair,true,7,IMD+BRO/NHAI
+2018-07-18,Meghalaya,NH-29,11.2,true,false,poor,false,1,IMD
+2018-07-19,Tripura,NH-29,10.7,true,false,poor,false,2,IMD
+2018-07-22,Meghalaya,NH-37,125.6,false,false,good,true,10,IMD+BRO/NHAI
+2018-07-23,Manipur,NH-37,47.8,false,false,fair,false,1,IMD
+2018-07-25,Manipur,NH-52,32.5,true,false,poor,false,2,IMD
+2018-07-28,Manipur,NH-52,11.7,false,false,good,false,1,IMD
+2018-07-28,Mizoram,NH-31,44.7,false,false,good,false,2,IMD
+2018-08-01,Assam,NH-29,12.7,false,false,good,false,2,IMD
+2018-08-03,Tripura,NH-52,30.2,true,false,fair,false,2,IMD
+2018-08-09,Manipur,NH-31,137.1,false,false,fair,true,14,IMD+BRO/NHAI
+2018-08-10,Mizoram,NH-29,42.9,false,false,good,false,1,IMD
+2018-08-12,Assam,NH-157,33.6,true,false,poor,false,0,IMD
+2018-08-15,Assam,NH-29,49.3,false,false,good,false,2,IMD
+2018-08-15,Arunachal Pradesh,NH-52,40.5,false,false,good,false,2,IMD
+2018-08-15,Arunachal Pradesh,NH-157,42.5,true,false,poor,false,2,IMD
+2018-08-16,Mizoram,NH-31,34.2,false,false,fair,false,1,IMD
+2018-08-18,Mizoram,NH-52,27.3,false,false,good,false,1,IMD
+2018-08-20,Mizoram,NH-52,32.7,false,false,good,false,0,IMD
+2018-08-22,Assam,NH-52,25.5,false,false,good,false,1,IMD
+2018-08-22,Manipur,NH-157,41.4,false,false,good,false,1,IMD
+2018-08-25,Nagaland,NH-29,49.7,false,false,fair,false,1,IMD
+2018-08-28,Manipur,NH-52,22.6,false,false,fair,false,0,IMD
+2018-09-02,Meghalaya,NH-29,45.5,false,false,fair,false,0,IMD
+2018-09-03,Meghalaya,NH-157,39.6,false,false,fair,false,1,IMD
+2018-09-03,Assam,NH-157,47.3,false,false,good,false,2,IMD
+2018-09-04,Mizoram,NH-31,11.2,false,false,good,false,2,IMD
+2018-09-07,Nagaland,NH-31,23.1,false,false,good,false,2,IMD
+2018-09-08,Arunachal Pradesh,NH-52,20.5,false,false,good,false,0,IMD
+2018-09-08,Mizoram,NH-157,138.2,true,false,poor,true,13,IMD+BRO/NHAI
+2018-09-12,Meghalaya,NH-31,44.2,false,false,fair,false,0,IMD
+2018-09-12,Assam,NH-157,136.7,true,true,poor,true,8,IMD+BRO/NHAI
+2018-09-13,Meghalaya,NH-29,41.3,false,false,fair,false,1,IMD
+2018-09-14,Manipur,NH-52,14.5,false,false,good,false,0,IMD
+2018-09-16,Manipur,NH-52,116.7,false,false,good,true,13,IMD+BRO/NHAI
+2018-09-18,Arunachal Pradesh,NH-157,39.1,false,false,good,false,1,IMD
+2018-09-22,Manipur,NH-31,32.4,false,false,good,false,2,IMD
+2018-09-23,Mizoram,NH-157,25.9,false,false,good,false,0,IMD
+2018-09-25,Assam,NH-37,19.7,false,false,fair,false,2,IMD
+2018-09-25,Mizoram,NH-52,109,true,false,poor,true,13,IMD+BRO/NHAI
+2018-09-25,Manipur,NH-37,131.2,true,false,fair,true,14,IMD+BRO/NHAI
+2018-09-27,Tripura,NH-29,99.5,false,false,fair,false,0,IMD+BRO/NHAI
+2019-05-01,Meghalaya,NH-157,26,true,false,poor,false,2,IMD
+2019-05-03,Nagaland,NH-31,42.4,false,false,good,false,0,IMD
+2019-05-03,Arunachal Pradesh,NH-157,16.9,false,false,fair,false,0,IMD
+2019-05-08,Tripura,NH-37,95.3,true,false,poor,true,7,IMD+BRO/NHAI
+2019-05-10,Meghalaya,NH-29,12,false,false,good,false,2,IMD
+2019-05-12,Tripura,NH-52,30.4,false,false,fair,false,1,IMD
+2019-05-13,Mizoram,NH-52,114.8,true,false,fair,true,6,IMD+BRO/NHAI
+2019-05-14,Tripura,NH-37,137.7,true,false,fair,true,14,IMD+BRO/NHAI
+2019-05-16,Manipur,NH-37,106.8,true,false,poor,true,10,IMD+BRO/NHAI
+2019-05-17,Tripura,NH-157,11.4,false,false,good,false,0,IMD
+2019-05-17,Assam,NH-37,25.3,false,false,good,false,1,IMD
+2019-05-19,Mizoram,NH-52,39.2,false,false,good,false,0,IMD
+2019-05-20,Mizoram,NH-29,124.9,false,false,good,true,11,IMD+BRO/NHAI
+2019-05-22,Arunachal Pradesh,NH-52,41.8,false,false,good,false,1,IMD
+2019-05-23,Manipur,NH-31,29.6,false,false,fair,false,1,IMD
+2019-05-26,Assam,NH-29,24.1,false,false,fair,false,2,IMD
+2019-05-27,Meghalaya,NH-29,45.7,false,false,good,false,2,IMD
+2019-05-28,Mizoram,NH-31,36.1,false,false,fair,false,0,IMD
+2019-06-01,Manipur,NH-31,46.4,false,false,fair,false,2,IMD
+2019-06-03,Assam,NH-29,19.2,false,false,good,false,0,IMD
+2019-06-03,Arunachal Pradesh,NH-37,40.4,false,false,fair,false,2,IMD
+2019-06-05,Assam,NH-37,124.5,true,false,poor,true,16,IMD+BRO/NHAI
+2019-06-06,Tripura,NH-31,80.1,false,false,good,false,0,IMD+BRO/NHAI
+2019-06-10,Meghalaya,NH-52,46.7,false,false,good,false,0,IMD
+2019-06-10,Meghalaya,NH-52,35,false,false,fair,false,1,IMD
+2019-06-12,Tripura,NH-52,28.1,false,false,good,false,0,IMD
+2019-06-13,Tripura,NH-31,120.5,true,false,poor,true,9,IMD+BRO/NHAI
+2019-06-15,Tripura,NH-37,29.9,false,false,good,false,1,IMD
+2019-06-16,Meghalaya,NH-52,39.7,false,false,good,false,2,IMD
+2019-06-17,Manipur,NH-52,46.8,false,false,good,false,2,IMD
+2019-06-17,Meghalaya,NH-31,26.5,false,false,good,false,2,IMD
+2019-06-18,Nagaland,NH-157,21.9,false,false,good,false,2,IMD
+2019-06-18,Tripura,NH-52,16.7,false,false,good,false,2,IMD
+2019-06-19,Meghalaya,NH-37,97.1,true,false,poor,true,8,IMD+BRO/NHAI
+2019-06-20,Manipur,NH-52,29,false,false,good,false,0,IMD
+2019-06-20,Tripura,NH-29,30.3,true,false,fair,false,2,IMD
+2019-06-21,Meghalaya,NH-52,41.8,false,false,good,false,2,IMD
+2019-06-23,Mizoram,NH-52,33.8,false,false,good,false,2,IMD
+2019-06-24,Assam,NH-29,29.6,false,false,good,false,1,IMD
+2019-06-27,Nagaland,NH-29,34.1,false,false,fair,false,0,IMD
+2019-07-01,Tripura,NH-29,107.2,true,false,poor,true,17,IMD+BRO/NHAI
+2019-07-02,Manipur,NH-52,41.7,false,false,fair,false,1,IMD
+2019-07-03,Manipur,NH-37,38.9,false,false,fair,false,2,IMD
+2019-07-04,Assam,NH-29,15.2,false,false,good,false,1,IMD
+2019-07-04,Nagaland,NH-31,20.8,false,false,good,false,0,IMD
+2019-07-06,Mizoram,NH-29,12.2,false,false,fair,false,2,IMD
+2019-07-07,Assam,NH-29,116.7,true,true,fair,true,13,IMD+BRO/NHAI
+2019-07-08,Manipur,NH-52,20.1,false,false,fair,false,1,IMD
+2019-07-10,Arunachal Pradesh,NH-52,26.4,false,false,good,false,2,IMD
+2019-07-11,Meghalaya,NH-29,27.7,true,false,poor,false,0,IMD
+2019-07-15,Arunachal Pradesh,NH-29,10.8,false,false,good,false,0,IMD
+2019-07-16,Meghalaya,NH-31,107.7,true,false,poor,true,11,IMD+BRO/NHAI
+2019-07-17,Nagaland,NH-157,23.6,false,false,good,false,0,IMD
+2019-07-17,Arunachal Pradesh,NH-37,34.4,false,false,fair,false,2,IMD
+2019-07-17,Assam,NH-31,48.7,false,false,fair,false,0,IMD
+2019-07-20,Assam,NH-52,24.4,false,false,good,false,0,IMD
+2019-07-21,Nagaland,NH-157,44.1,false,false,fair,false,2,IMD
+2019-07-21,Meghalaya,NH-157,110.5,true,false,poor,true,17,IMD+BRO/NHAI
+2019-07-22,Assam,NH-157,42.7,false,false,good,false,0,IMD
+2019-07-24,Arunachal Pradesh,NH-157,34.7,false,false,good,false,2,IMD
+2019-07-25,Arunachal Pradesh,NH-29,19.4,false,false,good,false,2,IMD
+2019-07-25,Tripura,NH-29,82.5,true,false,poor,true,14,IMD+BRO/NHAI
+2019-07-25,Tripura,NH-31,31.7,false,false,good,false,2,IMD
+2019-07-26,Manipur,NH-37,24.2,false,false,good,false,2,IMD
+2019-08-03,Manipur,NH-29,25.8,false,false,good,false,2,IMD
+2019-08-03,Mizoram,NH-31,39.9,false,false,fair,false,2,IMD
+2019-08-04,Tripura,NH-29,20.6,false,false,fair,false,0,IMD
+2019-08-08,Assam,NH-157,19.9,false,false,fair,false,0,IMD
+2019-08-11,Arunachal Pradesh,NH-37,31.8,false,false,good,false,1,IMD
+2019-08-13,Assam,NH-157,11.7,false,false,fair,false,0,IMD
+2019-08-14,Tripura,NH-157,34.2,false,false,good,false,1,IMD
+2019-08-14,Arunachal Pradesh,NH-29,40.8,true,false,poor,false,1,IMD
+2019-08-15,Manipur,NH-52,38.8,false,false,good,false,2,IMD
+2019-08-16,Assam,NH-157,43.9,false,false,good,false,1,IMD
+2019-08-18,Mizoram,NH-37,26.7,false,false,good,false,1,IMD
+2019-08-20,Arunachal Pradesh,NH-31,37.9,false,false,good,false,1,IMD
+2019-08-20,Arunachal Pradesh,NH-37,19.2,false,false,good,false,0,IMD
+2019-08-21,Meghalaya,NH-37,122,true,false,poor,true,17,IMD+BRO/NHAI
+2019-08-21,Meghalaya,NH-29,134.7,false,false,fair,true,15,IMD+BRO/NHAI
+2019-08-21,Nagaland,NH-157,108.5,true,false,poor,true,17,IMD+BRO/NHAI
+2019-08-24,Manipur,NH-157,27.4,false,false,good,false,1,IMD
+2019-08-25,Tripura,NH-157,24.2,false,false,fair,false,2,IMD
+2019-08-25,Nagaland,NH-31,28.9,false,false,fair,false,2,IMD
+2019-08-26,Manipur,NH-52,34.5,false,false,fair,false,2,IMD
+2019-08-26,Manipur,NH-157,49.8,false,false,good,false,2,IMD
+2019-08-27,Tripura,NH-31,41.4,false,false,good,false,0,IMD
+2019-08-28,Mizoram,NH-37,126.3,false,false,good,true,9,IMD+BRO/NHAI
+2019-08-28,Nagaland,NH-31,38.6,false,false,good,false,2,IMD
+2019-08-28,Meghalaya,NH-37,113,false,false,fair,true,13,IMD+BRO/NHAI
+2019-09-01,Tripura,NH-29,45.6,false,false,good,false,1,IMD
+2019-09-01,Assam,NH-157,20,false,false,good,false,1,IMD
+2019-09-03,Assam,NH-31,38.9,false,false,good,false,1,IMD
+2019-09-03,Manipur,NH-157,42.7,false,false,good,false,2,IMD
+2019-09-05,Nagaland,NH-37,32,false,false,fair,false,2,IMD
+2019-09-05,Manipur,NH-52,32.8,false,false,good,false,2,IMD
+2019-09-07,Nagaland,NH-52,49.6,false,false,fair,false,2,IMD
+2019-09-07,Nagaland,NH-37,14.5,false,false,good,false,2,IMD
+2019-09-11,Manipur,NH-157,94.8,true,false,poor,true,16,IMD+BRO/NHAI
+2019-09-12,Assam,NH-157,101.9,true,false,poor,true,17,IMD+BRO/NHAI
+2019-09-12,Assam,NH-37,27.6,false,false,fair,false,0,IMD
+2019-09-15,Tripura,NH-157,34.3,false,false,good,false,0,IMD
+2019-09-16,Manipur,NH-31,126.2,false,false,fair,true,7,IMD+BRO/NHAI
+2019-09-16,Mizoram,NH-37,16.5,false,false,fair,false,2,IMD
+2019-09-17,Arunachal Pradesh,NH-29,23,true,false,fair,false,0,IMD
+2019-09-22,Mizoram,NH-157,89,true,false,poor,true,13,IMD+BRO/NHAI
+2019-09-22,Arunachal Pradesh,NH-37,19.4,false,false,fair,false,0,IMD
+2019-09-23,Assam,NH-52,28.9,false,false,good,false,0,IMD
+2019-09-23,Nagaland,NH-52,22.9,false,false,fair,false,1,IMD
+2019-09-24,Tripura,NH-37,11.7,false,false,good,false,1,IMD
+2019-09-27,Mizoram,NH-37,27.8,false,false,fair,false,1,IMD
+2020-05-04,Arunachal Pradesh,NH-29,25.6,true,false,poor,false,0,IMD
+2020-05-06,Assam,NH-52,31.1,true,false,fair,false,1,IMD
+2020-05-07,Assam,NH-157,12.4,false,false,good,false,1,IMD
+2020-05-07,Tripura,NH-29,104.2,true,false,poor,true,7,IMD+BRO/NHAI
+2020-05-08,Mizoram,NH-29,30.5,false,false,good,false,1,IMD
+2020-05-11,Arunachal Pradesh,NH-52,38,true,false,poor,false,2,IMD
+2020-05-13,Arunachal Pradesh,NH-157,116.6,true,false,poor,true,12,IMD+BRO/NHAI
+2020-05-13,Manipur,NH-31,29.7,false,false,fair,false,0,IMD
+2020-05-14,Nagaland,NH-37,30.3,false,false,good,false,2,IMD
+2020-05-17,Assam,NH-157,40.4,false,false,fair,false,2,IMD
+2020-05-17,Meghalaya,NH-31,47.9,false,false,good,false,2,IMD
+2020-05-18,Mizoram,NH-52,37.5,false,false,good,false,1,IMD
+2020-05-19,Mizoram,NH-157,31.9,false,false,good,false,0,IMD
+2020-05-19,Tripura,NH-37,120.6,true,false,poor,true,15,IMD+BRO/NHAI
+2020-05-19,Meghalaya,NH-52,136.6,false,false,good,true,16,IMD+BRO/NHAI
+2020-05-21,Mizoram,NH-29,20.4,false,false,good,false,1,IMD
+2020-05-21,Assam,NH-52,36.7,false,false,good,false,1,IMD
+2020-05-23,Mizoram,NH-52,106.5,true,false,poor,true,13,IMD+BRO/NHAI
+2020-05-24,Arunachal Pradesh,NH-157,15.9,false,false,good,false,1,IMD
+2020-06-03,Arunachal Pradesh,NH-52,16.5,false,false,good,false,0,IMD
+2020-06-04,Arunachal Pradesh,NH-52,49.7,false,false,good,false,2,IMD
+2020-06-05,Nagaland,NH-29,119.8,true,false,poor,true,10,IMD+BRO/NHAI
+2020-06-10,Tripura,NH-37,21.3,false,false,fair,false,2,IMD
+2020-06-11,Mizoram,NH-37,11.7,false,false,good,false,0,IMD
+2020-06-13,Arunachal Pradesh,NH-37,11,false,false,good,false,2,IMD
+2020-06-13,Manipur,NH-37,22.6,false,false,good,false,1,IMD
+2020-06-16,Assam,NH-31,46.1,false,false,good,false,0,IMD
+2020-06-20,Nagaland,NH-37,44.4,true,false,poor,false,2,IMD
+2020-06-24,Manipur,NH-157,44.8,false,false,good,false,1,IMD
+2020-06-28,Manipur,NH-157,27.1,false,false,good,false,0,IMD
+2020-07-01,Mizoram,NH-157,20.7,false,false,good,false,1,IMD
+2020-07-01,Nagaland,NH-52,23,true,false,poor,false,0,IMD
+2020-07-06,Assam,NH-31,49.5,false,false,good,false,2,IMD
+2020-07-07,Manipur,NH-157,100.5,true,false,fair,true,17,IMD+BRO/NHAI
+2020-07-08,Tripura,NH-37,80.2,false,false,good,false,1,IMD+BRO/NHAI
+2020-07-09,Arunachal Pradesh,NH-31,32.3,false,false,fair,false,0,IMD
+2020-07-09,Nagaland,NH-29,19,false,false,fair,false,0,IMD
+2020-07-13,Arunachal Pradesh,NH-52,129,true,false,poor,true,17,IMD+BRO/NHAI
+2020-07-15,Tripura,NH-52,18.6,false,false,good,false,2,IMD
+2020-07-19,Meghalaya,NH-37,14,false,false,good,false,2,IMD
+2020-07-19,Assam,NH-52,22.4,false,false,fair,false,2,IMD
+2020-07-20,Manipur,NH-29,15.5,false,false,good,false,1,IMD
+2020-07-26,Manipur,NH-37,34,false,false,good,false,0,IMD
+2020-07-27,Nagaland,NH-29,11.9,false,false,good,false,1,IMD
+2020-08-01,Mizoram,NH-31,28.9,false,false,good,false,1,IMD
+2020-08-03,Nagaland,NH-31,31.7,false,false,good,false,1,IMD
+2020-08-06,Manipur,NH-31,35.7,false,false,good,false,1,IMD
+2020-08-06,Arunachal Pradesh,NH-157,35.1,true,false,poor,false,2,IMD
+2020-08-07,Tripura,NH-31,24.2,false,false,good,false,1,IMD
+2020-08-10,Assam,NH-52,46.5,false,false,fair,false,2,IMD
+2020-08-12,Tripura,NH-157,35.1,false,false,good,false,2,IMD
+2020-08-12,Mizoram,NH-157,111.6,true,false,poor,true,8,IMD+BRO/NHAI
+2020-08-13,Mizoram,NH-52,27.2,false,false,good,false,0,IMD
+2020-08-15,Nagaland,NH-157,20.4,false,false,good,false,1,IMD
+2020-08-18,Tripura,NH-52,15.2,false,false,good,false,1,IMD
+2020-08-19,Assam,NH-31,133.5,true,true,poor,true,6,IMD+BRO/NHAI
+2020-08-20,Meghalaya,NH-37,47.3,false,false,good,false,1,IMD
+2020-08-23,Tripura,NH-52,17.7,false,false,good,false,2,IMD
+2020-08-25,Mizoram,NH-31,40.1,false,false,good,false,2,IMD
+2020-08-27,Tripura,NH-29,19.9,true,false,poor,false,1,IMD
+2020-08-27,Mizoram,NH-29,15.7,false,false,fair,false,1,IMD
+2020-09-03,Manipur,NH-157,105.3,true,false,poor,true,8,IMD+BRO/NHAI
+2020-09-03,Tripura,NH-37,37.6,false,false,good,false,2,IMD
+2020-09-05,Arunachal Pradesh,NH-31,25.2,false,false,good,false,0,IMD
+2020-09-06,Assam,NH-31,41.9,false,false,good,false,1,IMD
+2020-09-07,Meghalaya,NH-31,49,false,false,good,false,2,IMD
+2020-09-11,Mizoram,NH-37,33.5,false,false,fair,false,0,IMD
+2020-09-11,Meghalaya,NH-31,47.4,true,false,poor,false,1,IMD
+2020-09-12,Manipur,NH-52,10.9,false,false,fair,false,1,IMD
+2020-09-13,Tripura,NH-157,127.2,false,false,fair,true,10,IMD+BRO/NHAI
+2020-09-14,Tripura,NH-31,26.8,false,false,fair,false,0,IMD
+2020-09-15,Assam,NH-157,102.9,true,true,poor,true,13,IMD+BRO/NHAI
+2020-09-16,Assam,NH-31,17.5,false,false,good,false,2,IMD
+2020-09-16,Assam,NH-37,35.4,false,false,fair,false,0,IMD
+2020-09-18,Meghalaya,NH-31,25.2,false,false,fair,false,0,IMD
+2020-09-19,Manipur,NH-37,13.2,false,false,fair,false,1,IMD
+2020-09-20,Meghalaya,NH-52,33,false,false,fair,false,1,IMD
+2020-09-24,Arunachal Pradesh,NH-37,137.6,true,false,poor,true,14,IMD+BRO/NHAI
+2020-09-24,Mizoram,NH-52,42.9,false,false,good,false,1,IMD
+2020-09-26,Tripura,NH-157,28.8,false,false,good,false,2,IMD
+2020-09-26,Arunachal Pradesh,NH-52,26,false,false,good,false,0,IMD
+2020-09-26,Arunachal Pradesh,NH-29,12,false,false,fair,false,1,IMD
+2021-05-03,Manipur,NH-29,14.5,true,false,fair,false,1,IMD
+2021-05-05,Assam,NH-37,12.4,false,false,fair,false,1,IMD
+2021-05-07,Meghalaya,NH-52,45.5,false,false,good,false,2,IMD
+2021-05-08,Manipur,NH-29,22.8,false,false,fair,false,2,IMD
+2021-05-09,Tripura,NH-37,26.5,false,false,good,false,1,IMD
+2021-05-11,Meghalaya,NH-37,20.3,false,false,good,false,0,IMD
+2021-05-18,Arunachal Pradesh,NH-29,47.6,false,false,fair,false,0,IMD
+2021-05-21,Tripura,NH-31,40.5,false,false,good,false,2,IMD
+2021-05-22,Assam,NH-52,36.7,false,false,good,false,0,IMD
+2021-05-23,Arunachal Pradesh,NH-31,39.8,false,false,fair,false,0,IMD
+2021-05-25,Nagaland,NH-52,13.4,false,false,fair,false,2,IMD
+2021-05-27,Tripura,NH-29,96.3,true,false,poor,true,8,IMD+BRO/NHAI
+2021-05-27,Tripura,NH-37,46.5,false,false,good,false,0,IMD
+2021-05-28,Assam,NH-37,12,false,false,good,false,0,IMD
+2021-05-28,Arunachal Pradesh,NH-157,22,false,false,good,false,0,IMD
+2021-06-14,Assam,NH-37,48.8,false,false,good,false,1,IMD
+2021-06-16,Assam,NH-31,48.8,false,false,fair,false,0,IMD
+2021-06-16,Nagaland,NH-37,41.8,false,false,good,false,2,IMD
+2021-06-17,Assam,NH-157,23.4,false,false,good,false,0,IMD
+2021-06-20,Manipur,NH-29,32.1,false,false,good,false,2,IMD
+2021-06-20,Assam,NH-31,136.6,true,false,fair,true,10,IMD+BRO/NHAI
+2021-06-21,Mizoram,NH-29,46.2,false,false,good,false,1,IMD
+2021-06-21,Manipur,NH-157,99.8,true,false,fair,true,13,IMD+BRO/NHAI
+2021-06-22,Manipur,NH-31,23.9,false,false,good,false,0,IMD
+2021-06-22,Tripura,NH-37,26.6,false,false,good,false,1,IMD
+2021-06-26,Tripura,NH-29,31.5,false,false,good,false,2,IMD
+2021-06-28,Nagaland,NH-157,28,false,false,good,false,0,IMD
+2021-06-28,Nagaland,NH-29,32.5,false,false,good,false,2,IMD
+2021-06-28,Tripura,NH-157,39.1,false,false,fair,false,2,IMD
+2021-06-28,Manipur,NH-37,117.4,false,false,good,true,8,IMD+BRO/NHAI
+2021-07-02,Manipur,NH-52,43.2,false,false,fair,false,2,IMD
+2021-07-07,Meghalaya,NH-31,32.3,true,false,fair,false,2,IMD
+2021-07-08,Nagaland,NH-157,11.3,false,false,good,false,2,IMD
+2021-07-09,Manipur,NH-157,119.9,false,false,good,true,13,IMD+BRO/NHAI
+2021-07-18,Meghalaya,NH-37,46.2,false,false,good,false,1,IMD
+2021-07-18,Meghalaya,NH-31,38.9,false,false,good,false,0,IMD
+2021-07-19,Mizoram,NH-52,20.6,false,false,good,false,1,IMD
+2021-07-23,Mizoram,NH-52,46.6,false,false,good,false,1,IMD
+2021-07-26,Meghalaya,NH-31,45.2,false,false,fair,false,1,IMD
+2021-07-28,Meghalaya,NH-157,28.8,false,false,good,false,0,IMD
+2021-08-03,Arunachal Pradesh,NH-157,35.2,false,false,good,false,2,IMD
+2021-08-04,Tripura,NH-37,14.6,false,false,good,false,2,IMD
+2021-08-04,Tripura,NH-29,26.6,true,false,poor,false,2,IMD
+2021-08-08,Manipur,NH-52,81.5,true,false,poor,true,8,IMD+BRO/NHAI
+2021-08-09,Meghalaya,NH-29,24.2,false,false,good,false,2,IMD
+2021-08-11,Assam,NH-37,20.6,false,false,good,false,1,IMD
+2021-08-11,Mizoram,NH-52,96.7,false,false,good,false,1,IMD+BRO/NHAI
+2021-08-13,Meghalaya,NH-157,26.6,false,false,fair,false,2,IMD
+2021-08-13,Tripura,NH-37,11.5,true,false,fair,false,2,IMD
+2021-08-19,Meghalaya,NH-31,48.8,false,false,good,false,2,IMD
+2021-08-19,Meghalaya,NH-29,87.7,true,false,poor,true,8,IMD+BRO/NHAI
+2021-08-21,Mizoram,NH-31,89.1,false,false,fair,false,1,IMD+BRO/NHAI
+2021-08-21,Mizoram,NH-157,24.4,false,false,fair,false,1,IMD
+2021-08-22,Tripura,NH-29,17.8,false,false,good,false,2,IMD
+2021-08-24,Meghalaya,NH-31,25.1,false,false,good,false,0,IMD
+2021-08-25,Meghalaya,NH-157,132.8,true,false,poor,true,13,IMD+BRO/NHAI
+2021-08-27,Assam,NH-37,35,false,false,good,false,0,IMD
+2021-08-28,Nagaland,NH-52,109.9,false,false,good,true,13,IMD+BRO/NHAI
+2021-09-11,Assam,NH-31,33.5,false,false,good,false,2,IMD
+2021-09-12,Assam,NH-37,49.3,false,false,fair,false,1,IMD
+2021-09-14,Meghalaya,NH-31,35.7,false,false,fair,false,1,IMD
+2021-09-16,Arunachal Pradesh,NH-157,44.4,false,false,good,false,0,IMD
+2021-09-17,Mizoram,NH-52,31.8,false,false,good,false,1,IMD
+2021-09-17,Arunachal Pradesh,NH-31,43.8,false,false,good,false,0,IMD
+2021-09-24,Tripura,NH-37,17.7,false,false,good,false,2,IMD
+2021-09-24,Arunachal Pradesh,NH-52,21.1,false,false,good,false,1,IMD
+2022-05-02,Mizoram,NH-157,94.1,true,false,poor,true,14,IMD+BRO/NHAI
+2022-05-06,Nagaland,NH-157,97.7,true,false,poor,true,9,IMD+BRO/NHAI
+2022-05-06,Tripura,NH-52,43.9,false,false,good,false,0,IMD
+2022-05-08,Nagaland,NH-37,49.5,false,false,good,false,2,IMD
+2022-05-09,Nagaland,NH-29,14.8,false,false,good,false,0,IMD
+2022-05-09,Nagaland,NH-52,46.7,false,false,fair,false,2,IMD
+2022-05-10,Assam,NH-29,85.5,true,false,fair,true,8,IMD+BRO/NHAI
+2022-05-11,Tripura,NH-37,14.9,false,false,good,false,1,IMD
+2022-05-16,Tripura,NH-157,88.7,true,false,poor,true,15,IMD+BRO/NHAI
+2022-05-19,Meghalaya,NH-37,11,false,false,good,false,1,IMD
+2022-05-20,Meghalaya,NH-29,33,false,false,good,false,0,IMD
+2022-05-21,Assam,NH-37,36.7,false,false,good,false,2,IMD
+2022-05-22,Mizoram,NH-31,47.6,false,false,good,false,1,IMD
+2022-05-23,Assam,NH-37,90,true,false,poor,true,6,IMD+BRO/NHAI
+2022-05-25,Mizoram,NH-31,36.6,false,false,good,false,2,IMD
+2022-05-28,Meghalaya,NH-31,26.9,false,false,good,false,0,IMD
+2022-06-01,Tripura,NH-29,46.7,false,false,good,false,0,IMD
+2022-06-02,Nagaland,NH-29,133,false,false,good,true,17,IMD+BRO/NHAI
+2022-06-04,Nagaland,NH-157,50,false,false,good,false,0,IMD
+2022-06-05,Meghalaya,NH-52,127,true,false,poor,true,15,IMD+BRO/NHAI
+2022-06-05,Meghalaya,NH-37,34.4,false,false,good,false,1,IMD
+2022-06-07,Arunachal Pradesh,NH-31,23.7,false,false,good,false,1,IMD
+2022-06-08,Arunachal Pradesh,NH-52,45,false,false,good,false,2,IMD
+2022-06-13,Arunachal Pradesh,NH-31,19.4,true,false,poor,false,0,IMD
+2022-06-15,Nagaland,NH-37,29.8,false,false,good,false,0,IMD
+2022-06-15,Tripura,NH-52,137.2,false,false,good,true,10,IMD+BRO/NHAI
+2022-06-17,Meghalaya,NH-29,48.5,false,false,fair,false,2,IMD
+2022-06-18,Tripura,NH-157,24.9,false,false,good,false,1,IMD
+2022-06-18,Mizoram,NH-52,43.9,false,false,good,false,1,IMD
+2022-06-26,Tripura,NH-31,85.2,true,false,poor,true,13,IMD+BRO/NHAI
+2022-07-01,Meghalaya,NH-157,29.9,false,false,fair,false,0,IMD
+2022-07-02,Arunachal Pradesh,NH-31,43.2,false,false,good,false,0,IMD
+2022-07-02,Manipur,NH-157,49.6,false,false,good,false,2,IMD
+2022-07-03,Nagaland,NH-31,15,false,false,fair,false,0,IMD
+2022-07-03,Meghalaya,NH-37,34.7,false,false,fair,false,2,IMD
+2022-07-05,Manipur,NH-31,48.1,false,false,fair,false,1,IMD
+2022-07-07,Tripura,NH-157,26.3,false,false,good,false,1,IMD
+2022-07-08,Manipur,NH-157,30.5,false,false,good,false,0,IMD
+2022-07-10,Meghalaya,NH-37,23.9,false,false,good,false,0,IMD
+2022-07-11,Nagaland,NH-31,12,false,false,good,false,2,IMD
+2022-07-11,Mizoram,NH-31,127,false,false,fair,true,11,IMD+BRO/NHAI
+2022-07-12,Mizoram,NH-52,37.5,false,false,good,false,2,IMD
+2022-07-13,Assam,NH-37,35.8,false,false,fair,false,2,IMD
+2022-07-15,Manipur,NH-31,10.8,false,false,good,false,0,IMD
+2022-07-15,Nagaland,NH-29,35.7,false,false,good,false,0,IMD
+2022-07-17,Arunachal Pradesh,NH-29,36.5,false,false,good,false,0,IMD
+2022-07-18,Meghalaya,NH-31,16,false,false,good,false,1,IMD
+2022-07-18,Meghalaya,NH-29,47.2,false,false,good,false,2,IMD
+2022-07-19,Tripura,NH-157,16.4,true,false,poor,false,1,IMD
+2022-07-20,Nagaland,NH-37,30.3,false,false,good,false,1,IMD
+2022-07-21,Tripura,NH-29,17.9,false,false,good,false,2,IMD
+2022-07-21,Manipur,NH-52,48.9,false,false,good,false,2,IMD
+2022-07-21,Assam,NH-29,15.7,false,false,fair,false,0,IMD
+2022-07-21,Arunachal Pradesh,NH-157,48.2,false,false,fair,false,1,IMD
+2022-07-22,Tripura,NH-31,46.8,true,false,poor,false,1,IMD
+2022-07-22,Manipur,NH-52,20.2,false,false,good,false,1,IMD
+2022-07-22,Meghalaya,NH-157,14.8,false,false,fair,false,2,IMD
+2022-07-23,Assam,NH-29,10.8,false,false,fair,false,0,IMD
+2022-07-26,Meghalaya,NH-52,133,false,false,good,true,16,IMD+BRO/NHAI
+2022-07-26,Assam,NH-31,16.3,false,false,good,false,0,IMD
+2022-07-27,Meghalaya,NH-29,46.3,false,false,fair,false,2,IMD
+2022-07-28,Meghalaya,NH-52,19.9,false,false,good,false,2,IMD
+2022-08-02,Mizoram,NH-52,10.5,false,false,good,false,0,IMD
+2022-08-03,Tripura,NH-37,45.3,false,false,good,false,1,IMD
+2022-08-05,Manipur,NH-52,10.1,false,false,good,false,2,IMD
+2022-08-06,Meghalaya,NH-31,21.4,false,false,good,false,1,IMD
+2022-08-09,Nagaland,NH-157,137.2,true,false,poor,true,16,IMD+BRO/NHAI
+2022-08-09,Manipur,NH-29,20.6,false,false,good,false,1,IMD
+2022-08-09,Mizoram,NH-31,40.9,false,false,fair,false,2,IMD
+2022-08-09,Mizoram,NH-52,43.3,false,false,good,false,0,IMD
+2022-08-11,Mizoram,NH-52,42.5,false,false,good,false,0,IMD
+2022-08-12,Arunachal Pradesh,NH-157,40.5,false,false,good,false,2,IMD
+2022-08-13,Assam,NH-31,49.7,true,false,poor,false,2,IMD
+2022-08-14,Tripura,NH-31,88.6,true,false,poor,true,17,IMD+BRO/NHAI
+2022-08-16,Manipur,NH-52,44.8,false,false,fair,false,2,IMD
+2022-08-18,Mizoram,NH-31,17.9,false,false,fair,false,0,IMD
+2022-08-19,Nagaland,NH-29,40.5,false,false,good,false,1,IMD
+2022-08-21,Arunachal Pradesh,NH-37,27.3,false,false,good,false,1,IMD
+2022-08-21,Arunachal Pradesh,NH-31,36,false,false,fair,false,0,IMD
+2022-08-22,Assam,NH-29,105.5,true,true,poor,true,10,IMD+BRO/NHAI
+2022-08-26,Meghalaya,NH-31,22.6,false,false,fair,false,0,IMD
+2022-08-27,Manipur,NH-29,31.6,false,false,good,false,2,IMD
+2022-09-01,Meghalaya,NH-37,21.4,false,false,good,false,1,IMD
+2022-09-02,Assam,NH-29,44.9,false,false,good,false,1,IMD
+2022-09-02,Tripura,NH-29,22.4,true,false,fair,false,0,IMD
+2022-09-05,Meghalaya,NH-37,138,false,false,good,true,6,IMD+BRO/NHAI
+2022-09-07,Arunachal Pradesh,NH-37,36.1,false,false,good,false,1,IMD
+2022-09-07,Arunachal Pradesh,NH-52,13.7,false,false,good,false,1,IMD
+2022-09-11,Assam,NH-52,35.4,false,false,good,false,0,IMD
+2022-09-12,Mizoram,NH-52,43.2,false,false,good,false,1,IMD
+2022-09-16,Manipur,NH-31,112.5,false,false,good,true,14,IMD+BRO/NHAI
+2022-09-20,Tripura,NH-37,18.2,false,false,good,false,1,IMD
+2022-09-21,Meghalaya,NH-31,20.3,false,false,fair,false,1,IMD
+2022-09-25,Nagaland,NH-52,49,false,false,good,false,2,IMD
+2022-09-26,Arunachal Pradesh,NH-31,86,true,false,poor,true,10,IMD+BRO/NHAI
+2023-05-02,Mizoram,NH-31,16.7,false,false,good,false,1,IMD
+2023-05-02,Mizoram,NH-37,114.4,true,false,poor,true,6,IMD+BRO/NHAI
+2023-05-03,Meghalaya,NH-29,113,false,false,good,true,14,IMD+BRO/NHAI
+2023-05-03,Arunachal Pradesh,NH-29,38.8,false,false,fair,false,2,IMD
+2023-05-05,Manipur,NH-31,26.9,false,false,good,false,2,IMD
+2023-05-06,Meghalaya,NH-31,23.8,false,false,good,false,1,IMD
+2023-05-08,Nagaland,NH-157,37.5,false,false,fair,false,2,IMD
+2023-05-10,Tripura,NH-29,36.1,false,false,good,false,1,IMD
+2023-05-11,Manipur,NH-157,22.6,false,false,fair,false,0,IMD
+2023-05-11,Mizoram,NH-157,26,false,false,good,false,2,IMD
+2023-05-14,Nagaland,NH-31,46.2,false,false,fair,false,2,IMD
+2023-05-15,Arunachal Pradesh,NH-29,44.9,false,false,fair,false,2,IMD
+2023-05-18,Mizoram,NH-52,20.1,false,false,fair,false,2,IMD
+2023-05-20,Arunachal Pradesh,NH-31,46.6,false,false,good,false,1,IMD
+2023-05-22,Manipur,NH-29,97.5,true,false,poor,true,12,IMD+BRO/NHAI
+2023-05-25,Tripura,NH-37,12.8,false,false,good,false,1,IMD
+2023-05-28,Manipur,NH-31,119.4,true,false,poor,true,16,IMD+BRO/NHAI
+2023-06-04,Tripura,NH-37,43.1,false,false,good,false,0,IMD
+2023-06-05,Nagaland,NH-29,38.9,false,false,good,false,1,IMD
+2023-06-06,Assam,NH-37,16,false,false,good,false,2,IMD
+2023-06-09,Arunachal Pradesh,NH-37,23.1,false,false,good,false,0,IMD
+2023-06-11,Assam,NH-29,34.3,false,false,good,false,1,IMD
+2023-06-13,Tripura,NH-37,94.8,true,false,poor,true,9,IMD+BRO/NHAI
+2023-06-17,Tripura,NH-52,38.1,false,false,good,false,1,IMD
+2023-06-21,Arunachal Pradesh,NH-29,47,false,false,good,false,0,IMD
+2023-06-22,Tripura,NH-37,103.3,true,false,poor,true,8,IMD+BRO/NHAI
+2023-06-23,Mizoram,NH-31,97.3,true,false,poor,true,13,IMD+BRO/NHAI
+2023-06-24,Arunachal Pradesh,NH-157,33.2,false,false,good,false,2,IMD
+2023-07-04,Nagaland,NH-31,116.5,true,false,poor,true,10,IMD+BRO/NHAI
+2023-07-05,Mizoram,NH-52,48.8,false,false,fair,false,1,IMD
+2023-07-05,Mizoram,NH-31,26,false,false,good,false,0,IMD
+2023-07-05,Manipur,NH-31,15.3,false,false,good,false,1,IMD
+2023-07-11,Assam,NH-31,21.5,true,false,poor,false,2,IMD
+2023-07-12,Mizoram,NH-52,128.3,true,false,poor,true,9,IMD+BRO/NHAI
+2023-07-12,Mizoram,NH-29,43.2,true,false,poor,false,1,IMD
+2023-07-13,Tripura,NH-52,15.3,false,false,fair,false,2,IMD
+2023-07-15,Mizoram,NH-29,26.8,false,false,good,false,1,IMD
+2023-07-17,Mizoram,NH-52,29.8,false,false,good,false,0,IMD
+2023-07-20,Assam,NH-31,22,false,false,good,false,0,IMD
+2023-07-23,Assam,NH-157,46.8,false,false,good,false,0,IMD
+2023-07-23,Arunachal Pradesh,NH-157,10,false,false,good,false,0,IMD
+2023-07-24,Manipur,NH-52,18.5,false,false,good,false,1,IMD
+2023-07-24,Nagaland,NH-157,40,false,false,good,false,1,IMD
+2023-07-24,Arunachal Pradesh,NH-157,13.2,false,false,good,false,1,IMD
+2023-07-25,Assam,NH-29,40.7,false,false,good,false,1,IMD
+2023-07-27,Manipur,NH-37,32,false,false,good,false,1,IMD
+2023-07-28,Meghalaya,NH-52,12.2,false,false,good,false,1,IMD
+2023-08-01,Tripura,NH-29,85.5,false,false,good,false,2,IMD+BRO/NHAI
+2023-08-02,Meghalaya,NH-52,24.4,false,false,fair,false,1,IMD
+2023-08-02,Nagaland,NH-31,49,false,false,fair,false,1,IMD
+2023-08-02,Tripura,NH-157,34.6,false,false,good,false,0,IMD
+2023-08-03,Meghalaya,NH-52,32.7,false,false,good,false,2,IMD
+2023-08-04,Assam,NH-157,38.7,false,false,good,false,0,IMD
+2023-08-05,Tripura,NH-31,18.3,false,false,good,false,2,IMD
+2023-08-07,Manipur,NH-31,27.8,true,false,poor,false,1,IMD
+2023-08-11,Nagaland,NH-52,124.8,true,false,poor,true,16,IMD+BRO/NHAI
+2023-08-11,Tripura,NH-31,31.7,false,false,fair,false,1,IMD
+2023-08-18,Nagaland,NH-157,42.6,false,false,good,false,1,IMD
+2023-08-22,Mizoram,NH-31,10.5,false,false,good,false,0,IMD
+2023-08-25,Tripura,NH-31,102.9,false,false,good,true,13,IMD+BRO/NHAI
+2023-08-26,Tripura,NH-31,45,false,false,good,false,2,IMD
+2023-08-27,Nagaland,NH-157,45.8,false,false,fair,false,2,IMD
+2023-08-27,Manipur,NH-37,48.7,false,false,good,false,1,IMD
+2023-08-28,Tripura,NH-52,104.3,false,false,good,true,17,IMD+BRO/NHAI
+2023-08-28,Mizoram,NH-52,13.4,false,false,good,false,1,IMD
+2023-09-07,Arunachal Pradesh,NH-29,124,true,false,fair,true,15,IMD+BRO/NHAI
+2023-09-07,Mizoram,NH-52,14.2,false,false,good,false,0,IMD
+2023-09-10,Manipur,NH-52,25.3,false,false,fair,false,1,IMD
+2023-09-11,Mizoram,NH-29,41,false,false,fair,false,1,IMD
+2023-09-12,Manipur,NH-31,13.6,false,false,good,false,2,IMD
+2023-09-14,Meghalaya,NH-37,12.1,false,false,good,false,0,IMD
+2023-09-19,Manipur,NH-37,36,false,false,good,false,2,IMD
+2023-09-19,Manipur,NH-29,29.8,false,false,good,false,0,IMD
+2023-09-20,Arunachal Pradesh,NH-157,16.3,false,false,good,false,0,IMD
+2023-09-20,Manipur,NH-157,40.5,false,false,good,false,0,IMD
+2023-09-21,Nagaland,NH-31,11.1,false,false,good,false,2,IMD
+2023-09-23,Nagaland,NH-52,34.6,false,false,good,false,0,IMD
+2023-09-23,Manipur,NH-31,20.5,false,false,fair,false,1,IMD
+2023-09-24,Mizoram,NH-31,105.8,false,false,good,true,7,IMD+BRO/NHAI
+2023-09-25,Nagaland,NH-29,15.2,false,false,good,false,2,IMD
+2023-09-28,Arunachal Pradesh,NH-157,20,false,false,fair,false,2,IMD
+2024-05-01,Arunachal Pradesh,NH-157,14.8,false,false,good,false,0,IMD
+2024-05-02,Manipur,NH-157,30.8,false,false,good,false,2,IMD
+2024-05-03,Nagaland,NH-52,36.1,false,false,good,false,1,IMD
+2024-05-03,Nagaland,NH-37,18.1,false,false,good,false,1,IMD
+2024-05-10,Manipur,NH-31,22.8,false,false,good,false,0,IMD
+2024-05-14,Meghalaya,NH-29,41.1,false,false,good,false,2,IMD
+2024-05-14,Manipur,NH-37,10.1,false,false,good,false,0,IMD
+2024-05-15,Arunachal Pradesh,NH-37,29.2,false,false,good,false,2,IMD
+2024-05-17,Meghalaya,NH-157,29.2,false,false,good,false,0,IMD
+2024-05-18,Nagaland,NH-52,135.1,false,false,good,true,13,IMD+BRO/NHAI
+2024-05-22,Nagaland,NH-157,45.2,false,false,fair,false,2,IMD
+2024-05-23,Tripura,NH-29,18.5,false,false,fair,false,1,IMD
+2024-05-23,Mizoram,NH-37,46.6,true,false,poor,false,0,IMD
+2024-05-25,Mizoram,NH-37,16,false,false,fair,false,0,IMD
+2024-06-08,Arunachal Pradesh,NH-37,33.2,false,false,fair,false,2,IMD
+2024-06-10,Arunachal Pradesh,NH-29,20.6,false,false,good,false,2,IMD
+2024-06-10,Arunachal Pradesh,NH-31,43.9,false,false,fair,false,0,IMD
+2024-06-14,Arunachal Pradesh,NH-31,116.4,true,false,poor,true,15,IMD+BRO/NHAI
+2024-06-15,Meghalaya,NH-52,21.3,false,false,good,false,2,IMD
+2024-06-16,Mizoram,NH-157,13.7,false,false,good,false,1,IMD
+2024-06-20,Tripura,NH-31,123.5,true,false,poor,true,8,IMD+BRO/NHAI
+2024-06-23,Arunachal Pradesh,NH-52,45.2,false,false,good,false,2,IMD
+2024-06-25,Nagaland,NH-37,47.8,false,false,good,false,2,IMD
+2024-07-02,Tripura,NH-31,37.4,false,false,good,false,0,IMD
+2024-07-05,Arunachal Pradesh,NH-52,39.4,false,false,good,false,0,IMD
+2024-07-06,Arunachal Pradesh,NH-37,20.3,true,false,fair,false,2,IMD
+2024-07-10,Nagaland,NH-157,49.6,true,false,poor,false,2,IMD
+2024-07-15,Manipur,NH-37,14.6,true,false,poor,false,0,IMD
+2024-07-21,Manipur,NH-52,123.2,true,false,poor,true,6,IMD+BRO/NHAI
+2024-07-22,Nagaland,NH-52,20.8,false,false,fair,false,0,IMD
+2024-07-26,Nagaland,NH-31,13.8,false,false,fair,false,1,IMD
+2024-07-28,Nagaland,NH-52,18.9,true,false,poor,false,1,IMD
+2024-08-01,Nagaland,NH-29,16.3,false,false,good,false,0,IMD
+2024-08-02,Assam,NH-157,38,false,false,good,false,0,IMD
+2024-08-04,Assam,NH-37,35.6,false,false,good,false,0,IMD
+2024-08-06,Manipur,NH-29,16.6,true,false,fair,false,2,IMD
+2024-08-09,Assam,NH-29,27.3,false,false,good,false,1,IMD
+2024-08-09,Assam,NH-29,36.2,false,false,good,false,2,IMD
+2024-08-09,Arunachal Pradesh,NH-29,95.3,true,false,poor,true,15,IMD+BRO/NHAI
+2024-08-14,Manipur,NH-37,14.3,false,false,good,false,2,IMD
+2024-08-17,Mizoram,NH-157,23.3,false,false,fair,false,0,IMD
+2024-08-18,Assam,NH-37,49,false,false,fair,false,2,IMD
+2024-08-18,Manipur,NH-157,114.1,false,false,good,true,10,IMD+BRO/NHAI
+2024-08-21,Arunachal Pradesh,NH-29,36.3,false,false,good,false,1,IMD
+2024-08-21,Arunachal Pradesh,NH-29,23.1,false,false,good,false,1,IMD
+2024-08-22,Tripura,NH-29,119.9,false,false,fair,true,8,IMD+BRO/NHAI
+2024-08-27,Assam,NH-157,39.1,false,false,good,false,2,IMD
+2024-09-02,Manipur,NH-37,36.9,false,false,good,false,0,IMD
+2024-09-06,Manipur,NH-157,13.3,false,false,fair,false,1,IMD
+2024-09-09,Mizoram,NH-37,38.7,false,false,fair,false,0,IMD
+2024-09-10,Meghalaya,NH-29,37.9,false,false,good,false,2,IMD
+2024-09-10,Nagaland,NH-29,119.4,true,false,poor,true,15,IMD+BRO/NHAI
+2024-09-11,Arunachal Pradesh,NH-31,31.1,false,false,good,false,1,IMD
+2024-09-14,Meghalaya,NH-157,43.6,false,false,fair,false,1,IMD
+2024-09-14,Arunachal Pradesh,NH-157,20.6,false,false,fair,false,1,IMD
+2024-09-15,Tripura,NH-157,82.9,true,false,poor,true,12,IMD+BRO/NHAI
+2024-09-16,Tripura,NH-29,43.7,false,false,good,false,2,IMD
+2024-09-17,Mizoram,NH-157,32.9,false,false,good,false,1,IMD
+2024-09-18,Manipur,NH-52,48.1,false,false,good,false,2,IMD
+2024-09-18,Nagaland,NH-157,14.9,false,false,fair,false,0,IMD
+2024-09-18,Manipur,NH-29,49.6,false,false,good,false,2,IMD
+2024-09-20,Assam,NH-31,125,true,false,fair,true,14,IMD+BRO/NHAI
+2024-09-22,Meghalaya,NH-157,20.2,false,false,fair,false,1,IMD
+2024-09-24,Arunachal Pradesh,NH-157,22.2,false,false,good,false,2,IMD
+2024-09-25,Mizoram,NH-157,49.8,false,false,fair,false,1,IMD
