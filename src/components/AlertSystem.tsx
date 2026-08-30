@@ -45,9 +45,10 @@ function getAlertPriorityLabel(level: AlertLevel): string {
 }
 
 export function AlertCenter({
-  alerts,
+  alerts, onAction,
 }: {
   alerts: Alert[];
+  onAction?: (alert: Alert) => void;
 }) {
   return (
     <div>
@@ -88,6 +89,7 @@ export function AlertCenter({
           <thead>
             <tr className="border-b bg-zinc-100">
               <th className="p-3 text-left text-sm font-medium">Level</th>
+              <th className="p-3 text-left text-sm font-medium">Route</th>
               <th className="p-3 text-left text-sm font-medium">Category</th>
               <th className="p-3 text-left text-sm font-medium">Title</th>
               <th className="p-3 text-left text-sm font-medium">Message</th>
@@ -108,6 +110,7 @@ export function AlertCenter({
                     {getAlertPriorityLabel(alert.level)}
                   </span>
                 </td>
+                <td className="p-3 text-xs font-black text-slate-700">{(alert as any).routeId || "—"}</td>
                 <td className="p-3">
                   <span className="text-zinc-400 text-xs">
                     {alertCategoryIcons[alert.category]}
@@ -118,7 +121,11 @@ export function AlertCenter({
                 <td className="p-3 text-zinc-500 text-sm">{alert.message}</td>
                 <td className="p-3">
                   {alert.action ? (
-                    <p className="text-sm font-medium text-primary hover:underline">{alert.action}</p>
+                    alert.action.toLowerCase().includes("reroute") ? (
+                      <button onClick={() => onAction?.(alert)} className="px-3 py-1.5 rounded bg-emerald-600 text-white text-xs font-black hover:bg-emerald-700">{alert.action}</button>
+                    ) : (
+                      <span className="text-xs font-bold text-slate-700">{alert.action}</span>
+                    )
                   ) : (
                     <span className="text-zinc-400 text-xs">No action</span>
                   )}

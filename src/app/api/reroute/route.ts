@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
     const notification = {
       id: Date.now().toString(),
       vehicleId,
+      from, to,
       title: `🔔 Reroute: ${from} → ${to}`,
       body: `${from} blocked (${reason}). Take ${to} — tap to navigate.`,
       lang: "en",

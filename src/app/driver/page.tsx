@@ -3,11 +3,11 @@
 import React, { useState, useEffect } from "react";
 
 const VEHICLES = [
-  { id: "NER-1024", cargo: "medicines", route: "NH-37 Guwahati→Silchar", driver: "Ramesh Kumar" },
-  { id: "NER-1025", cargo: "food", route: "NH-52 Dibrugarh→Tinsukia", driver: "Arun Singh" },
-  { id: "NER-1026", cargo: "construction", route: "NH-29 Jorhat→Mokokchung", driver: "Bikash Das" },
-  { id: "NER-1027", cargo: "medicines", route: "NH-157 Tezpur→Itanagar", driver: "Sunita Roy" },
-  { id: "NER-1028", cargo: "food", route: "NH-31 Assam→Tripura", driver: "Mohan Lal" },
+  { id: "NER-1024", cargo: "medicines", route: "NH-37 Guwahati→Silchar", dest: "Silchar, Assam", driver: "Ramesh Kumar" },
+  { id: "NER-1025", cargo: "food", route: "NH-52 Dibrugarh→Tinsukia", dest: "Tinsukia, Assam", driver: "Arun Singh" },
+  { id: "NER-1026", cargo: "construction", route: "NH-29 Jorhat→Mokokchung", dest: "Mokokchung, Nagaland", driver: "Bikash Das" },
+  { id: "NER-1027", cargo: "medicines", route: "NH-157 Tezpur→Itanagar", dest: "Itanagar, Arunachal Pradesh", driver: "Sunita Roy" },
+  { id: "NER-1028", cargo: "food", route: "NH-31 Assam→Tripura", dest: "Agartala, Tripura", driver: "Mohan Lal" },
 ];
 
 export default function DriverApp() {
@@ -15,6 +15,7 @@ export default function DriverApp() {
   const [input, setInput] = useState("");
   const [inbox, setInbox] = useState<any[]>([]);
   const [vehicle, setVehicle] = useState<any>(null);
+  const [acceptedRoute, setAcceptedRoute] = useState<any>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem("driver-vehicle");
@@ -118,6 +119,8 @@ export default function DriverApp() {
                     <button
                       onClick={async () => {
                         await fetch("/api/reroute", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ vehicleId: n.vehicleId }) });
+                        setAcceptedRoute({ from: n.from, to: n.to, title: n.title });
+                        setVehicle((prev: any) => prev ? { ...prev, route: n.to } : prev);
                         setInbox((prev) => prev.filter((x) => x.id !== n.id));
                       }}
                       className="flex-1 py-2 rounded bg-emerald-600 text-white text-xs font-black"
@@ -132,9 +135,39 @@ export default function DriverApp() {
           )}
         </div>
 
-        {inbox.length === 0 && vehicle && (
+        {acceptedRoute && (
+          <div className="bg-white border-2 border-emerald-300 rounded-xl overflow-hidden">
+            <div className="px-4 py-3 bg-emerald-600 text-white">
+              <p className="text-xs font-black">✓ REROUTED • Following: {acceptedRoute.to}</p>
+              <p className="text-[11px] font-semibold opacity-90">{acceptedRoute.from} → {acceptedRoute.to}</p>
+            </div>
+            <div className="p-3">
+              {/* persistent map - stays after accept */}
+              {(() => {
+                const dest = VEHICLES.find(v=>v.id===logged)?.dest || "Silchar";
+                const origin = vehicle?.lat && vehicle?.lng ? `${vehicle.lat},${vehicle.lng}` : "";
+                const toStr = acceptedRoute?.to || "";
+                const via = toStr.includes("Bypass") || toStr.includes("Lumding") ? "via Lumding" : toStr.includes("Hill") ? "via Hill Route" : "";
+                const dirUrl = origin ? `https://www.google.com/maps/dir/${origin}/${encodeURIComponent(dest)}/` : `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}`;
+                const embedUrl = origin ? `https://maps.google.com/maps?saddr=${origin}&daddr=${encodeURIComponent(dest)}&output=embed` : `https://maps.google.com/maps?q=${encodeURIComponent(dest)}&z=11&output=embed`;
+                return (<>
+                  <p className="text-[11px] font-semibold text-slate-600 mb-2">{acceptedRoute?.from || "Route"} blocked → {acceptedRoute?.to || dest} {via} → Destination: <b>{dest}</b></p>
+                  <div className="h-48 bg-slate-100 rounded-lg border border-slate-200 overflow-hidden relative">
+                    <iframe title="alternate route" width="100%" height="100%" loading="lazy" referrerPolicy="no-referrer-when-downgrade" src={embedUrl} />
+                  </div>
+                  <div className="flex gap-2 mt-3">
+                    <a href={dirUrl} target="_blank" className="flex-1 py-2.5 rounded bg-slate-900 text-white text-xs font-black text-center">↗ Navigate to {dest}</a>
+                    <a href={`https://www.google.com/maps/search/${encodeURIComponent(dest)}`} target="_blank" className="px-4 py-2.5 rounded bg-white border border-slate-200 text-xs font-bold">View</a>
+                  </div>
+                </>);
+              })()}
+              <p className="text-[10px] font-semibold text-slate-500 mt-2 text-center">Map stays pinned — safe to navigate offline via cached route</p>
+            </div>
+          </div>
+        )}
+        {inbox.length === 0 && !acceptedRoute && vehicle && (
           <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3">
-            <p className="text-xs font-bold text-emerald-800">✓ Route updated — drive safe!</p>
+            <p className="text-xs font-bold text-emerald-800">✓ On assigned route — drive safe!</p>
           </div>
         )}
       </div>

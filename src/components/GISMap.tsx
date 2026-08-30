@@ -45,7 +45,7 @@ function LeafletMap({ routes, focusId, liveVehicles }: { routes: Route[]; focusI
         const map = leaflet.map(mapRef.current!, { zoomControl: false }).setView([26.2, 92.9], 7);
         mapInstanceRef.current = map;
         leafletRef.current = leaflet;
-        leaflet.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "© OpenStreetMap | NER Exact Outline", maxZoom: 10 }).addTo(map);
+        leaflet.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "© OpenStreetMap | NER Exact Outline", maxZoom: 10, opacity: 0.92 }).addTo(map);
         const states = ["arunachal-pradesh","assam","meghalaya","manipur","mizoram","nagaland","tripura"];
         const colors: Record<string,string> = {"arunachal-pradesh":"#1e293b",assam:"#0f172a",meghalaya:"#1e293b",nagaland:"#1e293b",manipur:"#1e293b",mizoram:"#1e293b",tripura:"#1e293b"};
         const group: any[] = [];
@@ -69,7 +69,7 @@ function LeafletMap({ routes, focusId, liveVehicles }: { routes: Route[]; focusI
         } catch {}
         routes.forEach((r)=>{
           const latlng = routeLatLng[r.name]; if(!latlng) return;
-          const poly = leaflet.polyline(latlng,{color:statusColors[r.status],weight:r.status==="blocked"?6:4,opacity:0.95,dashArray:r.status==="blocked"?"10 8":r.status==="high_risk"?"12 8":undefined}).addTo(map);
+          const poly = leaflet.polyline(latlng,{color:statusColors[r.status],weight:r.status==="blocked"?7:5,opacity:1,dashArray:r.status==="blocked"?"10 8":r.status==="high_risk"?"14 10":undefined}).addTo(map);
           poly.bindTooltip(`<b>${r.name}</b> ${r.from} → ${r.to}<br/>${r.distance}km • ${r.eta}`,{sticky:true});
           const mid = latlng[Math.floor(latlng.length/2)];
           leaflet.marker(mid,{icon:leaflet.divIcon({html:`<div style="background:${statusColors[r.status]};color:white;font-size:9px;font-weight:900;padding:2px 5px;border-radius:4px;border:1px solid white;white-space:nowrap;">${r.name}</div>`,className:""})}).addTo(map);
@@ -87,19 +87,25 @@ function LeafletMap({ routes, focusId, liveVehicles }: { routes: Route[]; focusI
     if(!vehicleLayerRef.current) vehicleLayerRef.current = leaflet.layerGroup().addTo(map);
     else vehicleLayerRef.current.clearLayers();
     const live = liveVehicles ? Object.values(liveVehicles) : [];
-    const toShow = live.length ? live : [
-      {id:"NER-1024", lat:26.5, lng:92.9, delayMinutes:120, etaMinutes:225, status:"on_route", cargo:"medicines"},
-      {id:"NER-1025", lat:27.48, lng:94.91, delayMinutes:240, etaMinutes:360, status:"delayed", cargo:"food"},
-      {id:"NER-1026", lat:26.14, lng:91.73, delayMinutes:0, etaMinutes:180, status:"on_route", cargo:"construction"},
+    const VEH_ROUTE: Record<string,string> = {"NER-1024":"NH-37","NER-1025":"NH-52","NER-1026":"NH-29","NER-1027":"NH-157","NER-1028":"NH-31"};
+    const toShow = live.length ? live.map((v:any)=>({...v, _route: VEH_ROUTE[v.id]||"—"})) : [
+      {id:"NER-1024", _route:"NH-37", lat:26.5, lng:92.9, delayMinutes:120, etaMinutes:225, status:"on_route", cargo:"medicines"},
+      {id:"NER-1025", _route:"NH-52", lat:27.48, lng:94.91, delayMinutes:240, etaMinutes:360, status:"delayed", cargo:"food"},
+      {id:"NER-1026", _route:"NH-29", lat:26.14, lng:91.73, delayMinutes:0, etaMinutes:180, status:"on_route", cargo:"construction"},
+      {id:"NER-1027", _route:"NH-157", lat:26.63, lng:92.8, delayMinutes:180, etaMinutes:300, status:"delayed", cargo:"medicines"},
+      {id:"NER-1028", _route:"NH-31", lat:26.2, lng:92.9, delayMinutes:60, etaMinutes:240, status:"delayed", cargo:"food"},
     ];
     toShow.forEach((v:any)=>{
       const lat=v.lat ?? 26.5, lng=v.lng ?? 92.9;
       const isFocused = focusId && v.id===focusId;
-      const dotColor = v.status==="stranded"||v.delayMinutes>180 ? "#ef4444" : v.delayMinutes>60 ? "#f97316" : v.delayMinutes>0 ? "#f59e0b" : "#10b981";
-      const icon = leaflet.divIcon({html:`<div style="background:${dotColor};width:${isFocused?14:10}px;height:${isFocused?14:10}px;border-radius:50%;border:2px solid white;box-shadow:0 0 ${isFocused?10:6}px ${dotColor};"></div>`,className:"",iconSize:[isFocused?14:10,isFocused?14:10]});
-      const m = leaflet.marker([lat,lng],{icon}).addTo(vehicleLayerRef.current);
+      const dotColor = v.status==="stranded"||v.delayMinutes>180 ? "#ef4444" : v.delayMinutes>60 ? "#f97316" : v.delayMinutes>0 ? "#f59e0b" : "#06b6d4";
+      const ring = dotColor==="#06b6d4" ? "#ffffff" : dotColor;
+      const icon = leaflet.divIcon({html:`<div style="background:${dotColor};width:${isFocused?20:16}px;height:${isFocused?20:16}px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 3px ${ring}, 0 4px 12px rgba(0,0,0,0.6);"></div><div style="position:absolute;top:50%;left:50%;width:${isFocused?28:24}px;height:${isFocused?28:24}px;margin:-${isFocused?14:12}px 0 0 -${isFocused?14:12}px;border-radius:50%;border:2px solid ${dotColor};opacity:0.35;animation: ping 1.5s cubic-bezier(0,0,0.2,1) infinite;"></div>`,className:"",iconSize:[isFocused?20:16,isFocused?20:16]});
+      const html = `<div style="display:flex;flex-direction:column;align-items:center;gap:3px;transform:translate(-50%,-100%);"><div style="background:#0f172a;color:white;font-size:10px;font-weight:900;padding:2px 6px;border-radius:999px;border:2px solid ${dotColor};white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.5);">${v.id} • ${v._route||""}</div><div style="background:${dotColor};width:${isFocused?20:16}px;height:${isFocused?20:16}px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 3px ${ring}, 0 4px 12px rgba(0,0,0,0.6);"></div></div>`;
+      const combinedIcon = leaflet.divIcon({html, className:"", iconSize:[100,40], iconAnchor:[50,16]});
+      const m = leaflet.marker([lat,lng],{icon: combinedIcon}).addTo(vehicleLayerRef.current);
       const fmt=(m:number)=> `${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")} hrs`;
-      m.bindTooltip(`<b>${v.id}</b> ${v.cargo||""}<br/>${fmt(v.etaMinutes||0)} • ${v.delayMinutes?fmt(v.delayMinutes)+" delay":"On time"}<br/>${v.status}`,{sticky:true});
+      m.bindTooltip(`<b>${v.id} • ${v._route||""}</b> ${v.cargo||""}<br/>on <b>${v._route||""}</b> • ${fmt(v.etaMinutes||0)} • ${v.delayMinutes?fmt(v.delayMinutes)+" delay":"On time"}<br/>${v.status}`,{sticky:true});
       if(isFocused) m.openTooltip();
     });
     if(focusId){ const f=toShow.find((v:any)=>v.id===focusId); if(f) map.flyTo([f.lat,f.lng],9,{duration:0.8}); }

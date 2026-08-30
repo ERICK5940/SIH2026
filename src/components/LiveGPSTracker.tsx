@@ -29,7 +29,7 @@ export function LiveGPSTracker() {
           body: JSON.stringify({ id, lat, lng, cargo: id==="NER-1024"?"medicines": id==="NER-1025"?"food":"construction", currentLocation: `${lat.toFixed(2)},${lng.toFixed(2)}` }),
         }).catch(()=>{});
       }
-      setStatus(`Simulated • ${new Date().toLocaleTimeString("en-IN",{timeZone:"Asia/Kolkata"})} IST • 5 min interval`);
+      setStatus(`Simulated • ${new Date().toLocaleTimeString("en-IN",{timeZone:"Asia/Kolkata", hour12:false})} IST • 5 min interval`);
     }, 300000);
     return () => clearInterval(simRef.current);
   }, [simulating]);
@@ -46,7 +46,7 @@ export function LiveGPSTracker() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ id: "NER-1024", lat, lng, cargo: "medicines", currentLocation: `${lat.toFixed(4)},${lng.toFixed(4)}`, speedKph: speed ? Math.round(speed*3.6) : undefined }),
         });
-        setStatus(`Live • ${lat.toFixed(4)},${lng.toFixed(4)} • ${new Date().toLocaleTimeString()}`);
+        setStatus(`Live • ${lat.toFixed(4)},${lng.toFixed(4)} • ${new Date().toLocaleTimeString("en-IN",{timeZone:"Asia/Kolkata", hour12:false})}`);
       },
       (err) => setStatus("Error: " + err.message),
       { enableHighAccuracy: true, maximumAge: 0 }

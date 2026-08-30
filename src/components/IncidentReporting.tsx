@@ -296,7 +296,7 @@ export function IncidentDashboard() {
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <p className="text-zinc-500 text-sm" suppressHydrationWarning>
-                  {new Date(incident.timestamp).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
+                  {new Date(incident.timestamp).toLocaleString("en-IN", { timeZone: "Asia/Kolkata", hour12:false })}
                 </p>
                 <p className="font-medium mt-1">
                   {getAccessibilityStatusLabel(incident.accessibilityStatus)} - {getSeverityLabel(incident.severity)}

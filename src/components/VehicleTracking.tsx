@@ -44,6 +44,13 @@ function fmtHrsMins(mins: number): string {
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")} hrs`;
 }
 
+const VEHICLE_ROUTE: Record<string, { name: string; status: string; color: string }> = {
+  "NER-1024": { name: "NH-37", status: "HIGH RISK", color: "#f97316" },
+  "NER-1025": { name: "NH-52", status: "DELAYED", color: "#f59e0b" },
+  "NER-1026": { name: "NH-29", status: "ACCESSIBLE", color: "#10b981" },
+  "NER-1027": { name: "NH-157", status: "BLOCKED", color: "#ef4444" },
+  "NER-1028": { name: "NH-31", status: "HIGH RISK", color: "#f97316" },
+};
 export function VehicleTracking({ vehicles, onFocus, live }: { vehicles: VehicleRecord[]; onFocus?: (id: string) => void; live?: Record<string, any> }) {
   const display = vehicles.map((v) => {
     const lv = live?.[v.id];
@@ -56,13 +63,13 @@ export function VehicleTracking({ vehicles, onFocus, live }: { vehicles: Vehicle
         <span className="text-[11px] font-bold tracking-widest bg-emerald-600 text-white px-2 py-1 rounded animate-pulse">{display.length} LIVE</span>
       </div>
       <div className="overflow-x-auto -mx-4 px-4">
-        <div className="min-w-[760px] rounded-lg border border-slate-200 overflow-hidden">
+        <div className="min-w-[660px] rounded-lg border border-slate-200 overflow-hidden">
           <table className="w-full text-left">
             <thead>
               <tr className="bg-slate-50 border-b border-slate-200">
                 <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Vehicle</th>
+                <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Route</th>
                 <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Cargo</th>
-                <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Current Location</th>
                 <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Destination</th>
                 <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">ETA</th>
                 <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Delay</th>
@@ -74,8 +81,8 @@ export function VehicleTracking({ vehicles, onFocus, live }: { vehicles: Vehicle
               {display.map((vehicle) => (
                 <tr key={vehicle.id} className="border-b border-slate-100 hover:bg-slate-50">
                   <td className="px-3 py-2.5 font-black text-slate-900 text-xs whitespace-nowrap">{vehicle.id}</td>
+                  <td className="px-3 py-2.5 whitespace-nowrap">{(() => { const r = VEHICLE_ROUTE[vehicle.id]; return r ? <span className="inline-flex px-2 py-1 rounded text-[10px] font-black border border-white shadow-sm text-white whitespace-nowrap" style={{background:r.color}} title={r.status}>{r.name} • {r.status}</span> : <span className="text-[11px] text-slate-400">—</span>; })()}</td>
                   <td className="px-3 py-2.5 whitespace-nowrap"><span className={`inline-flex px-2 py-1 rounded text-[11px] font-bold border whitespace-nowrap ${cargoBadge[vehicle.cargo]}`}>{vehicle.cargo}</span></td>
-                  <td className="px-3 py-2.5 text-xs font-semibold text-slate-700 whitespace-nowrap max-w-[130px] truncate" title={vehicle.currentLocation}>{vehicle.currentLocation} {live?.[vehicle.id] && <span className="text-emerald-600">● live</span>}</td>
                   <td className="px-3 py-2.5 text-xs font-semibold text-slate-700 whitespace-nowrap max-w-[110px] truncate">{vehicle.destination}</td>
                   <td className="px-3 py-2.5 text-xs font-bold text-slate-900 whitespace-nowrap">{fmtHrsMins(vehicle.etaMinutes)}</td>
                   <td className="px-3 py-2.5 text-xs font-black whitespace-nowrap" style={{ color: vehicle.delayMinutes > 0 ? "#dc2626" : "#16a34a" }}>{fmtHrsMins(vehicle.delayMinutes)}</td>

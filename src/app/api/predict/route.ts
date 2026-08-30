@@ -52,7 +52,9 @@ export async function POST(req: NextRequest) {
       historicalIncidents.filter((h: any) => h.severity === "high").length > 0 ? `Previous ${historicalIncidents[historicalIncidents.length - 1]?.type} incident` : null,
     ].filter(Boolean).join(" + ") || "Normal conditions";
 
-    const recommendedAction = prob >= 80 ? "Immediate rerouting required" : prob >= 60 ? "Strongly recommend alternate route" : prob >= 40 ? "Monitor conditions closely" : "Route appears safe";
+    // ensemble: don't waste good road — require GIS-risk context (low rain + accessible route should not be Immediate)
+    const gRiskHigh = fRain > 0.5 || roadInfo?.landslideRisk; // proxy for GIS 60%+ in liveRoutes
+    const recommendedAction = prob >= 95 && gRiskHigh ? "Immediate rerouting required" : prob >= 80 ? (gRiskHigh ? "Strongly recommend alternate route" : "Monitor — keep Bypass ready (good road now, terrain-risk forecast)") : prob >= 40 ? "Monitor conditions closely" : "Route appears safe";
 
     // SHAP-like contributions for explainability
     const featureImportance = [

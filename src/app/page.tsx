@@ -101,7 +101,35 @@ export default function DashboardPage() {
     });
     return merged;
   }, [liveVehiclesRaw]);
+  // LIVE corridors - STATUS/RISK now from Open-Meteo live weather (not showcase)
+  const routeDistrict: Record<string,string> = {"NH-37":"Assam","NH-52":"Arunachal Pradesh","NH-157":"Arunachal Pradesh","NH-29":"Nagaland","NH-31":"Tripura"};
+  const liveRoutesBase = React.useMemo(() => sampleRoutes.map((r:any)=>{
+    const d = routeDistrict[r.name]; const live = d ? (liveDistricts as any)[d] : null;
+    if(!live) return r; // no live yet -> showcase fallback
+    const risk = live.liveRisk; // 0-95 from /api/weather/live
+    const status = risk>=80 ? "blocked" : risk>=60 ? "high_risk" : risk>=35 ? "delayed" : "accessible";
+    return { ...r, riskScore: risk, status };
+  }), [liveDistricts]);
   const isEmergency = emergencyMode === "active";
+  const liveRoutes = React.useMemo(()=> isEmergency ? liveRoutesBase.filter((r:any)=> r.status==="blocked"||r.status==="high_risk") : liveRoutesBase, [liveRoutesBase, isEmergency]);
+  const emergencyVehicles = React.useMemo(()=> isEmergency ? sampleVehicles.filter((v:any)=> (v.cargo==="medicines"||v.cargo==="food") && v.delayMinutes>0) : sampleVehicles, [isEmergency]);
+  const liveAlerts = React.useMemo(()=>{
+    const a:any[] = [];
+    liveRoutesBase.forEach((r:any)=>{
+      if(r.status==="blocked") a.push({ id:`a-${r.name}`, level:"critical", category:"route_blocked", title:"Route Blocked", message:`${r.name} blocked — live ${r.riskScore}%`, action:"Reroute via Alternative Corridor B", timestamp: new Date().toISOString(), routeId:r.name, vehicleId: r.name==="NH-37"?"NER-1024":r.name==="NH-157"?"NER-1027":undefined });
+      else if(r.status==="high_risk") a.push({ id:`a-${r.name}`, level:"warning", category:"weather", title:"High Risk", message:`${r.name} high risk ${r.riskScore}%`, action:"Monitor conditions", timestamp: new Date().toISOString(), routeId:r.name });
+    });
+    if(a.length===0) a.push({ id:"1", level:"informational", category:"field_update", title:"All Clear", message:"No critical blocks — live monitoring", action:"Update dashboard", timestamp: new Date().toISOString() });
+    // merge field incidents
+    incidents.slice(0,1).forEach((inc:any)=> a.push({ id:`inc-${inc.id}`, level: inc.severity==="high"?"critical":inc.severity==="medium"?"warning":"informational", category:"field_update", title: inc.type, message: inc.description, action:"View on map", timestamp: inc.timestamp, routeId: inc.location?`${inc.location.latitude.toFixed(1)},${inc.location.longitude.toFixed(1)}`:"Field" }));
+    return a.slice(0,5);
+  }, [liveRoutesBase, incidents]);
+  const handleAlertAction = async (alert:any)=>{
+    if(alert.action?.toLowerCase().includes("reroute") && alert.vehicleId){
+      await fetch("/api/reroute",{method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({vehicleId: alert.vehicleId, from: alert.routeId, to: "Brahmaputra South Bypass (via Lumding)", reason: alert.title})});
+      alert(`✓ Reroute sent to ${alert.vehicleId} for ${alert.routeId}`);
+    }
+  };
   // Memoize weather objects to prevent predictor flicker (new object ref every render)
   const liveWeatherForPredictor = React.useMemo(() => liveWeather ? { severity: liveWeather.severity, rainfall: liveWeather.rainfall, temperature: liveWeather.temperature } : null, [liveWeather?.severity, liveWeather?.rainfall, liveWeather?.temperature]);
   const liveWeatherForAlternate = React.useMemo(() => liveWeather ? { severity: liveWeather.severity, rainfall: liveWeather.rainfall } : null, [liveWeather?.severity, liveWeather?.rainfall]);
@@ -172,7 +200,7 @@ export default function DashboardPage() {
           <div className="flex items-center gap-3 shrink-0">
             <div className="hidden lg:flex flex-col items-end text-xs font-medium">
               <div className="flex items-center gap-2">
-                <span className="opacity-70">Last sync:</span><span className="font-mono font-bold">{liveWeather ? new Date().toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" }) : "09:42:11"} IST</span>
+                <span className="opacity-70">Last sync:</span><span className="font-mono font-bold">{liveWeather ? new Date().toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata", hour12:false }) : "09:42:11"} IST</span>
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse ml-1" />
               </div>
               {liveWeather && <span className="text-[10px] font-bold tracking-widest text-emerald-300">Gathered: {liveWeather.location} {liveWeather.rainfall}mm • {liveWeather.temperature}°C</span>}
@@ -246,7 +274,7 @@ export default function DashboardPage() {
                   <h2 className="text-sm font-black tracking-tight">🛰 GIS ACCESSIBILITY MAP • NER</h2>
                   <span className="text-[11px] font-bold px-2 py-1 rounded bg-slate-900 text-white">LIVE FEED</span>
                 </div>
-                <GISMap routes={sampleRoutes as any} districtScores={sampleDistrictData as any} focusId={focusVehicle} liveVehicles={liveVehicles} />
+                <GISMap routes={liveRoutes as any} districtScores={sampleDistrictData as any} focusId={focusVehicle} liveVehicles={liveVehicles} />
               </div>
 
               <div className="col-span-12 xl:col-span-4 bg-white border border-slate-200 rounded-lg shadow-sm p-4">
@@ -328,7 +356,7 @@ export default function DashboardPage() {
             {/* ROW 3b: Logistics Priority - full width, no scrollbar, entire content */}
             <section className="grid grid-cols-12 gap-4">
               <div className="col-span-12 bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
-                <LogisticsPriorityEngine vehicles={sampleVehicles} />
+                <LogisticsPriorityEngine vehicles={emergencyVehicles} />
               </div>
             </section>
 
@@ -343,22 +371,17 @@ export default function DashboardPage() {
               </div>
               <div className="col-span-12 lg:col-span-7 space-y-4">
                 <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4">
-                  <AlertCenter
-                    alerts={[
-                      { id: "1", level: "critical", category: "route_blocked", title: "Route Blocked", message: "NH-37 blocked due to landslide", action: "Reroute via Alternative Corridor B", timestamp: FIXED_TS },
-                      { id: "2", level: "warning", category: "weather", title: "Heavy Rainfall", message: "Rainfall predicted 45mm/hr, disruption probability 82%", action: "Monitor conditions", timestamp: FIXED_TS },
-                      { id: "3", level: "informational", category: "field_update", title: "Field Update Received", message: "New incident reported from field officer", action: "Update dashboard", timestamp: FIXED_TS },
-                    ] as any}
-                  />
+                  <AlertCenter alerts={liveAlerts as any} onAction={handleAlertAction} />
+                  {isEmergency && <p className="text-[11px] font-bold text-red-600 mt-2">⚠ EMERGENCY: showing only BLOCKED/HIGH RISK corridors + critical vehicles</p>}
                 </div>
                 <DriverInbox />
                 <div className="grid grid-cols-1 gap-4">
                   <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4 overflow-hidden">
-                    <VehicleTracking vehicles={sampleVehicles} onFocus={setFocusVehicle} live={liveVehicles} />
+                    <VehicleTracking vehicles={emergencyVehicles} onFocus={setFocusVehicle} live={liveVehicles} />
                   </div>
                   <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4">
-                    <h3 className="text-sm font-black mb-3">ESSENTIAL SUPPLIES</h3>
-                    <EssentialSuppliesMonitor vehicles={sampleVehicles} />
+                    <h3 className="text-sm font-black mb-3">ESSENTIAL SUPPLIES {isEmergency && "• EMERGENCY"}</h3>
+                    <EssentialSuppliesMonitor vehicles={emergencyVehicles} />
                   </div>
                 </div>
               </div>
