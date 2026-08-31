@@ -30,24 +30,29 @@ export default function FieldPage() {
   const [camErr, setCamErr] = useState<string | null>(null);
   const startCam = async () => {
     setCamErr(null);
+    setCamOn(true); // render video element first so ref exists
+    await new Promise(r=>setTimeout(r,80));
     try {
-      // localhost is secure context, but try environment first then fallback to user
       let s: MediaStream | null = null;
       try { s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } } }); } catch {}
       if (!s) s = await navigator.mediaDevices.getUserMedia({ video: true });
+      streamRef.current = s;
       if (videoRef.current) { videoRef.current.srcObject = s; videoRef.current.muted = true; await videoRef.current.play().catch(()=>{}); }
-      streamRef.current = s; setCamOn(true);
     } catch (e: any) {
-      const msg = e?.name === "NotAllowedError" ? "Camera permission denied — please Allow camera in browser" : e?.name === "NotFoundError" ? "No camera found on this device — use File upload" : "Camera not available: " + (e?.message || e);
-      setCamErr(msg); alert(msg);
+      setCamOn(false);
+      const msg = e?.name === "NotAllowedError" ? "Camera permission denied — please Allow camera (padlock → Allow)" : e?.name === "NotFoundError" ? "No camera found — use File upload below" : "Camera not available: " + (e?.message || e);
+      setCamErr(msg);
     }
   };
   const stopCam = () => { streamRef.current?.getTracks().forEach(t => t.stop()); setCamOn(false); };
   const capture = () => {
     if (!videoRef.current) return;
+    if (videoRef.current.videoWidth === 0) { alert("Camera not ready — wait 1 sec and try again"); return; }
     const c = document.createElement("canvas"); c.width = videoRef.current.videoWidth; c.height = videoRef.current.videoHeight;
     c.getContext("2d")?.drawImage(videoRef.current, 0, 0);
-    setPhoto(c.toDataURL("image/jpeg", 0.7));
+    const data = c.toDataURL("image/jpeg", 0.7);
+    if (data.length < 100) { alert("Capture failed — try again"); return; }
+    setPhoto(data);
     if (lat === null) getGps();
   };
   const onFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -150,13 +155,17 @@ export default function FieldPage() {
           <div className="border border-slate-200 rounded-lg p-3 bg-slate-50">
             <p className="text-xs font-black tracking-widest">PHOTO — File upload + Live GPS Cam</p>
             <input type="file" accept="image/*" onChange={onFile} className="mt-2 text-xs w-full" />
+            <label className="mt-2 block text-xs font-bold text-emerald-700">📱 Mobile: tap to take photo directly
+              <input type="file" accept="image/*" capture="environment" onChange={onFile} className="mt-1 text-xs w-full" />
+            </label>
             <div className="flex gap-2 mt-3">
-              {!camOn ? <button type="button" onClick={startCam} className="px-3 py-1.5 rounded bg-emerald-600 text-white text-xs font-black">📷 Open Cam</button> : <button type="button" onClick={stopCam} className="px-3 py-1.5 rounded bg-slate-700 text-white text-xs font-black">■ Close Cam</button>}
+              {!camOn ? <button type="button" onClick={startCam} className="px-3 py-1.5 rounded bg-emerald-600 text-white text-xs font-black">📷 Open Laptop Cam</button> : <button type="button" onClick={stopCam} className="px-3 py-1.5 rounded bg-slate-700 text-white text-xs font-black">■ Close Cam</button>}
               {camOn && <button type="button" onClick={capture} className="px-3 py-1.5 rounded bg-slate-900 text-white text-xs font-black">Capture</button>}
             </div>
+            <p className="text-[11px] text-slate-500 mt-1">Laptop la camera permission Allow pannunga — illa na File upload use pannunga</p>
             {camErr && <p className="text-xs font-bold text-red-600 mt-2">{camErr}</p>}
-            {camOn && <video ref={videoRef} autoPlay playsInline muted className="mt-3 w-full rounded-lg bg-black h-48 object-cover" />}
-            {photo && <img src={photo} alt="preview" className="mt-3 w-full rounded-lg border h-48 object-cover bg-white" />}
+            <video ref={videoRef} autoPlay playsInline muted className={`mt-3 w-full rounded-lg bg-black h-48 object-cover ${camOn ? "block" : "hidden"}`} />
+            {photo && photo.length > 100 && <div className="mt-3"><p className="text-xs font-black text-emerald-700">✓ Captured preview (will submit with report)</p><img src={photo} alt="preview" className="mt-1 w-full rounded-lg border h-48 object-cover bg-white" /></div>}
           </div>
 
           <button type="submit" disabled={saving} className="w-full py-3 rounded-lg bg-slate-900 text-white font-black hover:bg-black disabled:opacity-50">{saving ? "Saving…" : "Submit Geo-tagged Report"}</button>
