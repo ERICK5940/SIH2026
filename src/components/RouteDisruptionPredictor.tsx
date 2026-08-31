@@ -51,6 +51,7 @@ export function RouteDisruptionPredictor(p: RoutePredictionEngineProps & { onRou
   const fallback = { ...fb, model: "NER-LSTM v2.1", accuracy: 71.5, latencyMs: 42, featureImportance: [{ feature: "Rainfall", value: `${(p.weather?.rainfall ?? 45) + (ROUTE_PROFILES[selected]?.baseRainOffset||0)}mm`, contribution: 38, weight: 0.63 }, { feature: "Weather Severity", value: p.weather?.severity || "rain", contribution: 32, weight: 0.42 }] };
   const [data, setData] = React.useState<any>(fallback);
   const [loading, setLoading] = React.useState(false);
+  const cacheRef = React.useRef<Map<string,any>>(new Map());
 
   // Use route-specific profile so each NH shows distinct prediction (correct approach)
   const profile = ROUTE_PROFILES[selected] || ROUTE_PROFILES["NH-37"];
@@ -59,12 +60,15 @@ export function RouteDisruptionPredictor(p: RoutePredictionEngineProps & { onRou
     rainfall: Math.max(0, (p.weather.rainfall || 0) + profile.baseRainOffset + (selected.charCodeAt(3) % 5)),
     temperature: p.weather.temperature,
   };
+  const cacheKey = `${selected}:${routeWeather.rainfall}:${routeWeather.severity}:${profile.roadInfo.condition}:${profile.traffic}`;
 
   React.useEffect(() => {
     let cancelled = false;
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 4000);
-    (async () => {
+    const cached = cacheRef.current.get(cacheKey);
+    if (cached) { setData(cached); return; }
+    const debounce = setTimeout(async () => {
+      const timeout = setTimeout(() => controller.abort(), 3000);
       try {
         const r = await fetch("/api/predict", {
           method: "POST",
@@ -74,11 +78,11 @@ export function RouteDisruptionPredictor(p: RoutePredictionEngineProps & { onRou
         });
         clearTimeout(timeout);
         const j = await r.json();
-        if (!cancelled && j.disruptionProbability !== undefined) setData(j);
+        if (!cancelled && j.disruptionProbability !== undefined) { cacheRef.current.set(cacheKey, j); setData(j); }
       } catch {}
-    })();
-    return () => { cancelled = true; clearTimeout(timeout); controller.abort(); };
-  }, [selected, JSON.stringify(routeWeather), profile.roadInfo.condition, profile.traffic]);
+    }, 250);
+    return () => { cancelled = true; clearTimeout(debounce); controller.abort(); };
+  }, [cacheKey]);
 
   // Immediate fallback update on route change (no same-value flash)
   React.useEffect(() => {
@@ -113,7 +117,7 @@ export function RouteDisruptionPredictor(p: RoutePredictionEngineProps & { onRou
           <div>
             <p className="text-[11px] font-bold tracking-widest text-slate-500">Disruption Probability</p>
             <p className="text-3xl font-black" style={{ color: riskColors[d.riskLevel] }}>{d.disruptionProbability}%</p>
-            <p className="text-[11px] font-mono font-bold text-slate-500">{d.latencyMs}ms inference • Updated: {new Date(d.timestamp).toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata", hour12: false })}</p>
+            <p className="text-[11px] font-mono font-bold text-slate-500">{d.latencyMs}ms inference{d.cacheHit?" • cached":""} • Updated: {new Date(d.timestamp).toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata", hour12: false })}</p>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
