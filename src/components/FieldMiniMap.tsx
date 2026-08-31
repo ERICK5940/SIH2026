@@ -10,7 +10,7 @@ export default function FieldMiniMap({ lat, lng }: { lat: number | null; lng: nu
     let cancelled = false;
     import("maplibre-gl").then((mod) => {
       if (cancelled) return;
-      const maplibregl = mod.default;
+      const maplibregl = (mod as any).default || mod;
       import("maplibre-gl/dist/maplibre-gl.css");
       if (mapInstRef.current) return;
       const map = new maplibregl.Map({
