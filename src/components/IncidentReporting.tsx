@@ -302,6 +302,13 @@ export function IncidentDashboard() {
                   {getAccessibilityStatusLabel(incident.accessibilityStatus)} - {getSeverityLabel(incident.severity)}
                 </p>
                 <p className="text-zinc-500 text-xs mt-1">{incident.description}</p>
+                {(incident.state || incident.district || incident.road) && (
+                  <p className="text-[10px] text-zinc-400 mt-1 font-mono">
+                    {incident.road ? `Road: ${incident.road} • ` : ""}
+                    {incident.state ? `${incident.state}` : ""}
+                    {incident.district ? ` / ${incident.district}` : ""}
+                  </p>
+                )}
               </div>
               <div className="w-12 h-12 rounded bg-zinc-100 flex items-center justify-center">
                 {incident.photoUrl ? (

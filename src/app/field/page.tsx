@@ -15,6 +15,7 @@ export default function FieldPage() {
   const [lng, setLng] = useState<number | null>(null);
   const [stateName, setStateName] = useState<string>("");
   const [districtName, setDistrictName] = useState<string>("");
+  const [roadName, setRoadName] = useState<string>("");
   const [photo, setPhoto] = useState<string | null>(null);
   const [gpsStatus, setGpsStatus] = useState("Tap 📍 Get GPS");
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -24,13 +25,15 @@ export default function FieldPage() {
 
   const reverseGeo = async (lat: number, lng: number) => {
     try {
-      const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=10&addressdetails=1`);
+      const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`);
       const j = await r.json();
       const a = j?.address || {};
       const st = a.state || a.state_district || "";
       const dt = a.state_district || a.district || a.county || "";
+      const rd = a.road || a highway || a.suburb || "";
       setStateName(st);
       setDistrictName(dt);
+      setRoadName(rd);
     } catch {}
   };
   const getGps = () => {
@@ -83,7 +86,7 @@ export default function FieldPage() {
     if (!desc.trim() || !authority.trim()) { alert("Authority + description required"); return; }
     if (lat === null || lng === null) { alert("Tap Get GPS first"); return; }
     setSaving(true);
-    const report = { id: Date.now().toString(), type, description: `${authority} (${role}): ${desc}`, photoUrl: photo, location: { latitude: lat, longitude: lng }, severity, accessibilityStatus: access, timestamp: new Date().toISOString(), offline: !navigator.onLine, authority, role, state: stateName, district: districtName };
+    const report = { id: Date.now().toString(), type, description: `${authority} (${role}): ${desc}`, photoUrl: photo, location: { latitude: lat, longitude: lng }, severity, accessibilityStatus: access, timestamp: new Date().toISOString(), offline: !navigator.onLine, authority, role, state: stateName, district: districtName, road: roadName };
     try {
       const r = await fetch("/api/incidents", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(report) });
       if (r.ok) { alert("✓ Report submitted — central dashboard updated"); setDesc(""); setPhoto(null); }
@@ -166,13 +169,13 @@ export default function FieldPage() {
                <button type="button" onClick={getGps} className="px-3 py-1.5 rounded bg-sky-600 text-white text-xs font-black">📍 Get GPS</button>
                <span className="text-xs font-semibold text-slate-700 self-center">{gpsStatus}</span>
              </div>
-             {lat !== null && (
-               <div className="mt-2 text-xs font-mono">
-                 <p>{lat.toFixed(6)}, {lng?.toFixed(6)}</p>
-                 {stateName && <p className="text-emerald-700 font-bold mt-1">State: {stateName}{districtName ? ` • District: ${districtName}` : ""}</p>}
-                 <div className="mt-3"><FieldMiniMap lat={lat} lng={lng!} /></div>
-               </div>
-             )}
+              {lat !== null && (
+                <div className="mt-2 text-xs font-mono">
+                  <p>{lat.toFixed(6)}, {lng?.toFixed(6)}</p>
+                  {stateName && <p className="text-emerald-700 font-bold mt-1">State: {stateName}{districtName ? ` • District: ${districtName}` : ""}{roadName ? ` • Road: ${roadName}` : ""}</p>}
+                  <div className="mt-3"><FieldMiniMap lat={lat} lng={lng!} /></div>
+                </div>
+              )}
            </div>
 
           <div className="border border-slate-200 rounded-lg p-3 bg-slate-50">
