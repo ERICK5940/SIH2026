@@ -42,10 +42,10 @@ function LeafletMap({ routes, focusId, liveVehicles }: { routes: Route[]; focusI
         });
         if (!mapRef.current) return;
         if ((mapRef.current as any)._leaflet_id) return;
-        const map = leaflet.map(mapRef.current!, { zoomControl: false }).setView([26.2, 92.9], 7);
+        const map = leaflet.map(mapRef.current!, { zoomControl: true }).setView([26.2, 92.9], 7);
         mapInstanceRef.current = map;
         leafletRef.current = leaflet;
-        leaflet.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "© OpenStreetMap | NER Exact Outline", maxZoom: 10, opacity: 0.92 }).addTo(map);
+        leaflet.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "© OpenStreetMap | NER", maxZoom: 18, opacity: 1 }).addTo(map);
         const states = ["arunachal-pradesh","assam","meghalaya","manipur","mizoram","nagaland","tripura"];
         const colors: Record<string,string> = {"arunachal-pradesh":"#1e293b",assam:"#0f172a",meghalaya:"#1e293b",nagaland:"#1e293b",manipur:"#1e293b",mizoram:"#1e293b",tripura:"#1e293b"};
         const group: any[] = [];
@@ -55,7 +55,7 @@ function LeafletMap({ routes, focusId, liveVehicles }: { routes: Route[]; focusI
             if (!res.ok) continue;
             const gj = await res.json();
             const layer = leaflet.geoJSON(gj, {
-              style: { color: st==="assam"?"#38bdf8":"white", weight: st==="assam"?2.5:1.2, fillColor: colors[st]||"#1e293b", fillOpacity: 0.82, opacity: 0.9 },
+              style: { color: st==="assam"?"#0ea5e9":"#64748b", weight: st==="assam"?2:1, fillColor: colors[st]||"#1e293b", fillOpacity: 0.12, opacity: 0.7 },
               onEachFeature: (f:any,l:any)=> l.bindTooltip(`<b>${st.replace("-"," ").toUpperCase()}</b>`,{sticky:true}),
             }).addTo(map);
             group.push(layer);
@@ -69,10 +69,12 @@ function LeafletMap({ routes, focusId, liveVehicles }: { routes: Route[]; focusI
         } catch {}
         routes.forEach((r)=>{
           const latlng = routeLatLng[r.name]; if(!latlng) return;
+          // white halo for clear vision on OSM
+          leaflet.polyline(latlng,{color:"white",weight:r.status==="blocked"?9:7,opacity:0.95}).addTo(map);
           const poly = leaflet.polyline(latlng,{color:statusColors[r.status],weight:r.status==="blocked"?7:5,opacity:1,dashArray:r.status==="blocked"?"10 8":r.status==="high_risk"?"14 10":undefined}).addTo(map);
           poly.bindTooltip(`<b>${r.name}</b> ${r.from} → ${r.to}<br/>${r.distance}km • ${r.eta}`,{sticky:true});
           const mid = latlng[Math.floor(latlng.length/2)];
-          leaflet.marker(mid,{icon:leaflet.divIcon({html:`<div style="background:${statusColors[r.status]};color:white;font-size:9px;font-weight:900;padding:2px 5px;border-radius:4px;border:1px solid white;white-space:nowrap;">${r.name}</div>`,className:""})}).addTo(map);
+          leaflet.marker(mid,{icon:leaflet.divIcon({html:`<div style="background:${statusColors[r.status]};color:white;font-size:10px;font-weight:900;padding:3px 6px;border-radius:6px;border:2px solid white;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,0.4);">${r.name}</div>`,className:""})}).addTo(map);
         });
         vehicleLayerRef.current = leaflet.layerGroup().addTo(map);
         setTimeout(()=> { try{ map.invalidateSize(); }catch{} }, 150);
@@ -111,7 +113,7 @@ function LeafletMap({ routes, focusId, liveVehicles }: { routes: Route[]; focusI
     if(focusId){ const f=toShow.find((v:any)=>v.id===focusId); if(f) map.flyTo([f.lat,f.lng],9,{duration:0.8}); }
   },[liveVehicles, focusId]);
 
-  return <div ref={mapRef} className="w-full h-[380px] bg-slate-900" />;
+  return <div ref={mapRef} className="w-full h-[420px] bg-slate-100" />;
 }
 
 export function GISMap({ routes, focusId, liveVehicles }: GISMapProps) {
