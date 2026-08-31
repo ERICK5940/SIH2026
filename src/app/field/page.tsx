@@ -12,6 +12,8 @@ export default function FieldPage() {
   const [access, setAccess] = useState("blocked");
   const [lat, setLat] = useState<number | null>(null);
   const [lng, setLng] = useState<number | null>(null);
+  const [stateName, setStateName] = useState<string>("");
+  const [districtName, setDistrictName] = useState<string>("");
   const [photo, setPhoto] = useState<string | null>(null);
   const [gpsStatus, setGpsStatus] = useState("Tap 📍 Get GPS");
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -19,11 +21,25 @@ export default function FieldPage() {
   const [camOn, setCamOn] = useState(false);
   const [saving, setSaving] = useState(false);
 
+  const reverseGeo = async (lat: number, lng: number) => {
+    try {
+      const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=10&addressdetails=1`);
+      const j = await r.json();
+      const a = j?.address || {};
+      const st = a.state || a.state_district || "";
+      const dt = a.state_district || a.district || a.county || "";
+      setStateName(st);
+      setDistrictName(dt);
+    } catch {}
+  };
   const getGps = () => {
     if (!navigator.geolocation) { setGpsStatus("GPS not supported"); return; }
     setGpsStatus("Fetching…");
     navigator.geolocation.getCurrentPosition((p) => {
-      setLat(p.coords.latitude); setLng(p.coords.longitude); setGpsStatus(`✓ ${p.coords.latitude.toFixed(4)}, ${p.coords.longitude.toFixed(4)}`);
+      const la = p.coords.latitude; const lo = p.coords.longitude;
+      setLat(la); setLng(lo);
+      setGpsStatus(`✓ ${la.toFixed(4)}, ${lo.toFixed(4)}`);
+      reverseGeo(la, lo);
     }, (e) => setGpsStatus("Error: " + e.message), { enableHighAccuracy: true });
   };
 
@@ -66,7 +82,7 @@ export default function FieldPage() {
     if (!desc.trim() || !authority.trim()) { alert("Authority + description required"); return; }
     if (lat === null || lng === null) { alert("Tap Get GPS first"); return; }
     setSaving(true);
-    const report = { id: Date.now().toString(), type, description: `${authority} (${role}): ${desc}`, photoUrl: photo, location: { latitude: lat, longitude: lng }, severity, accessibilityStatus: access, timestamp: new Date().toISOString(), offline: !navigator.onLine, authority, role };
+    const report = { id: Date.now().toString(), type, description: `${authority} (${role}): ${desc}`, photoUrl: photo, location: { latitude: lat, longitude: lng }, severity, accessibilityStatus: access, timestamp: new Date().toISOString(), offline: !navigator.onLine, authority, role, state: stateName, district: districtName };
     try {
       const r = await fetch("/api/incidents", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(report) });
       if (r.ok) { alert("✓ Report submitted — central dashboard updated"); setDesc(""); setPhoto(null); }
@@ -143,14 +159,19 @@ export default function FieldPage() {
             <textarea value={desc} onChange={e => setDesc(e.target.value)} rows={3} className="mt-1 w-full px-3 py-2 border rounded-lg text-sm" placeholder="Describe incident..." required />
           </div>
 
-          <div className="border border-slate-200 rounded-lg p-3 bg-slate-50">
-            <p className="text-xs font-black tracking-widest">LIVE GPS (geo-tag)</p>
-            <div className="flex gap-2 mt-2">
-              <button type="button" onClick={getGps} className="px-3 py-1.5 rounded bg-sky-600 text-white text-xs font-black">📍 Get GPS</button>
-              <span className="text-xs font-semibold text-slate-700 self-center">{gpsStatus}</span>
-            </div>
-            {lat !== null && <p className="text-xs font-mono mt-2">{lat.toFixed(6)}, {lng?.toFixed(6)}</p>}
-          </div>
+           <div className="border border-slate-200 rounded-lg p-3 bg-slate-50">
+             <p className="text-xs font-black tracking-widest">LIVE GPS (geo-tag)</p>
+             <div className="flex gap-2 mt-2">
+               <button type="button" onClick={getGps} className="px-3 py-1.5 rounded bg-sky-600 text-white text-xs font-black">📍 Get GPS</button>
+               <span className="text-xs font-semibold text-slate-700 self-center">{gpsStatus}</span>
+             </div>
+             {lat !== null && (
+               <div className="mt-2 text-xs font-mono">
+                 <p>{lat.toFixed(6)}, {lng?.toFixed(6)}</p>
+                 {stateName && <p className="text-emerald-700 font-bold mt-1">State: {stateName}{districtName ? ` • District: ${districtName}` : ""}</p>}
+               </div>
+             )}
+           </div>
 
           <div className="border border-slate-200 rounded-lg p-3 bg-slate-50">
             <p className="text-xs font-black tracking-widest">PHOTO — File upload + Live GPS Cam</p>
@@ -164,8 +185,8 @@ export default function FieldPage() {
             </div>
             <p className="text-[11px] text-slate-500 mt-1">Laptop la camera permission Allow pannunga — illa na File upload use pannunga</p>
             {camErr && <p className="text-xs font-bold text-red-600 mt-2">{camErr}</p>}
-            <video ref={videoRef} autoPlay playsInline muted className={`mt-3 w-full rounded-lg bg-black h-48 object-cover ${camOn ? "block" : "hidden"}`} />
-            {photo && photo.length > 100 && <div className="mt-3"><p className="text-xs font-black text-emerald-700">✓ Captured preview (will submit with report)</p><img src={photo} alt="preview" className="mt-1 w-full rounded-lg border h-48 object-cover bg-white" /></div>}
+            <video ref={videoRef} autoPlay playsInline muted className={`mt-3 w-full rounded-lg bg-black h-64 object-cover ${camOn ? "block" : "hidden"}`} />
+            {photo && photo.length > 100 && <div className="mt-3"><p className="text-xs font-black text-emerald-700">✓ Captured preview (will submit with report)</p><img src={photo} alt="preview" className="mt-1 w-full rounded-lg border h-64 object-cover bg-white" /></div>}
           </div>
 
           <button type="submit" disabled={saving} className="w-full py-3 rounded-lg bg-slate-900 text-white font-black hover:bg-black disabled:opacity-50">{saving ? "Saving…" : "Submit Geo-tagged Report"}</button>
