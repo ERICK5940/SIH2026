@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import FieldMiniMap from "@/components/FieldMiniMap";
 
 const ROLES = ["Field Officer", "BRO Officer", "District Magistrate", "NHAI Engineer", "Local Authority", "NDMA Volunteer"];
 
@@ -169,6 +170,7 @@ export default function FieldPage() {
                <div className="mt-2 text-xs font-mono">
                  <p>{lat.toFixed(6)}, {lng?.toFixed(6)}</p>
                  {stateName && <p className="text-emerald-700 font-bold mt-1">State: {stateName}{districtName ? ` • District: ${districtName}` : ""}</p>}
+                 <div className="mt-3"><FieldMiniMap lat={lat} lng={lng!} /></div>
                </div>
              )}
            </div>
