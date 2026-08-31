@@ -85,22 +85,22 @@ export function AlertCenter({
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full table-fixed w-full">
+        <table className="min-w-[720px] w-full">
           <thead>
             <tr className="border-b bg-zinc-100">
-              <th className="p-3 text-left text-sm font-medium">Level</th>
-              <th className="p-3 text-left text-sm font-medium">Route</th>
-              <th className="p-3 text-left text-sm font-medium">Category</th>
-              <th className="p-3 text-left text-sm font-medium">Title</th>
+              <th className="p-3 text-left text-sm font-medium w-[110px]">Level</th>
+              <th className="p-3 text-left text-sm font-medium w-[90px]">Route</th>
+              <th className="p-3 text-left text-sm font-medium w-[85px]">Category</th>
+              <th className="p-3 text-left text-sm font-medium w-[110px]">Title</th>
               <th className="p-3 text-left text-sm font-medium">Message</th>
-              <th className="p-3 text-left text-sm font-medium">Action</th>
+              <th className="p-3 text-left text-sm font-medium w-[120px]">Action</th>
             </tr>
           </thead>
           <tbody>
             {alerts.map((alert) => (
               <tr
                 key={alert.id}
-                className="border-b hover:bg-zinc-50"
+                className="border-b hover:bg-zinc-50 align-top"
                 style={{ background: `${alertLevelConfig[alert.level].color}/5` }}
               >
                 <td className="p-3">
@@ -110,15 +110,15 @@ export function AlertCenter({
                     {getAlertPriorityLabel(alert.level)}
                   </span>
                 </td>
-                <td className="p-3 text-xs font-black text-slate-700">{(alert as any).routeId || "—"}</td>
+                <td className="p-3 text-xs font-black text-slate-700 max-w-[90px] truncate">{(alert as any).routeId || "—"}</td>
                 <td className="p-3">
                   <span className="text-zinc-400 text-xs">
                     {alertCategoryIcons[alert.category]}
                   </span>
-                  <p className="text-zinc-500 text-sm mt-1">{alert.category}</p>
+                  <p className="text-zinc-500 text-xs mt-1 break-words">{alert.category}</p>
                 </td>
-                <td className="p-3 font-medium">{alert.title}</td>
-                <td className="p-3 text-zinc-500 text-sm">{alert.message}</td>
+                <td className="p-3 font-medium text-sm max-w-[110px] truncate">{alert.title}</td>
+                <td className="p-3 text-zinc-500 text-xs max-w-[320px] break-all whitespace-normal leading-snug">{alert.message}</td>
                 <td className="p-3">
                   {alert.action ? (
                     alert.action.toLowerCase().includes("reroute") ? (
