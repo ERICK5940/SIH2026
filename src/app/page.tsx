@@ -90,6 +90,8 @@ export default function DashboardPage() {
   const [liveDistricts, setLiveDistricts] = React.useState<Record<string, any>>({});
   const [incidents, setIncidents] = React.useState<any[]>(sampleIncidents);
   const [selectedRouteId, setSelectedRouteId] = React.useState<string>("NH-37");
+  const [aiTab, setAiTab] = React.useState<"predict"|"alternate"|"priority">("predict");
+  const [districtsExpanded, setDistrictsExpanded] = React.useState(false);
   const liveVehiclesRaw = useLiveVehicles(2500);
   // Merge live lat/lng with full vehicle records so map knows delay/ETA/status
   const liveVehicles = React.useMemo(() => {
@@ -283,79 +285,91 @@ export default function DashboardPage() {
                 </div>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[10px] font-bold tracking-widest px-2 py-1 rounded bg-emerald-600 text-white">{Object.keys(liveDistricts).length ? "● LIVE WEATHER" : "● DEMO"}</span>
-                  {Object.keys(liveDistricts).length > 0 && <span className="text-[10px] font-semibold text-slate-500">Open-Meteo • updates 10m</span>}
+                  <button onClick={()=>setDistrictsExpanded(!districtsExpanded)} className="text-[11px] font-black underline text-slate-700">{districtsExpanded?"Show critical only":"Show all 7"}</button>
                 </div>
                 <div className="space-y-2.5">
-                  {Object.entries(sampleDistrictData).map(([name, data]: any) => {
-                    const live = liveDistricts[name];
-                    const weatherRisk = live ? live.liveRisk : data.weatherRisk;
-                    const score = Math.round((data.roads * 0.3) + ((100 - weatherRisk) * 0.2) + ((100 - data.disruptions) * 0.2) + (data.connectivity * 0.15) + (data.emergencyAccess * 0.15));
-                    const isCritical = score < 40;
-                    const color = isCritical ? "#ef4444" : score >= 60 ? "#10b981" : "#f59e0b";
-                    const label = isCritical ? "CRITICAL" : score >= 60 ? "GOOD" : score >= 40 ? "MODERATE" : "POOR";
-                    return (
-                      <div key={name} className="border border-slate-200 rounded-lg p-3 bg-white">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[13px] font-bold text-slate-900">{name}</span>
-                          <span className="text-xs font-black px-2 py-1 rounded text-white" style={{ background: color }}>{label}</span>
-                        </div>
-                        <p className="text-[11px] font-semibold text-slate-600 mt-1">Weather {live ? `${live.rainfall}mm ${live.severity} ` : `${data.weatherRisk} risk `}{live && <span className="text-emerald-600">● live</span>}</p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <div className="flex-1 h-2.5 bg-slate-200 rounded-full overflow-hidden">
-                            <div className="h-full rounded-full" style={{ width: `${score}%`, background: color }} />
+                  {(() => {
+                    const scored = Object.entries(sampleDistrictData).map(([name, data]: any) => {
+                      const live = (liveDistricts as any)[name];
+                      const wr = live ? live.liveRisk : data.weatherRisk;
+                      const score = Math.round((data.roads * 0.3) + ((100 - wr) * 0.2) + ((100 - data.disruptions) * 0.2) + (data.connectivity * 0.15) + (data.emergencyAccess * 0.15));
+                      return { name, data, live, score };
+                    }).sort((a,b)=> a.score - b.score);
+                    const list = districtsExpanded ? scored : scored.slice(0,3);
+                    return list.map(({name,data,live,score}:any)=>{
+                      const isCritical = score < 40;
+                      const color = isCritical ? "#ef4444" : score >= 60 ? "#10b981" : "#f59e0b";
+                      const label = isCritical ? "CRITICAL" : score >= 60 ? "GOOD" : score >= 40 ? "MODERATE" : "POOR";
+                      return (
+                        <div key={name} className="border border-slate-200 rounded-lg p-3 bg-white">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[13px] font-bold text-slate-900">{name}</span>
+                            <span className="text-xs font-black px-2 py-1 rounded text-white" style={{ background: color }}>{label}</span>
                           </div>
-                          <span className="text-xs font-black text-slate-900 w-12 text-right">{score}/100</span>
+                          <p className="text-[11px] font-semibold text-slate-600 mt-1">Weather {live ? `${live.rainfall}mm ${live.severity} ` : `${(data as any).weatherRisk} risk `}{live && <span className="text-emerald-600">● live</span>}</p>
+                          <div className="flex items-center gap-2 mt-2">
+                            <div className="flex-1 h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                              <div className="h-full rounded-full" style={{ width: `${score}%`, background: color }} />
+                            </div>
+                            <span className="text-xs font-black text-slate-900 w-12 text-right">{score}/100</span>
+                          </div>
                         </div>
+                      );
+                    });
+                  })()}
+                </div>
+                {!districtsExpanded && <p className="text-[11px] text-slate-500 mt-2 font-semibold">Compact: 3 lowest scores only • click Show all 7</p>}
+              </div>
+            </section>
+
+            {/* LiveGPSTracker merged into VehicleTracking — hidden for compact mode (revert commit 6eb8157 to restore) */}
+
+            {/* ROW 3: AI ENGINES - TABBED to reduce repeat */}
+            <section id="ai-engine" className="scroll-mt-20">
+              <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
+                <div className="flex items-center gap-1 p-1.5 bg-slate-50 border-b border-slate-200">
+                  <button onClick={()=>setAiTab("predict")} className={`px-3 py-1.5 rounded text-xs font-black ${aiTab==="predict"?"bg-slate-900 text-white":"bg-white border text-slate-700"}`}>AI Predictor</button>
+                  <button onClick={()=>setAiTab("alternate")} className={`px-3 py-1.5 rounded text-xs font-black ${aiTab==="alternate"?"bg-slate-900 text-white":"bg-white border text-slate-700"}`}>Smart Alternate • {selectedRouteId}</button>
+                  <button onClick={()=>setAiTab("priority")} className={`px-3 py-1.5 rounded text-xs font-black ${aiTab==="priority"?"bg-slate-900 text-white":"bg-white border text-slate-700"}`}>Logistics Priority</button>
+                  <span className="ml-auto text-[10px] font-bold text-slate-500">Compact • reversible via git revert 6eb8157</span>
+                </div>
+                {aiTab==="predict" && (
+                  <>
+                    {liveWeather && (
+                      <div className="px-4 py-2 bg-emerald-50 border-b border-emerald-200 flex items-center justify-between">
+                        <span className="text-[11px] font-black tracking-widest text-emerald-800">● LIVE NER TODAY • {liveWeather.location} • {liveWeather.temperature}°C • {liveWeather.rainfall}mm • {liveWeather.severity.toUpperCase()}</span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-600 text-white">LIVE</span>
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </section>
-
-            <section className="col-span-12">
-              <LiveGPSTracker />
-            </section>
-
-            {/* ROW 3: AI ENGINES - 2 balanced segments, no empty white */}
-            <section id="ai-engine" className="grid grid-cols-12 gap-4 scroll-mt-20">
-              <div className="col-span-12 lg:col-span-6 bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
-                {liveWeather && (
-                  <div className="px-4 py-2 bg-emerald-50 border-b border-emerald-200 flex items-center justify-between shrink-0">
-                    <span className="text-[11px] font-black tracking-widest text-emerald-800">● LIVE NER TODAY • {liveWeather.location} • {liveWeather.temperature}°C • {liveWeather.rainfall}mm • {liveWeather.severity.toUpperCase()}</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-600 text-white">LIVE</span>
-                  </div>
+                    )}
+                    <RouteDisruptionPredictor
+                      routeId={selectedRouteId}
+                      from={sampleRoutes.find((r) => r.name === selectedRouteId)?.from || "Guwahati"}
+                      to={sampleRoutes.find((r) => r.name === selectedRouteId)?.to || "Silchar"}
+                      distance={sampleRoutes.find((r) => r.name === selectedRouteId)?.distance ? parseInt(String(sampleRoutes.find((r) => r.name === selectedRouteId)!.distance)) : 210}
+                      weather={(liveWeatherForPredictor as any) || sampleWeather}
+                      roadInfo={sampleRoadInfo}
+                      trafficDensity={75}
+                      historicalIncidents={sampleHistoricalIncidents}
+                      onRouteChange={setSelectedRouteId}
+                    />
+                  </>
                 )}
-                <RouteDisruptionPredictor
-                  routeId={selectedRouteId}
-                  from={sampleRoutes.find((r) => r.name === selectedRouteId)?.from || "Guwahati"}
-                  to={sampleRoutes.find((r) => r.name === selectedRouteId)?.to || "Silchar"}
-                  distance={sampleRoutes.find((r) => r.name === selectedRouteId)?.distance ? parseInt(String(sampleRoutes.find((r) => r.name === selectedRouteId)!.distance)) : 210}
-                  weather={(liveWeatherForPredictor as any) || sampleWeather}
-                  roadInfo={sampleRoadInfo}
-                  trafficDensity={75}
-                  historicalIncidents={sampleHistoricalIncidents}
-                  onRouteChange={setSelectedRouteId}
-                />
-              </div>
-              <div className="col-span-12 lg:col-span-6 bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
-                <div className="px-3 py-2 bg-sky-50 border-b border-sky-200 flex items-center gap-2">
-                  <span className="text-[11px] font-black tracking-widest text-sky-700">↔ CONNECTED • Showing alternate for {selectedRouteId}{focusVehicle ? ` • Vehicle ${focusVehicle} @ ${liveVehicles[focusVehicle]?.currentLocation || "—"}` : " • All vehicles"}</span>
-                  {selectedRouteId !== "NH-37" && <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-600 text-white">SYNCED</span>}
-                </div>
-                <SmartAlternateRouteEngine
-                  currentRoute={liveRoutesBase.find((r) => r.name === selectedRouteId) as any || liveRoutesBase[0] as any}
-                  availableAlternatives={sampleAlternativesByRoute[selectedRouteId] || sampleAlternatives}
-                  weather={(liveWeatherForAlternate as any) || sampleWeather}
-                  vehicleLocation={focusVehicle ? liveVehicles[focusVehicle]?.currentLocation : undefined}
-                  vehicleId={focusVehicle || undefined}
-                />
-              </div>
-            </section>
-            {/* ROW 3b: Logistics Priority - full width, no scrollbar, entire content */}
-            <section className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
-                <LogisticsPriorityEngine vehicles={emergencyVehicles} />
+                {aiTab==="alternate" && (
+                  <>
+                    <div className="px-3 py-2 bg-sky-50 border-b border-sky-200 flex items-center gap-2">
+                      <span className="text-[11px] font-black tracking-widest text-sky-700">↔ CONNECTED • Showing alternate for {selectedRouteId}{focusVehicle ? ` • Vehicle ${focusVehicle} @ ${liveVehicles[focusVehicle]?.currentLocation || "—"}` : " • All vehicles"}</span>
+                      {selectedRouteId !== "NH-37" && <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-600 text-white">SYNCED</span>}
+                    </div>
+                    <SmartAlternateRouteEngine
+                      currentRoute={liveRoutesBase.find((r) => r.name === selectedRouteId) as any || liveRoutesBase[0] as any}
+                      availableAlternatives={sampleAlternativesByRoute[selectedRouteId] || sampleAlternatives}
+                      weather={(liveWeatherForAlternate as any) || sampleWeather}
+                      vehicleLocation={focusVehicle ? liveVehicles[focusVehicle]?.currentLocation : undefined}
+                      vehicleId={focusVehicle || undefined}
+                    />
+                  </>
+                )}
+                {aiTab==="priority" && <LogisticsPriorityEngine vehicles={emergencyVehicles} />}
               </div>
             </section>
 
@@ -372,15 +386,10 @@ export default function DashboardPage() {
                   {isEmergency && <p className="text-[11px] font-bold text-red-600 mt-2">⚠ EMERGENCY: showing only BLOCKED/HIGH RISK corridors + critical vehicles</p>}
                 </div>
                 <DriverInbox />
-                <div className="grid grid-cols-1 gap-4">
-                  <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4 overflow-hidden">
-                    <VehicleTracking vehicles={emergencyVehicles} onFocus={setFocusVehicle} live={liveVehicles} liveRoutes={liveRoutes as any} />
-                  </div>
-                  <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4">
-                    <h3 className="text-sm font-black mb-3">ESSENTIAL SUPPLIES {isEmergency && "• EMERGENCY"}</h3>
-                    <EssentialSuppliesMonitor vehicles={emergencyVehicles} />
-                  </div>
+                <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4 overflow-hidden">
+                  <VehicleTracking vehicles={emergencyVehicles} onFocus={setFocusVehicle} live={liveVehicles} liveRoutes={liveRoutes as any} />
                 </div>
+                {/* EssentialSuppliesMonitor hidden for compact mode — same data as Logistics Priority, revert commit 6eb8157 to restore */}
               </div>
             </section>
 
