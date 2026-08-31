@@ -345,7 +345,7 @@ export default function DashboardPage() {
                   {selectedRouteId !== "NH-37" && <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-600 text-white">SYNCED</span>}
                 </div>
                 <SmartAlternateRouteEngine
-                  currentRoute={sampleRoutes.find((r) => r.name === selectedRouteId) as any || sampleRoutes[0] as any}
+                  currentRoute={liveRoutesBase.find((r) => r.name === selectedRouteId) as any || liveRoutesBase[0] as any}
                   availableAlternatives={sampleAlternativesByRoute[selectedRouteId] || sampleAlternatives}
                   weather={(liveWeatherForAlternate as any) || sampleWeather}
                   vehicleLocation={focusVehicle ? liveVehicles[focusVehicle]?.currentLocation : undefined}
