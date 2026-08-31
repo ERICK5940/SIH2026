@@ -30,7 +30,7 @@ export default function FieldPage() {
       const a = j?.address || {};
       const st = a.state || a.state_district || "";
       const dt = a.state_district || a.district || a.county || "";
-      const rd = a.road || a highway || a.suburb || "";
+      const rd = a.road || a.highway || a.suburb || "";
       setStateName(st);
       setDistrictName(dt);
       setRoadName(rd);
