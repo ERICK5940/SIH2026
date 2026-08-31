@@ -15,7 +15,7 @@ export default function FieldMiniMap({ lat, lng }: { lat: number | null; lng: nu
       if (mapInstRef.current) return;
       const map = new maplibregl.Map({
         container: mapRef.current!,
-        style: "https://tiles.openfreemap.org/styles/bright",
+        style: "https://demotiles.maplibre.org/style.json",
         center: [lng, lat],
         zoom: 12,
       });
