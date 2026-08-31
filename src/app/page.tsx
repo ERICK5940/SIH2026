@@ -5,7 +5,6 @@ import { GISMap } from "@/components/GISMap";
 import { RouteDisruptionPredictor } from "@/components/RouteDisruptionPredictor";
 import { SmartAlternateRouteEngine } from "@/components/SmartAlternateRouteEngine";
 import { LogisticsPriorityEngine } from "@/components/LogisticsPriorityEngine";
-import { IncidentReportForm } from "@/components/IncidentReporting";
 import { IncidentDashboard } from "@/components/IncidentReporting";
 import { VehicleTracking } from "@/components/VehicleTracking";
 import { EssentialSuppliesMonitor } from "@/components/VehicleTracking";
@@ -101,34 +100,15 @@ export default function DashboardPage() {
     });
     return merged;
   }, [liveVehiclesRaw]);
-  // LIVE corridors - STATUS/RISK now from Open-Meteo live weather + incident boost (so Erode report also impacts)
+  // LIVE corridors - STATUS/RISK now from Open-Meteo live weather (not showcase)
   const routeDistrict: Record<string,string> = {"NH-37":"Assam","NH-52":"Arunachal Pradesh","NH-157":"Arunachal Pradesh","NH-29":"Nagaland","NH-31":"Tripura"};
-  const liveRoutesBase = React.useMemo(() => {
-    // incident boost per route - Haversine nearest route
-    const hav = (a:number,b:number,c:number,d:number)=>{ const R=6371; const dLa=(c-a)*Math.PI/180; const dLo=(d-b)*Math.PI/180; const s1=Math.sin(dLa/2)**2 + Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dLo/2)**2; return 2*R*Math.asin(Math.sqrt(s1)); };
-    const routeMid: Record<string,[number,number]> = {"NH-37":[26.2,92.9],"NH-52":[27.7,95.0],"NH-157":[27.1,93.6],"NH-29":[26.1,94.5],"NH-31":[24.8,91.9]};
-    const boost: Record<string,number> = {};
-    incidents.forEach((inc:any)=>{
-      if(!inc.location) return;
-      let nearest="NH-37"; let best=Infinity;
-      Object.entries(routeMid).forEach(([k,v])=>{ const dis=hav(inc.location.latitude,inc.location.longitude,v[0],v[1]); if(dis<best){best=dis; nearest=k;} });
-      const add = inc.severity==="high"?28:inc.severity==="medium"?14:6; // severity boost
-      // even far Erode ~1800km still counts 40% for demo so reroute triggers
-      const distFactor = best>800?0.4:1; // demothon blast logic
-      boost[nearest]=(boost[nearest]||0)+Math.round(add*distFactor);
-    });
-    return sampleRoutes.map((r:any)=>{
-      const d = routeDistrict[r.name]; const live = d ? (liveDistricts as any)[d] : null;
-      const base = live ? live.liveRisk : r.riskScore;
-      const incB = boost[r.name]||0;
-      let risk = Math.min(98, base + incB);
-      // if blocked incident directly on route (accessibilityStatus blocked -> force max)
-      const hasBlocked = incidents.some((inc:any)=>{ const mid=routeMid[r.name]; if(!mid||!inc.location) return false; return hav(inc.location.latitude,inc.location.longitude,mid[0],mid[1])<400 && inc.accessibilityStatus==="blocked"; });
-      if(hasBlocked) risk=Math.max(risk,82);
-      const status = risk>=80 ? "blocked" : risk>=60 ? "high_risk" : risk>=35 ? "delayed" : "accessible";
-      return { ...r, riskScore: risk, status };
-    });
-  }, [liveDistricts, incidents]);
+  const liveRoutesBase = React.useMemo(() => sampleRoutes.map((r:any)=>{
+    const d = routeDistrict[r.name]; const live = d ? (liveDistricts as any)[d] : null;
+    if(!live) return r; // no live yet -> showcase fallback
+    const risk = live.liveRisk; // 0-95 from /api/weather/live
+    const status = risk>=80 ? "blocked" : risk>=60 ? "high_risk" : risk>=35 ? "delayed" : "accessible";
+    return { ...r, riskScore: risk, status };
+  }), [liveDistricts]);
   const isEmergency = emergencyMode === "active";
   const liveRoutes = React.useMemo(()=> isEmergency ? liveRoutesBase.filter((r:any)=> r.status==="blocked"||r.status==="high_risk") : liveRoutesBase, [liveRoutesBase, isEmergency]);
   const emergencyVehicles = React.useMemo(()=> isEmergency ? sampleVehicles.filter((v:any)=> (v.cargo==="medicines"||v.cargo==="food") && v.delayMinutes>0) : sampleVehicles, [isEmergency]);
@@ -379,14 +359,12 @@ export default function DashboardPage() {
               </div>
             </section>
 
-            {/* ROW 4: FIELD INTELLIGENCE + ALERTS */}
+            {/* ROW 4: FIELD INTELLIGENCE + ALERTS - form removed, dedicated /field page is source */}
             <section id="alerts" className="grid grid-cols-12 gap-4 scroll-mt-20">
               <div id="vehicles" className="col-span-12 lg:col-span-5 bg-white border border-slate-200 rounded-lg shadow-sm p-4 scroll-mt-20">
-                <h2 className="text-sm font-black tracking-tight mb-3">FIELD INTELLIGENCE • OFFLINE QUEUE</h2>
-                <IncidentReportForm onReport={(report) => console.log("Incident reported:", report)} />
-                <div className="mt-4 border-t border-slate-200 pt-4">
-                  <IncidentDashboard />
-                </div>
+                <h2 className="text-sm font-black tracking-tight mb-3">FIELD INTELLIGENCE • INCIDENT REPORTS</h2>
+                <p className="text-[11px] font-bold tracking-widest text-slate-500 mb-3">Reports from <a href="/field" className="underline text-sky-700">/field</a> • geo-tagged + photo</p>
+                <IncidentDashboard />
               </div>
               <div className="col-span-12 lg:col-span-7 space-y-4">
                 <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4">
