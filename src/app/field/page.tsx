@@ -27,12 +27,20 @@ export default function FieldPage() {
     }, (e) => setGpsStatus("Error: " + e.message), { enableHighAccuracy: true });
   };
 
+  const [camErr, setCamErr] = useState<string | null>(null);
   const startCam = async () => {
+    setCamErr(null);
     try {
-      const s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-      if (videoRef.current) videoRef.current.srcObject = s;
+      // localhost is secure context, but try environment first then fallback to user
+      let s: MediaStream | null = null;
+      try { s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } } }); } catch {}
+      if (!s) s = await navigator.mediaDevices.getUserMedia({ video: true });
+      if (videoRef.current) { videoRef.current.srcObject = s; videoRef.current.muted = true; await videoRef.current.play().catch(()=>{}); }
       streamRef.current = s; setCamOn(true);
-    } catch { alert("Camera not available"); }
+    } catch (e: any) {
+      const msg = e?.name === "NotAllowedError" ? "Camera permission denied — please Allow camera in browser" : e?.name === "NotFoundError" ? "No camera found on this device — use File upload" : "Camera not available: " + (e?.message || e);
+      setCamErr(msg); alert(msg);
+    }
   };
   const stopCam = () => { streamRef.current?.getTracks().forEach(t => t.stop()); setCamOn(false); };
   const capture = () => {
@@ -146,8 +154,9 @@ export default function FieldPage() {
               {!camOn ? <button type="button" onClick={startCam} className="px-3 py-1.5 rounded bg-emerald-600 text-white text-xs font-black">📷 Open Cam</button> : <button type="button" onClick={stopCam} className="px-3 py-1.5 rounded bg-slate-700 text-white text-xs font-black">■ Close Cam</button>}
               {camOn && <button type="button" onClick={capture} className="px-3 py-1.5 rounded bg-slate-900 text-white text-xs font-black">Capture</button>}
             </div>
-            {camOn && <video ref={videoRef} autoPlay playsInline className="mt-3 w-full rounded-lg bg-black h-48 object-cover" />}
-            {photo && <img src={photo} alt="preview" className="mt-3 w-full rounded-lg border h-48 object-cover" />}
+            {camErr && <p className="text-xs font-bold text-red-600 mt-2">{camErr}</p>}
+            {camOn && <video ref={videoRef} autoPlay playsInline muted className="mt-3 w-full rounded-lg bg-black h-48 object-cover" />}
+            {photo && <img src={photo} alt="preview" className="mt-3 w-full rounded-lg border h-48 object-cover bg-white" />}
           </div>
 
           <button type="submit" disabled={saving} className="w-full py-3 rounded-lg bg-slate-900 text-white font-black hover:bg-black disabled:opacity-50">{saving ? "Saving…" : "Submit Geo-tagged Report"}</button>
