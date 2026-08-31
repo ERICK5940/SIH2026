@@ -374,7 +374,7 @@ export default function DashboardPage() {
                 <DriverInbox />
                 <div className="grid grid-cols-1 gap-4">
                   <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4 overflow-hidden">
-                    <VehicleTracking vehicles={emergencyVehicles} onFocus={setFocusVehicle} live={liveVehicles} />
+                    <VehicleTracking vehicles={emergencyVehicles} onFocus={setFocusVehicle} live={liveVehicles} liveRoutes={liveRoutes as any} />
                   </div>
                   <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4">
                     <h3 className="text-sm font-black mb-3">ESSENTIAL SUPPLIES {isEmergency && "• EMERGENCY"}</h3>
