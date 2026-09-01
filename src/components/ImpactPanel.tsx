@@ -1,15 +1,15 @@
 "use client";
 import { useMemo } from "react";
-import { affectedVehicles, nearestSafeHub } from "@/lib/spatial";
+import { affectedVehicles, nearestHubs } from "@/lib/spatial";
 
 export default function ImpactPanel({ incidents, liveVehicles }: { incidents: any[]; liveVehicles: Record<string, any> }) {
   const last = incidents[0];
   const impact = useMemo(() => {
     if (!last?.location) return null;
     const aff = affectedVehicles({ latitude: last.location.latitude, longitude: last.location.longitude }, liveVehicles, 80);
-    const hub = nearestSafeHub({ latitude: last.location.latitude, longitude: last.location.longitude });
+    const hubs = nearestHubs({ latitude: last.location.latitude, longitude: last.location.longitude }, 3);
     const pop = aff.reduce((s: number, v: any) => s + (v.populationAffected || 0), 0);
-    return { aff, hub, pop };
+    return { aff, hubs, pop };
   }, [last, liveVehicles]);
 
   if (!last) return null;
@@ -22,7 +22,7 @@ export default function ImpactPanel({ incidents, liveVehicles }: { incidents: an
       <div className="grid grid-cols-3 gap-2 mt-3">
         <div className="bg-slate-50 border rounded p-2 text-center"><p className="text-[11px] font-bold">Affected vehicles</p><p className="text-lg font-black text-red-600">{impact.aff.length}</p><p className="text-[10px] truncate">{impact.aff.map((v:any)=>v.id).join(", ")||"—"}</p></div>
         <div className="bg-slate-50 border rounded p-2 text-center"><p className="text-[11px] font-bold">Pop affected</p><p className="text-lg font-black">{impact.pop}</p></div>
-        <div className="bg-slate-50 border rounded p-2 text-center"><p className="text-[11px] font-bold">Nearest safe hub</p><p className="text-xs font-black">{impact.hub?.name}</p><p className="text-[10px]">{impact.hub?.distKm} km • {impact.hub?.district}</p></div>
+        <div className="bg-slate-50 border rounded p-2 text-left"><p className="text-[11px] font-bold text-center">Nearest safe hubs (3)</p>{impact.hubs.map((h:any)=><p key={h.id} className="text-[11px] flex justify-between"><span className="font-bold">{h.name}</span><span>{h.distKm}km • {h.district}</span></p>)}</div>
       </div>
     </div>
   );

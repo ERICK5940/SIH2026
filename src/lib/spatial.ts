@@ -22,3 +22,7 @@ export function nearestSafeHub(incident: { latitude: number; longitude: number }
   }
   return best;
 }
+export function nearestHubs(incident: { latitude: number; longitude: number }, n=3) {
+  const pt = turf.point([incident.longitude, incident.latitude]);
+  return [...HUBS].map(h=> ({...h, distKm: Math.round(turf.distance(pt, turf.point([h.lng,h.lat]), {units:"kilometers"}))})).sort((a,b)=>a.distKm-b.distKm).slice(0,n);
+}
