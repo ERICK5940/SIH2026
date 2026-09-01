@@ -19,6 +19,7 @@ import AcceptedVehicles from "@/components/AcceptedVehicles";
 import AffectedVehicles from "@/components/AffectedVehicles";
 import ImpactPanel from "@/components/ImpactPanel";
 import HazardSimModal from "@/components/HazardSimModal";
+import { HUBS } from "@/lib/hubs";
 
 const sampleRoutes = [
   { id: "1", name: "NH-37", from: "Guwahati", to: "Silchar", status: "high_risk", distance: "210", eta: "6h 30m", riskScore: 82 },
@@ -96,6 +97,9 @@ export default function DashboardPage() {
   const [selectedRouteId, setSelectedRouteId] = React.useState<string>("NH-37");
   const [aiTab, setAiTab] = React.useState<"predict"|"alternate"|"priority">("predict");
   const [districtsExpanded, setDistrictsExpanded] = React.useState(false);
+  const [originHub, setOriginHub] = React.useState(HUBS[0].id);
+  const [destHub, setDestHub] = React.useState(HUBS[5].id);
+  const [commodity, setCommodity] = React.useState<"medicines"|"food"|"construction">("medicines");
   const liveVehiclesRaw = useLiveVehicles(2500);
   // Merge live lat/lng with full vehicle records so map knows delay/ETA/status
   const liveVehicles = React.useMemo(() => {
@@ -159,7 +163,7 @@ export default function DashboardPage() {
       } catch {}
     };
     load();
-    const id = setInterval(load, 300000); // 5 mins as requested, not ms
+    const id = setInterval(load, 42000); // 42s like NER-SHIELD Live Telemetry Sync
     return () => clearInterval(id);
   }, []);
 
@@ -240,33 +244,31 @@ export default function DashboardPage() {
         {/* MAIN DASHBOARD CANVAS */}
         <main className="flex-1 min-w-0 bg-[#eef2f7]">
           <div className="max-w-[1600px] mx-auto p-3 lg:p-5 space-y-4">
-            {/* KPI STRIP - LIVE COMPUTED (no hardcoded) */}
-            <section id="overview" className="grid grid-cols-2 lg:grid-cols-4 gap-3 scroll-mt-20">
+            {/* KPI STRIP - 7 tiles like NER-SHIELD LIVE (42s sync) */}
+            <section id="overview" className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3 scroll-mt-20">
               {(() => {
-                const liveScores = Object.entries(sampleDistrictData).map(([name, data]: any) => {
-                  const live = (liveDistricts as any)[name];
-                  const wr = live ? live.liveRisk : data.weatherRisk;
-                  return Math.round((data.roads * 0.3) + ((100 - wr) * 0.2) + ((100 - data.disruptions) * 0.2) + (data.connectivity * 0.15) + (data.emergencyAccess * 0.15));
-                });
-                const overall = Math.round(liveScores.reduce((a, b) => a + b, 0) / liveScores.length);
-                const overallLabel = overall >= 80 ? "Good" : overall >= 60 ? "Moderate" : overall >= 40 ? "Poor" : "Critical";
-                const activeDisruptions = sampleRoutes.filter((r: any) => r.status !== "accessible").length;
-                const criticalRoutes = sampleRoutes.filter((r: any) => r.status === "blocked" || r.status === "high_risk").map((r: any) => r.name).join(", ");
-                const totalVehicles = sampleVehicles.length;
-                const delayed = sampleVehicles.filter((v: any) => v.delayMinutes > 0).length;
-                const medicalDelayed = sampleVehicles.filter((v: any) => v.cargo === "medicines" && v.delayMinutes > 0).length;
-                const foodDelayed = sampleVehicles.filter((v: any) => v.cargo === "food" && v.delayMinutes > 0).length;
+                const districtsMonitored = "7 / 7";
+                const roadsOpen = `${liveRoutesBase.filter((r:any)=> r.status==="accessible").length} / ${liveRoutesBase.length}`;
+                const roadsDisrupted = liveRoutesBase.filter((r:any)=> r.status==="blocked").length;
+                const activeIncidentsCount = incidents.length;
+                const vehiclesInTransit = sampleVehicles.length;
+                const highRisk = liveRoutesBase.filter((r:any)=> r.status==="high_risk").length;
+                const delayed = sampleVehicles.filter((v:any)=> v.delayMinutes>0).length;
                 const kpis = [
-                  { label: "OVERALL ACCESSIBILITY", value: String(overall), sub: `${overallLabel} • live avg`, accent: "border-emerald-500", valueColor: overall < 40 ? "text-red-600" : "text-slate-900" },
-                  { label: "ACTIVE DISRUPTIONS", value: String(activeDisruptions), sub: `${activeDisruptions} routes • ${criticalRoutes}`, accent: "border-red-500", valueColor: "text-red-600" },
-                  { label: "VEHICLES IN TRANSIT", value: String(totalVehicles), sub: `${delayed} delayed • ${totalVehicles - delayed} on-time`, accent: "border-sky-500", valueColor: "text-slate-900" },
-                  { label: "DELAYED DELIVERIES", value: String(delayed), sub: `${medicalDelayed} medical • ${foodDelayed} food`, accent: "border-amber-500", valueColor: "text-amber-600" },
+                  { label: "Districts Monitored", value: districtsMonitored, sub: "7 NER States Covered", accent: "border-emerald-500", valueColor: "text-slate-900", badge: "100% telemetry active" },
+                  { label: "Roads Open", value: roadsOpen, sub: `${Math.round(liveRoutesBase.filter((r:any)=>r.status==="accessible").length/liveRoutesBase.length*100)}% Corridors Traversable`, accent: "border-emerald-500", valueColor: "text-emerald-600", badge: "Normal flow on NH-37" },
+                  { label: "Roads Disrupted", value: String(roadsDisrupted), sub: "Physical blockage", accent: "border-red-500", valueColor: "text-red-600", badge: roadsDisrupted?`Dima Hasao NH-6 Blocked`:"None" },
+                  { label: "Active Incidents", value: String(activeIncidentsCount), sub: "Landslide, Flood & Fog", accent: "border-amber-500", valueColor: "text-amber-600", badge: "2 Clearance crews active" },
+                  { label: "Vehicles in Transit", value: String(vehiclesInTransit), sub: "Tracked logistics fleet", accent: "border-sky-500", valueColor: "text-slate-900", badge: "GPS & Telemetry active" },
+                  { label: "High-Risk Corridors", value: String(highRisk), sub: "Severe landslide zones", accent: "border-orange-500", valueColor: "text-orange-600", badge: highRisk?"Heavy rainfall alert":"All clear" },
+                  { label: "Delayed Deliveries", value: String(delayed), sub: "Impacted essential cargo", accent: "border-amber-500", valueColor: "text-amber-600", badge: delayed?`Vaccine shipment rerouted`:"On time" },
                 ];
                 return kpis.map((k) => (
-                  <div key={k.label} className={`bg-white border border-slate-200 border-l-4 ${k.accent} rounded-lg p-4 shadow-sm`}>
-                    <p className="text-[11px] font-bold tracking-widest text-slate-600">{k.label}</p>
-                    <p className={`text-[32px] font-black leading-none mt-1 ${k.valueColor}`}>{k.value}</p>
-                    <p className="text-xs font-semibold text-slate-700 mt-1">{k.sub}</p>
+                  <div key={k.label} className={`bg-white border border-slate-200 border-l-4 ${k.accent} rounded-lg p-3 shadow-sm`}>
+                    <p className="text-[10px] font-black tracking-widest text-slate-500">{k.label.toUpperCase()}</p>
+                    <p className={`text-[22px] font-black leading-none mt-1 ${k.valueColor}`}>{k.value}</p>
+                    <p className="text-[11px] font-semibold text-slate-700 mt-1 truncate">{k.sub}</p>
+                    <p className="text-[10px] text-slate-500 mt-1 truncate">{k.badge}</p>
                   </div>
                 ));
               })()}
@@ -361,9 +363,20 @@ export default function DashboardPage() {
                 )}
                 {aiTab==="alternate" && (
                   <>
-                    <div className="px-3 py-2 bg-sky-50 border-b border-sky-200 flex items-center gap-2">
-                      <span className="text-[11px] font-black tracking-widest text-sky-700">↔ CONNECTED • Showing alternate for {selectedRouteId}{focusVehicle ? ` • Vehicle ${focusVehicle} @ ${liveVehicles[focusVehicle]?.currentLocation || "—"}` : " • All vehicles"}</span>
-                      {selectedRouteId !== "NH-37" && <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-600 text-white">SYNCED</span>}
+                    <div className="px-3 py-2 bg-slate-900 border-b border-slate-700 flex flex-wrap items-center gap-2">
+                      <span className="text-[10px] font-bold text-slate-300">ORIGIN HUB</span>
+                      <select value={originHub} onChange={e=>setOriginHub(e.target.value)} className="text-xs font-bold border rounded px-2 py-1 bg-white">
+                        {HUBS.map(h=> <option key={h.id} value={h.id}>{h.name}</option>)}
+                      </select>
+                      <span className="text-[10px] font-bold text-slate-300">DEST</span>
+                      <select value={destHub} onChange={e=>setDestHub(e.target.value)} className="text-xs font-bold border rounded px-2 py-1 bg-white">
+                        {HUBS.map(h=> <option key={h.id} value={h.id}>{h.name}</option>)}
+                      </select>
+                      <span className="text-[10px] font-bold text-slate-300">COMMODITY</span>
+                      <select value={commodity} onChange={e=>setCommodity(e.target.value as any)} className="text-xs font-bold border rounded px-2 py-1 bg-white">
+                        <option value="medicines">Medicines & Vaccines (3.5x)</option><option value="food">Food (1.2x)</option><option value="construction">Construction (1.0x)</option>
+                      </select>
+                      <span className={`ml-auto text-[10px] font-black px-2 py-1 rounded ${commodity==="medicines"?"bg-red-600 text-white":"bg-slate-700 text-white"}`}>{commodity==="medicines"?"3.5x Risk Aversion":"Standard"}</span>
                     </div>
                     <SmartAlternateRouteEngine
                       currentRoute={liveRoutesBase.find((r) => r.name === selectedRouteId) as any || liveRoutesBase[0] as any}
