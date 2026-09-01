@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import FieldMiniMap from "@/components/FieldMiniMap";
+import { queueReport, syncQueued, getQueued } from "@/lib/offlineDB";
 
 const ROLES = ["Field Officer", "BRO Officer", "District Magistrate", "NHAI Engineer", "Local Authority", "NDMA Volunteer"];
 
@@ -81,6 +82,9 @@ export default function FieldPage() {
     if (lat === null) getGps();
   };
 
+  const [queuedCount, setQueuedCount] = useState(0);
+  const refreshQueued = async () => setQueuedCount((await getQueued()).length);
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!desc.trim() || !authority.trim()) { alert("Authority + description required"); return; }
@@ -92,23 +96,21 @@ export default function FieldPage() {
       if (r.ok) { alert("✓ Report submitted — central dashboard updated"); setDesc(""); setPhoto(null); }
       else throw new Error();
     } catch {
-      // offline queue fallback
-      const q = JSON.parse(localStorage.getItem("offline-reports") || "[]"); q.push(report); localStorage.setItem("offline-reports", JSON.stringify(q));
-      alert("⚠️ Offline — queued locally, will sync when online");
+      await queueReport(report);
+      await refreshQueued();
+      alert("⚠️ Offline — queued in IndexedDB, auto sync when online");
     }
     setSaving(false);
   };
 
-  // sync offline queue when online
+  // sync offline queue when online + periodic
   useEffect(() => {
-    const sync = async () => {
-      if (!navigator.onLine) return;
-      const q = JSON.parse(localStorage.getItem("offline-reports") || "[]");
-      if (q.length === 0) return;
-      for (const rep of q) await fetch("/api/incidents", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(rep) }).catch(() => {});
-      localStorage.removeItem("offline-reports");
-    };
-    window.addEventListener("online", sync); return () => window.removeEventListener("online", sync);
+    refreshQueued();
+    const sync = async () => { const n = await syncQueued(); if(n) { await refreshQueued(); } };
+    sync();
+    window.addEventListener("online", sync);
+    const id = setInterval(sync, 10000);
+    return () => { window.removeEventListener("online", sync); clearInterval(id); };
   }, []);
 
   return (
@@ -195,7 +197,7 @@ export default function FieldPage() {
           </div>
 
           <button type="submit" disabled={saving} className="w-full py-3 rounded-lg bg-slate-900 text-white font-black hover:bg-black disabled:opacity-50">{saving ? "Saving…" : "Submit Geo-tagged Report"}</button>
-          <p className="text-[11px] text-slate-500 text-center">Offline? Queued in localStorage → auto sync when online → central dashboard + GIS map pin + Alert Center</p>
+          <p className="text-[11px] text-slate-500 text-center">Offline? Queued in IndexedDB ({queuedCount} pending) → auto sync every 10s when online → central dashboard + GIS map pin + Alert Center</p>
         </form>
       </div>
     </div>
