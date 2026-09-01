@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { HUBS } from "@/lib/hubs";
+import { BRIDGES } from "@/lib/bridges";
 
 type RouteStatus = "accessible" | "delayed" | "high_risk" | "blocked" | "emergency";
 interface Route { id: string; name: string; from: string; to: string; status: RouteStatus; distance: string; eta: string; riskScore: number; }
@@ -25,6 +26,7 @@ function LeafletMap({ routes, focusId, liveVehicles, incidents }: { routes: Rout
   const leafletRef = React.useRef<any>(null);
   const vehicleLayerRef = React.useRef<any>(null);
   const droneLayerRef = React.useRef<any>(null);
+  const bridgeLayerRef = React.useRef<any>(null);
 
   useEffect(() => {
     if (mapInstanceRef.current) return;
@@ -134,6 +136,19 @@ function LeafletMap({ routes, focusId, liveVehicles, incidents }: { routes: Rout
     });
   },[incidents]);
 
+  // Bridge monitoring layer — always visible
+  React.useEffect(()=>{
+    const map = mapInstanceRef.current; const leaflet = leafletRef.current;
+    if(!map||!leaflet) return;
+    if(!bridgeLayerRef.current) bridgeLayerRef.current = leaflet.layerGroup().addTo(map);
+    else bridgeLayerRef.current.clearLayers();
+    const col:Record<string,string>={accessible:"#10b981", delayed:"#f59e0b", blocked:"#ef4444"};
+    BRIDGES.forEach(b=>{
+      leaflet.circleMarker([b.lat,b.lng], {radius:7, color:col[b.status], fillColor:col[b.status], fillOpacity:0.9, weight:2}).addTo(bridgeLayerRef.current).bindTooltip(`<b>🌉 ${b.name}</b><br/>${b.status.toUpperCase()} • ${b.span}`,{sticky:true});
+      leaflet.marker([b.lat,b.lng], {icon: leaflet.divIcon({html:`<div style="background:${col[b.status]};color:white;font-size:8px;font-weight:900;padding:1px 4px;border-radius:3px;border:1px solid white;">🌉</div>`, className:""})}).addTo(bridgeLayerRef.current);
+    });
+  },[]);
+
   return <div ref={mapRef} className="w-full h-[420px] bg-slate-100" />;
 }
 
@@ -157,8 +172,8 @@ export function GISMap({ routes, focusId, liveVehicles, incidents }: GISMapProps
         </div>
         <LeafletMap routes={routes} focusId={focusId} liveVehicles={liveVehicles} incidents={incidents} />
         <div className="relative flex flex-wrap items-center justify-between gap-2 px-3 py-2 bg-slate-800 border-t border-white/10">
-          <span className="text-[11px] font-bold tracking-widest text-white">5 CORRIDORS • EXACT NH GEOMETRY • 7 STATES OUTLINE</span>
-          <span className="text-[11px] font-mono font-bold text-emerald-300">© OSM • udit-001/india-maps-data • GPS: LIVE</span>
+          <span className="text-[11px] font-bold tracking-widest text-white">5 CORRIDORS • 4 BRIDGES • 7 STATES OUTLINE</span>
+          <span className="text-[11px] font-mono font-bold text-emerald-300">© OSM • GPS: LIVE • 🌉 4 monitored</span>
         </div>
       </div>
       <div className="overflow-hidden rounded-lg border border-slate-200 bg-white mt-3">
