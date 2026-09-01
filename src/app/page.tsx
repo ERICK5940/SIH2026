@@ -378,13 +378,14 @@ export default function DashboardPage() {
                       </select>
                       <span className={`ml-auto text-[10px] font-black px-2 py-1 rounded ${commodity==="medicines"?"bg-red-600 text-white":"bg-slate-700 text-white"}`}>{commodity==="medicines"?"3.5x Risk Aversion":"Standard"}</span>
                     </div>
+                    {(() => { const mult = commodity==="medicines"?3.5: commodity==="food"?1.2:1; const alts = (sampleAlternativesByRoute[selectedRouteId] || sampleAlternatives).map((a:any)=> ({...a, riskScore: Math.min(98, Math.round(a.riskScore * (mult>1 ? (a.status==="accessible"?1: mult*0.6):1)))})); return (
                     <SmartAlternateRouteEngine
                       currentRoute={liveRoutesBase.find((r) => r.name === selectedRouteId) as any || liveRoutesBase[0] as any}
-                      availableAlternatives={sampleAlternativesByRoute[selectedRouteId] || sampleAlternatives}
+                      availableAlternatives={alts}
                       weather={(liveWeatherForAlternate as any) || sampleWeather}
                       vehicleLocation={focusVehicle ? liveVehicles[focusVehicle]?.currentLocation : undefined}
                       vehicleId={focusVehicle || undefined}
-                    />
+                    />); })()}
                   </>
                 )}
                 {aiTab==="priority" && <LogisticsPriorityEngine vehicles={emergencyVehicles} />}
