@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
   const t0 = Date.now();
   try {
     const { routeId, weather, roadInfo, trafficDensity = 50, historicalIncidents = [] } = await req.json();
-    const cacheKey = `v2:${routeId}:${weather?.rainfall}:${weather?.severity}:${roadInfo?.condition}:${trafficDensity}:${historicalIncidents.length}`;
+    const cacheKey = `v3:${routeId}:${weather?.rainfall}:${weather?.severity}:${roadInfo?.condition}:${trafficDensity}:${historicalIncidents.length}`;
     const cached = gc.__PREDICT_CACHE__.get(cacheKey);
     if (cached && Date.now() - cached.ts < 30000) {
       return NextResponse.json({ ...cached.data, latencyMs: Date.now()-t0, cacheHit: true });
@@ -42,22 +42,35 @@ export async function POST(req: NextRequest) {
     const fTraffic = Math.min(1, trafficDensity / 100);
     const fHist = Math.min(1, historicalIncidents.filter((h: any) => h.severity === "high").length * 0.4);
 
-    // Genuine ML: use trained weights if present, else honest heuristic
+    // Genuine ML: use trained weights if present, else honest heuristic — supports LSTM-like 7-day window
     const trained = loadWeights();
-    let w: Record<string, number>, bias: number, acc: number, modelName: string;
+    let w: Record<string, number> | null = null, bias: number, acc: number, modelName: string, isLSTM=false;
+    let wArr: number[] | null = null;
     if (trained && trained.weights) {
-      w = { rainfall: trained.weights.rain, severity: trained.weights.sev, landslide: trained.weights.land, flood: trained.weights.flood, road: trained.weights.road, traffic: trained.weights.traffic, history: trained.weights.hist };
-      bias = trained.weights.bias;
-      acc = trained.accuracy; // 71-72 honest synthetic
-      modelName = "Logistic Regression (7-feature, 12K synthetic rows 2018-2024)";
+      if (Array.isArray((trained.weights as any).w)) {
+        wArr = (trained.weights as any).w; bias = (trained.weights as any).bias; acc = trained.accuracy; modelName = trained.architecture || "LSTM-like 7-day window (49 feats)";
+        isLSTM = true;
+      } else {
+        w = { rainfall: (trained.weights as any).rain, severity: (trained.weights as any).sev, landslide: (trained.weights as any).land, flood: (trained.weights as any).flood, road: (trained.weights as any).road, traffic: (trained.weights as any).traffic, history: (trained.weights as any).hist };
+        bias = (trained.weights as any).bias; acc = trained.accuracy; modelName = "Logistic Regression (7-feature, 12K synthetic rows 2018-2024)";
+      }
     } else {
       w = { rainfall: 2.4, severity: 1.8, landslide: 0.9, flood: 0.7, road: 0.8, traffic: 0.4, history: 0.9 };
-      bias = -3.2;
-      acc = 68.0;
-      modelName = "Risk-Scoring Engine (heuristic, no training)";
+      bias = -3.2; acc = 68.0; modelName = "Risk-Scoring Engine (heuristic, no training)";
     }
 
-    const logit = fRain * w.rainfall + fSeverity * w.severity + fLandslide * w.landslide + fFlood * w.flood + fRoad * w.road + fTraffic * w.traffic + fHist * w.history + bias;
+    let logit: number;
+    let wDisplay: Record<string,number> = w as any;
+    if (isLSTM && wArr) {
+      const day = [fRain, fSeverity, fLandslide, fFlood, fRoad, fTraffic, fHist];
+      const feats: number[] = []; for(let i=0;i<7;i++) feats.push(...day);
+      logit = bias; for(let i=0;i<49;i++) logit += feats[i] * wArr[i];
+      const avg=(o:number)=> (wArr[o]+wArr[o+7]+wArr[o+14]+wArr[o+21]+wArr[o+28]+wArr[o+35]+wArr[o+42])/7;
+      wDisplay = { rainfall: avg(0), severity: avg(1), landslide: avg(2), flood: avg(3), road: avg(4), traffic: avg(5), history: avg(6) };
+    } else if (w) {
+      logit = fRain * w.rainfall + fSeverity * w.severity + fLandslide * w.landslide + fFlood * w.flood + fRoad * w.road + fTraffic * w.traffic + fHist * w.history + bias;
+      wDisplay = w;
+    } else logit = 0;
     const prob = Math.round(sigmoid(logit) * 100);
 
     const riskLevel = prob >= 80 ? "CRITICAL" : prob >= 60 ? "HIGH" : prob >= 40 ? "MEDIUM" : "LOW";
@@ -74,12 +87,12 @@ export async function POST(req: NextRequest) {
 
     // SHAP-like contributions for explainability — weights match logit (genuine)
     const featureImportance = [
-      { feature: "Rainfall", value: `${weather?.rainfall ?? 0}mm`, contribution: Math.round(fRain * w.rainfall * 18), weight: w.rainfall },
-      { feature: "Weather Severity", value: weather?.severity || "clear", contribution: Math.round(fSeverity * w.severity * 18), weight: w.severity },
-      { feature: "Landslide Zone", value: fLandslide ? "Yes" : "No", contribution: Math.round(fLandslide * w.landslide * 18), weight: w.landslide },
-      { feature: "Road Condition", value: roadInfo?.condition || "good", contribution: Math.round(fRoad * w.road * 18), weight: w.road },
-      { feature: "Traffic", value: `${trafficDensity}/100`, contribution: Math.round(fTraffic * w.traffic * 18), weight: w.traffic },
-      { feature: "History", value: `${historicalIncidents.length} incidents`, contribution: Math.round(fHist * w.history * 18), weight: w.history },
+      { feature: "Rainfall", value: `${weather?.rainfall ?? 0}mm`, contribution: Math.round(fRain * wDisplay.rainfall * 18), weight: wDisplay.rainfall },
+      { feature: "Weather Severity", value: weather?.severity || "clear", contribution: Math.round(fSeverity * wDisplay.severity * 18), weight: wDisplay.severity },
+      { feature: "Landslide Zone", value: fLandslide ? "Yes" : "No", contribution: Math.round(fLandslide * wDisplay.landslide * 18), weight: wDisplay.landslide },
+      { feature: "Road Condition", value: roadInfo?.condition || "good", contribution: Math.round(fRoad * wDisplay.road * 18), weight: wDisplay.road },
+      { feature: "Traffic", value: `${trafficDensity}/100`, contribution: Math.round(fTraffic * wDisplay.traffic * 18), weight: wDisplay.traffic },
+      { feature: "History", value: `${historicalIncidents.length} incidents`, contribution: Math.round(fHist * wDisplay.history * 18), weight: wDisplay.history },
     ].sort((a, b) => b.contribution - a.contribution);
 
     const latencyMs = Date.now() - t0;
@@ -112,17 +125,17 @@ export async function POST(req: NextRequest) {
       primaryCause,
       recommendedAction,
       featureImportance: [
-        { feature: "Rainfall", value: `${weather?.rainfall ?? 0}mm`, contribution: Math.round(fRain * w.rainfall * 18), weight: w.rainfall },
-        { feature: "Weather Severity", value: weather?.severity || "clear", contribution: Math.round(fSeverity * w.severity * 18), weight: w.severity },
-        { feature: "Landslide Zone", value: fLandslide ? "Yes" : "No", contribution: Math.round(fLandslide * w.landslide * 18), weight: w.landslide },
-        { feature: "Road Condition", value: roadInfo?.condition || "good", contribution: Math.round(fRoad * w.road * 18), weight: w.road },
-        { feature: "Traffic", value: `${trafficDensity}/100`, contribution: Math.round(fTraffic * w.traffic * 18), weight: w.traffic },
-        { feature: "History", value: `${historicalIncidents.length} incidents`, contribution: Math.round(fHist * w.history * 18), weight: w.history },
+        { feature: "Rainfall", value: `${weather?.rainfall ?? 0}mm`, contribution: Math.round(fRain * wDisplay.rainfall * 18), weight: wDisplay.rainfall },
+        { feature: "Weather Severity", value: weather?.severity || "clear", contribution: Math.round(fSeverity * wDisplay.severity * 18), weight: wDisplay.severity },
+        { feature: "Landslide Zone", value: fLandslide ? "Yes" : "No", contribution: Math.round(fLandslide * wDisplay.landslide * 18), weight: wDisplay.landslide },
+        { feature: "Road Condition", value: roadInfo?.condition || "good", contribution: Math.round(fRoad * wDisplay.road * 18), weight: wDisplay.road },
+        { feature: "Traffic", value: `${trafficDensity}/100`, contribution: Math.round(fTraffic * wDisplay.traffic * 18), weight: wDisplay.traffic },
+        { feature: "History", value: `${historicalIncidents.length} incidents`, contribution: Math.round(fHist * wDisplay.history * 18), weight: wDisplay.history },
       ].sort((a, b) => b.contribution - a.contribution),
       historicalComparison: `Today ${todayRain}mm → ${prob}% ${riskLevel} • Historical analog: 2019 NH-37 120mm → 78% blocked`,
       historicalStats: { total: 579, blockedRate: 12, example2019: { date: "2019-07-12", nh: "NH-37", rainfall: 120, blocked: true, district: "Assam" } },
       timestamp: new Date().toISOString(),
-      trained: trainedExists,
+      trained: !!trained,
       cacheHit: false,
     };
      gc.__PREDICT_CACHE__.set(cacheKey, { ts: Date.now(), data: out });
