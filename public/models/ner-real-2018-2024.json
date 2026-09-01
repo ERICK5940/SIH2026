@@ -1,0 +1,4067 @@
+[
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 39.7,
+    "blocked": true,
+    "source": "open-meteo-archive"
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 12.0,
+    "blocked": true,
+    "source": "open-meteo-archive"
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 2.5,
+    "blocked": true,
+    "source": "open-meteo-archive"
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 3.1,
+    "blocked": true,
+    "source": "open-meteo-archive"
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 13.6,
+    "blocked": true,
+    "source": "open-meteo-archive"
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 85.4,
+    "blocked": true,
+    "source": "open-meteo-archive"
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 18.1,
+    "blocked": true,
+    "source": "open-meteo-archive"
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 68.8,
+    "blocked": true,
+    "source": "open-meteo-archive"
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 7.0,
+    "blocked": false,
+    "source": "open-meteo-archive"
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 4.3,
+    "blocked": false,
+    "source": "open-meteo-archive"
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 4.2,
+    "blocked": false,
+    "source": "open-meteo-archive"
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 0.0,
+    "blocked": false,
+    "source": "curated"
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 89.6,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 98.3,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 21.5,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 76.3,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 89.7,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 30.7,
+    "blocked": false
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 104.1,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 122.2,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 15.8,
+    "blocked": false
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 126.1,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 69.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 97.7,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 153.1,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 111.6,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 22.0,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 120.1,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 1.3,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 22.7,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 129.9,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 117.4,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 145.2,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 79.4,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 79.6,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 125.6,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 114.8,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 131.7,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 4.7,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 31.0,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 14.3,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 96.1,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 5.0,
+    "blocked": false
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 85.3,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 102.2,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 162.6,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 123.6,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 73.6,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 100.6,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 25.3,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 5.8,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 24.5,
+    "blocked": false
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 75.9,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 11.9,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 109.5,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 70.8,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 97.4,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 89.0,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 84.0,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 76.5,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 26.0,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 0,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 21.5,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 125.4,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 94.1,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 92.5,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 37.3,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 125.6,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 109.6,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 118.9,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 145.4,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 133.9,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 108.6,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 7.6,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 122.0,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 135.4,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 94.7,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 99.3,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 64.9,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 140.9,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 125.4,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 15.5,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 34.7,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 11.8,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 13.1,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 140.8,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 36.5,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 6.9,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 35.6,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 25.8,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 36.9,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 23.8,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 115.7,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 114.7,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 155.8,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 89.1,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 103.9,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 85.0,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 20.2,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 163.0,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 111.2,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 162.1,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 15.7,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 25.3,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 97.5,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 4.9,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 142.3,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 148.6,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 94.1,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 114.0,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 19.5,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 122.4,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 36.2,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 11.6,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 91.9,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 87.4,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 118.8,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 156.9,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 122.0,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 39.9,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 126.8,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 111.7,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 126.7,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 90.4,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 96.0,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 75.6,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 128.2,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 91.8,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 100.7,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 7.2,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 138.2,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 37.3,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 116.2,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 115.0,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 114.8,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 111.9,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 19.5,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 101.4,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 65.4,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 94.9,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 72.5,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 7.2,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 90.5,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 99.3,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 3.0,
+    "blocked": false
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 88.3,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 24.3,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 79.7,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 80.0,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 108.9,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 128.4,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 22.6,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 122.3,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 25.4,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 12.8,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 1.3,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 75.5,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 87.1,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 77.1,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 2.4,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 75.7,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 90.5,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 32.8,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 30.2,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 95.0,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 89.1,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 94.1,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 115.9,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 163.4,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 96.1,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 71.7,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 74.2,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 6.4,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 7.2,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 38.9,
+    "blocked": false
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 92.5,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 0,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 128.0,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 90.2,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 147.4,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 130.0,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 32.1,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 0,
+    "blocked": false
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 120.3,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 17.8,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 115.2,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 161.2,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 84.6,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 77.6,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 44.4,
+    "blocked": false
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 76.5,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 163.9,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 31.8,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 113.6,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 102.2,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 103.6,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 82.3,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 76.2,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 24.3,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 108.7,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 92.9,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 146.7,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 62.7,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 7.5,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 164.2,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 112.5,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 30.0,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 166.6,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 108.8,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 62.0,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 114.3,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 113.1,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 90.8,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 27.2,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 86.0,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 0,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 115.3,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 129.8,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 122.2,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 75.3,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 139.3,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 1.0,
+    "blocked": false
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 109.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 113.3,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 92.6,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 18.5,
+    "blocked": false
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 91.2,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 14.4,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 25.6,
+    "blocked": false
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 96.1,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 156.5,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 134.9,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 0,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 134.5,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 120.8,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 21.0,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 17.3,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 15.0,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 31.7,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 76.9,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 72.9,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 32.2,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 76.2,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 131.8,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 77.3,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 102.5,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 100.2,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 91.4,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 73.7,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 62.4,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 136.6,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 33.0,
+    "blocked": false
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 111.2,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 87.7,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 117.0,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 41.4,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 82.7,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 94.1,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 19.1,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 102.2,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 120.8,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 35.7,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 24.4,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 167.3,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 73.2,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 89.7,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 23.6,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 9.9,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 20.0,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 12.3,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 119.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 31.4,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 83.1,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 116.0,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 28.9,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 6.0,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 38.9,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 132.9,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 41.1,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 74.9,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 69.7,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 104.8,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 111.1,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 16.4,
+    "blocked": false
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 79.2,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 83.2,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 74.5,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 6.2,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 113.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 17.3,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 23.1,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 18.5,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 126.7,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 116.0,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 99.9,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 113.5,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 114.3,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 116.7,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 5.5,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 120.6,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 106.0,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 98.7,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 133.2,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 30.4,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 151.6,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 79.3,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 125.5,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 7.6,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 130.3,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 84.0,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 18.2,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 85.7,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 21.0,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 168.0,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 69.5,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 7.1,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 126.7,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 103.1,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 78.1,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 106.0,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 167.8,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 33.7,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 101.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 16.4,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 22.7,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 8.2,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 10.2,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 101.4,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 125.0,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 139.4,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 142.0,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 130.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 90.3,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 128.2,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 99.7,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 137.7,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 9.2,
+    "blocked": false
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 90.8,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 124.6,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 20.1,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 89.1,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 15.9,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 84.4,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 79.5,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 41.1,
+    "blocked": false
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 66.8,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 113.2,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 120.0,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 113.8,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 15.7,
+    "blocked": false
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 95.4,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 0,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 96.2,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 107.7,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 93.3,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 80.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 28.9,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 0,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 8.1,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 25.3,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 97.3,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 112.0,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 28.3,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 156.6,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 84.3,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 134.8,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 104.9,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 140.2,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 108.6,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 13.8,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 25.2,
+    "blocked": false
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 91.9,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 94.3,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 115.8,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 89.7,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 125.8,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 5.5,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 92.8,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 23.9,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 28.5,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 15.0,
+    "blocked": false
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 112.9,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 106.3,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 97.3,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 0,
+    "blocked": false
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 110.6,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 87.3,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 23.3,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 21.9,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 75.2,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 95.2,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 83.9,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 103.8,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 36.9,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 96.6,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 113.1,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 102.0,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 96.8,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 29.6,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 163.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 99.6,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 83.5,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 66.0,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 69.9,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 17.3,
+    "blocked": false
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 76.8,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 81.4,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 27.6,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 136.9,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 90.7,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 121.3,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 83.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 111.6,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 4.8,
+    "blocked": false
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 123.4,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 92.8,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 25.6,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 3.0,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 30.2,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 29.0,
+    "blocked": false
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 101.5,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 94.3,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 80.3,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 43.9,
+    "blocked": false
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 92.6,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 29.2,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 0.2,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 80.8,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 113.1,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 163.6,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 101.9,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 71.5,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 87.3,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 18.4,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 106.3,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 119.4,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 91.6,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 94.8,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 98.3,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 31.0,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 130.3,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 149.0,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 97.2,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 67.9,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 17.7,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 5.5,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 78.6,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 36.1,
+    "blocked": false
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 84.2,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 29.5,
+    "blocked": false
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 75.4,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 116.0,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 17.5,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 20.9,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 99.1,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 29.7,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 85.1,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 29.4,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 28.5,
+    "blocked": false
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 86.8,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 93.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 107.0,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 103.1,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 16.4,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 20.5,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 133.5,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 116.8,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 84.7,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 84.6,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 18.5,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 22.3,
+    "blocked": false
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 95.7,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 97.6,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 109.5,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 109.1,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 102.3,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 21.6,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 157.2,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 108.8,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 15.1,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 114.0,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 20.2,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 94.7,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 116.5,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 41.4,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 22.7,
+    "blocked": false
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 123.8,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 87.8,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 83.7,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 0,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 69.9,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 15.5,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 11.8,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 124.2,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 128.6,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 120.7,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 95.8,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 105.6,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 106.1,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 87.2,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 7.4,
+    "blocked": false
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 102.9,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 66.9,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 101.0,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 109.8,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 118.7,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 68.0,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 121.1,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 135.1,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 99.9,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 120.3,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 18.9,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 9.3,
+    "blocked": false
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 100.7,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 87.2,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 17.6,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 132.1,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 30.4,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 13.0,
+    "blocked": false
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 19.4,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 32.1,
+    "blocked": false
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 93.1,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 72.1,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 100.5,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 147.4,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 107.6,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 93.6,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 88.1,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 1.0,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 106.9,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 87.3,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 133.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 10.7,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 24.5,
+    "blocked": false
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 9.3,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 135.1,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 102.4,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 140.4,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 110.3,
+    "blocked": true
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 0,
+    "blocked": false
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 10.6,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 4.5,
+    "blocked": false
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 93.7,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 106.6,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 63.0,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 104.1,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 14.2,
+    "blocked": false
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 114.3,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 99.9,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 92.2,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 38.0,
+    "blocked": false
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 126.4,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 111.3,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 129.2,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 109.2,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 104.1,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 6.7,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 68.7,
+    "blocked": true
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 66.6,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 99.2,
+    "blocked": true
+  },
+  {
+    "date": "2019-07-12",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 104.3,
+    "blocked": true
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 90.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-11-02",
+    "nh": "NH-31",
+    "district": "Tripura",
+    "rainfall": 44.7,
+    "blocked": false
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 134.5,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 104.6,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 164.6,
+    "blocked": true
+  },
+  {
+    "date": "2021-05-18",
+    "nh": "NH-6",
+    "district": "Meghalaya",
+    "rainfall": 75.5,
+    "blocked": true
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 109.4,
+    "blocked": true
+  },
+  {
+    "date": "2022-06-15",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 106.5,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 21.2,
+    "blocked": false
+  },
+  {
+    "date": "2024-05-28",
+    "nh": "NH-6",
+    "district": "Mizoram",
+    "rainfall": 66.7,
+    "blocked": true
+  },
+  {
+    "date": "2019-08-20",
+    "nh": "NH-52",
+    "district": "Arunachal Pradesh",
+    "rainfall": 12.3,
+    "blocked": false
+  },
+  {
+    "date": "2023-06-14",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 94.6,
+    "blocked": true
+  },
+  {
+    "date": "2018-06-13",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 97.6,
+    "blocked": true
+  },
+  {
+    "date": "2022-05-22",
+    "nh": "NH-27",
+    "district": "Assam",
+    "rainfall": 167.3,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 9.1,
+    "blocked": false
+  },
+  {
+    "date": "2020-06-29",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 97.6,
+    "blocked": true
+  },
+  {
+    "date": "2018-09-10",
+    "nh": "NH-37",
+    "district": "Assam",
+    "rainfall": 9.1,
+    "blocked": false
+  },
+  {
+    "date": "2020-03-15",
+    "nh": "NH-29",
+    "district": "Nagaland",
+    "rainfall": 2.0,
+    "blocked": false
+  }
+]

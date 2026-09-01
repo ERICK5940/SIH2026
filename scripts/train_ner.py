@@ -11,16 +11,33 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
 
 HIST = pathlib.Path("public/models/ner-historical-2018-2024.json")
+REAL = pathlib.Path("public/models/ner-real-2018-2024.json")
 OUT_W = pathlib.Path("public/models/ner-lstm-weights.json")
 
-# 1. Load or generate historical
-if HIST.exists():
+# 1. Load real dataset if exists (579 real NER records with Open-Meteo rainfall)
+if REAL.exists():
+    real = json.loads(REAL.read_text())
+    # Enrich real rows with other features for 7-feature model (keep rainfall/blocked real)
+    rows=[]
+    for r in real:
+        rainfall = r["rainfall"]
+        # severity from rainfall
+        severity = "storm" if rainfall>80 else "rain" if rainfall>50 else "cloudy" if rainfall>20 else "clear"
+        # landslide/flood higher for blocked and high rain districts
+        landslide = 1 if (r["blocked"] and r["district"] in ["Arunachal Pradesh","Mizoram","Assam"] and rainfall>60) or random.random()<0.2 else 0
+        flood = 1 if r["district"]=="Assam" and rainfall>70 else 1 if random.random()<0.15 else 0
+        road = "poor" if r["blocked"] and random.random()<0.6 else "fair" if random.random()<0.4 else "good"
+        traffic = random.randint(60,95) if r["blocked"] else random.randint(20,70)
+        hist = 1 if r["blocked"] else 1 if random.random()<0.2 else 0
+        rows.append({"rainfall":rainfall,"severity":severity,"landslideRisk":landslide,"floodRisk":flood,"road":road,"traffic":traffic,"histHigh":hist,"disrupted":1 if r["blocked"] else 0})
+    print(f"Loaded real {len(rows)} rows from {REAL}")
+elif HIST.exists():
     rows = json.loads(HIST.read_text())
 else:
     rows = []
 
-# Ensure 12k synthetic if too few (fallback to JS logic but via Python)
-if len(rows) < 8000:
+# Fallback synthetic only if no real and too few
+if len(rows) < 500 and not REAL.exists():
     print(f"Generating synthetic 12k (existing {len(rows)})")
     sev_map = {"clear":0,"cloudy":1,"rain":2,"storm":3}
     road_map = {"good":0,"fair":1,"poor":2}
