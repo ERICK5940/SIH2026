@@ -1,8 +1,10 @@
 "use client";
 import { useMemo } from "react";
 import { affectedVehicles, nearestHubs } from "@/lib/spatial";
+import { useTranslation } from "@/lib/i18n";
 
 export default function ImpactPanel({ incidents, liveVehicles }: { incidents: any[]; liveVehicles: Record<string, any> }) {
+  const { t } = useTranslation();
   const last = incidents[0];
   const impact = useMemo(() => {
     if (!last?.location) return null;
@@ -17,7 +19,7 @@ export default function ImpactPanel({ incidents, liveVehicles }: { incidents: an
 
   return (
     <div className="bg-white border border-slate-200 rounded-lg p-3">
-      <h3 className="text-xs font-black tracking-widest">IMPACT ANALYSIS • TURF BUFFER 80KM</h3>
+      <h3 className="text-xs font-black tracking-widest">{t("IMPACT ANALYSIS • TURF BUFFER 80KM")}</h3>
       <p className="text-[11px] text-slate-600 mt-1">Last: {last.type} • {last.severity} • {last.location.latitude.toFixed(2)},{last.location.longitude.toFixed(2)} {last.state ? `• ${last.state}` : ""}</p>
       <div className="grid grid-cols-3 gap-2 mt-3">
         <div className="bg-slate-50 border rounded p-2 text-center"><p className="text-[11px] font-bold">Affected vehicles</p><p className="text-lg font-black text-red-600">{impact.aff.length}</p><p className="text-[10px] truncate">{impact.aff.map((v:any)=>v.id).join(", ")||"—"}</p></div>

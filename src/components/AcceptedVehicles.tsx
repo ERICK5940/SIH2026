@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useTranslation } from "@/lib/i18n";
 
 export default function AcceptedVehicles() {
+  const { t } = useTranslation();
   const [list, setList] = useState<any[]>([]);
   useEffect(() => {
     const load = async () => {
@@ -9,10 +11,10 @@ export default function AcceptedVehicles() {
     };
     load(); const id=setInterval(load,3000); return()=>clearInterval(id);
   }, []);
-  if (!list.length) return <div className="bg-white border border-slate-200 rounded-lg p-4"><h3 className="text-xs font-black tracking-widest">ACCEPTED REROUTES</h3><p className="text-xs text-slate-500 mt-2">No accepted yet — driver tap Accept on /driver</p></div>;
+  if (!list.length) return <div className="bg-white border border-slate-200 rounded-lg p-4"><h3 className="text-xs font-black tracking-widest">{t("ACCEPTED VEHICLES")}</h3><p className="text-xs text-slate-500 mt-2">No accepted yet — driver tap Accept on /driver</p></div>;
   return (
     <div className="bg-white border border-slate-200 rounded-lg p-4">
-      <h3 className="text-xs font-black tracking-widest">ACCEPTED VEHICLES • {list.length}</h3>
+      <h3 className="text-xs font-black tracking-widest">{t("ACCEPTED VEHICLES")} • {list.length}</h3>
       <div className="space-y-2 mt-3">
         {list.map((r:any)=>(
           <div key={r.vehicleId} className="border rounded p-2 bg-emerald-50 border-emerald-200">

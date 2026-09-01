@@ -280,8 +280,8 @@ export default function DashboardPage() {
             <section id="gis" className="grid grid-cols-12 gap-4 scroll-mt-20">
               <div className="col-span-12 xl:col-span-8 bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
                 <div className="px-4 py-3 border-b border-slate-200 flex items-center justify-between bg-white">
-                  <h2 className="text-sm font-black tracking-tight">🛰 GIS ACCESSIBILITY MAP • NER</h2>
-                  <div className="flex items-center gap-2"><HazardSimModal onInject={async()=>{ const r=await fetch("/api/incidents"); const j=await r.json(); if(j.incidents) setIncidents(j.incidents);}} /><span className="text-[11px] font-bold px-2 py-1 rounded bg-slate-900 text-white">LIVE FEED</span></div>
+                  <h2 className="text-sm font-black tracking-tight">🛰 {t("GIS ACCESSIBILITY MAP • NER")}</h2>
+                  <div className="flex items-center gap-2"><HazardSimModal onInject={async()=>{ const r=await fetch("/api/incidents"); const j=await r.json(); if(j.incidents) setIncidents(j.incidents);}} /><span className="text-[11px] font-bold px-2 py-1 rounded bg-slate-900 text-white">{t("LIVE FEED")}</span></div>
                 </div>
                 <GISMap routes={liveRoutes as any} districtScores={sampleDistrictData as any} focusId={focusVehicle} liveVehicles={liveVehicles} />
                 <div className="p-3 bg-slate-50 border-t"><ImpactPanel incidents={incidents} liveVehicles={liveVehicles} /></div>
@@ -289,7 +289,7 @@ export default function DashboardPage() {
 
               <div className="col-span-12 xl:col-span-4 bg-white border border-slate-200 rounded-lg shadow-sm p-4">
                 <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-sm font-black tracking-tight">DISTRICTS AT RISK</h2>
+                  <h2 className="text-sm font-black tracking-tight">{t("DISTRICTS AT RISK")}</h2>
                   <span className="text-[11px] font-bold tracking-widest bg-amber-100 text-amber-800 px-2 py-1 rounded">7 DISTRICTS</span>
                 </div>
                 <div className="flex items-center justify-between mb-2">
@@ -397,7 +397,7 @@ export default function DashboardPage() {
             {/* ROW 4: FIELD INTELLIGENCE + ALERTS - form removed, dedicated /field page is source */}
             <section id="alerts" className="grid grid-cols-12 gap-4 scroll-mt-20">
               <div id="vehicles" className="col-span-12 lg:col-span-5 bg-white border border-slate-200 rounded-lg shadow-sm p-4 scroll-mt-20">
-                <h2 className="text-sm font-black tracking-tight mb-3">FIELD INTELLIGENCE • INCIDENT REPORTS</h2>
+                <h2 className="text-sm font-black tracking-tight mb-3">{t("FIELD INTELLIGENCE • INCIDENT REPORTS")}</h2>
                 <p className="text-[11px] font-bold tracking-widest text-slate-500 mb-3">Reports from <a href="/field" className="underline text-sky-700">/field</a> • geo-tagged + photo</p>
                 <IncidentDashboard />
               </div>
