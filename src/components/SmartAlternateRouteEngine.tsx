@@ -207,23 +207,23 @@ export function SmartAlternateRouteEngine({
                   ? "🟠 High Risk"
                   : "🟢 Accessible"}
             </p>
-            <p className="text-sm">Score: {currentRoute.riskScore}</p>
+            <p className="text-sm">Score: {currentScore} pts (Total)</p>
           </div>
         </div>
-        <div>
-          <p className="text-zinc-500 text-sm">Recommended Route</p>
           <div>
-            <p className="font-medium">{recommendedRoute.name}</p>
-            <p className={`text-sm ${recommendedRoute.status === "blocked" ? "text-red-600" : recommendedRoute.status === "high_risk" ? "text-orange-600" : "text-green-600"}`}>
-              {recommendedRoute.status === "blocked"
-                ? "🔴 Blocked"
-                : recommendedRoute.status === "high_risk"
-                  ? "🟠 High Risk"
-                  : "🟢 Accessible"}
-            </p>
-            <p className="text-sm">Score: {recommendedRoute.score}</p>
+            <p className="text-zinc-500 text-sm">Recommended Route</p>
+            <div>
+              <p className="font-medium">{recommendedRoute.name}</p>
+              <p className={`text-sm ${recommendedRoute.status === "blocked" ? "text-red-600" : recommendedRoute.status === "high_risk" ? "text-orange-600" : "text-green-600"}`}>
+                {recommendedRoute.status === "blocked"
+                  ? "🔴 Blocked"
+                  : recommendedRoute.status === "high_risk"
+                    ? "🟠 High Risk"
+                    : "🟢 Accessible"}
+              </p>
+              <p className="text-sm">Score: {recommendedRoute.score} pts (Total)</p>
+            </div>
           </div>
-        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4 mb-6">
