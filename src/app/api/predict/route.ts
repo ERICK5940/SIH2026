@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
         isLSTM = true;
       } else {
         w = { rainfall: (trained.weights as any).rain, severity: (trained.weights as any).sev, landslide: (trained.weights as any).land, flood: (trained.weights as any).flood, road: (trained.weights as any).road, traffic: (trained.weights as any).traffic, history: (trained.weights as any).hist };
-        bias = (trained.weights as any).bias; acc = trained.accuracy; modelName = "Logistic Regression (7-feature, 12K synthetic rows 2018-2024)";
+        bias = (trained.weights as any).bias; acc = trained.accuracy; const src = trained.samples===579 ? "579 real rows (Open-Meteo archive 2018-2024)" : `${trained.samples} synthetic rows 2018-2024`; modelName = `Logistic Regression (7-feature, ${src})`;
       }
     } else {
       w = { rainfall: 2.4, severity: 1.8, landslide: 0.9, flood: 0.7, road: 0.8, traffic: 0.4, history: 0.9 };
