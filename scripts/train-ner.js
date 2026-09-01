@@ -54,6 +54,6 @@ for(const r of data.slice(0,2000)){
   if(p===r.disrupted) correct++;
 }
 const acc=Math.round(correct/2000*1000)/10;
-console.log("Trained NER-LSTM mock weights:",w,"acc",acc+"%");
+console.log("Trained Logistic Regression weights (7-feature, synthetic 12K):",w,"acc",acc+"%");
 fs.writeFileSync(path.join(outDir,'ner-lstm-weights.json'), JSON.stringify({weights:w, accuracy:acc, samples:12000, trainedAt:new Date().toISOString(), features:["rainfall","severity","landslide","flood","road","traffic","history"]},null,2));
 console.log("Saved to public/models/");

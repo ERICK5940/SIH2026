@@ -1,5 +1,6 @@
 export type DistrictData = { roads: number; weatherRisk: number; disruptions: number; connectivity: number; emergencyAccess: number };
 
+// Rules-based composite (weighted heuristic) — not ML. Keep pitch honest.
 export function calcDistrictScore(d: DistrictData, liveRisk?: number) {
   const wr = liveRisk ?? d.weatherRisk;
   return Math.round((d.roads * 0.3) + ((100 - wr) * 0.2) + ((100 - d.disruptions) * 0.2) + (d.connectivity * 0.15) + (d.emergencyAccess * 0.15));

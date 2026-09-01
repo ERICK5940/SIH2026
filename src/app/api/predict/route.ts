@@ -48,13 +48,13 @@ export async function POST(req: NextRequest) {
     if (trained && trained.weights) {
       w = { rainfall: trained.weights.rain, severity: trained.weights.sev, landslide: trained.weights.land, flood: trained.weights.flood, road: trained.weights.road, traffic: trained.weights.traffic, history: trained.weights.hist };
       bias = trained.weights.bias;
-      acc = trained.accuracy; // 71.5 honest
-      modelName = "NER-LSTM v2.1 (trained 2018-2024, 12K rows)";
+      acc = trained.accuracy; // 71-72 honest synthetic
+      modelName = "Logistic Regression (7-feature, 12K synthetic rows 2018-2024)";
     } else {
       w = { rainfall: 2.4, severity: 1.8, landslide: 0.9, flood: 0.7, road: 0.8, traffic: 0.4, history: 0.9 };
       bias = -3.2;
       acc = 68.0;
-      modelName = "Risk-Scoring Engine (heuristic)";
+      modelName = "Risk-Scoring Engine (heuristic, no training)";
     }
 
     const logit = fRain * w.rainfall + fSeverity * w.severity + fLandslide * w.landslide + fFlood * w.flood + fRoad * w.road + fTraffic * w.traffic + fHist * w.history + bias;

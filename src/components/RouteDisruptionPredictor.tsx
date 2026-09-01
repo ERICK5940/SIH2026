@@ -48,7 +48,7 @@ export function RouteDisruptionPredictor(p: RoutePredictionEngineProps & { onRou
     "NH-31": { disruptionProbability: 78, riskLevel: "HIGH", primaryCause: "Heavy rain + Flood risk", recommendedAction: "Strongly recommend alternate route" },
   };
   const fb = routeFallback[selected] || routeFallback["NH-37"];
-  const fallback = { ...fb, model: "NER-LSTM v2.1", accuracy: 71.5, latencyMs: 42, featureImportance: [{ feature: "Rainfall", value: `${(p.weather?.rainfall ?? 45) + (ROUTE_PROFILES[selected]?.baseRainOffset||0)}mm`, contribution: 38, weight: 0.63 }, { feature: "Weather Severity", value: p.weather?.severity || "rain", contribution: 32, weight: 0.42 }] };
+  const fallback = { ...fb, model: "Logistic Regression (synthetic)", accuracy: 71.5, latencyMs: 42, featureImportance: [{ feature: "Rainfall", value: `${(p.weather?.rainfall ?? 45) + (ROUTE_PROFILES[selected]?.baseRainOffset||0)}mm`, contribution: 38, weight: 0.63 }, { feature: "Weather Severity", value: p.weather?.severity || "rain", contribution: 32, weight: 0.42 }] };
   const [data, setData] = React.useState<any>(fallback);
   const [loading, setLoading] = React.useState(false);
   const cacheRef = React.useRef<Map<string,any>>(new Map());
@@ -87,7 +87,7 @@ export function RouteDisruptionPredictor(p: RoutePredictionEngineProps & { onRou
   // Immediate fallback update on route change (no same-value flash)
   React.useEffect(() => {
     const fb = routeFallback[selected] || routeFallback["NH-37"];
-    setData({ ...fb, model: "NER-LSTM v2.1 (trained 2018-2024, 12K rows)", accuracy: 71.5, latencyMs: 42, featureImportance: [{ feature: "Rainfall", value: `${(p.weather?.rainfall ?? 45) + (ROUTE_PROFILES[selected]?.baseRainOffset||0)}mm`, contribution: 38, weight: 0.63 }] });
+    setData({ ...fb, model: "Logistic Regression (synthetic 12K)", accuracy: 71.5, latencyMs: 42, featureImportance: [{ feature: "Rainfall", value: `${(p.weather?.rainfall ?? 45) + (ROUTE_PROFILES[selected]?.baseRainOffset||0)}mm`, contribution: 38, weight: 0.63 }] });
   }, [selected]);
 
   const d = data;

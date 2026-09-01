@@ -9,7 +9,7 @@ Field PWA /field (GPS + cam + state/district/road + offline)
 Dashboard / (GISMap Leaflet OSM + ImpactPanel Turf 80km + 3 hubs + Alerts)
    ↕ Open-Meteo /api/weather/live (5m) → liveRisk = rain*1.8+severity
    ↕ /api/gps/ingest lerp 40km/h 2.5s → liveVehicles
-   → /api/predict NER-LSTM v2.1 → SmartAlternate + LogisticsPriority + VehicleTracking liveRoutes sync
+   → /api/predict Logistic Regression (synthetic 12K) → SmartAlternate + LogisticsPriority + VehicleTracking liveRoutes sync
    → POST /api/reroute → Driver PWA /driver PATCH accept → Accepted/Affected panels
 ```
 
