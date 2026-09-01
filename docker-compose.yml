@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    ports: ["3000:3000"]
+    environment: ["NEXT_PUBLIC_DEMO_MODE=true"]
+    command: npm run dev
+  # future fastapi stub
+  # api:
+  #   build: ./backend
+  #   ports: ["8000:8000"]
