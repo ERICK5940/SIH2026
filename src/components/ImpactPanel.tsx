@@ -21,7 +21,7 @@ export default function ImpactPanel({ incidents, liveVehicles }: { incidents: an
       <p className="text-[11px] text-slate-600 mt-1">Last: {last.type} • {last.severity} • {last.location.latitude.toFixed(2)},{last.location.longitude.toFixed(2)} {last.state ? `• ${last.state}` : ""}</p>
       <div className="grid grid-cols-3 gap-2 mt-3">
         <div className="bg-slate-50 border rounded p-2 text-center"><p className="text-[11px] font-bold">Affected vehicles</p><p className="text-lg font-black text-red-600">{impact.aff.length}</p><p className="text-[10px] truncate">{impact.aff.map((v:any)=>v.id).join(", ")||"—"}</p></div>
-        <div className="bg-slate-50 border rounded p-2 text-center"><p className="text-[11px] font-bold">Pop affected</p><p className="text-lg font-black">{impact.pop}</p></div>
+        <div className="bg-slate-50 border rounded p-2 text-center"><p className="text-[11px] font-bold">Population affected</p><p className="text-lg font-black">{impact.pop}</p></div>
         <div className="bg-slate-50 border rounded p-2 text-left"><p className="text-[11px] font-bold text-center">Nearest safe hubs (3)</p>{impact.hubs.map((h:any)=><p key={h.id} className="text-[11px] flex justify-between"><span className="font-bold">{h.name}</span><span>{h.distKm}km • {h.district}</span></p>)}</div>
       </div>
     </div>
