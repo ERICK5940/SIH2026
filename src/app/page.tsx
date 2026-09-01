@@ -16,6 +16,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { DriverInbox } from "@/components/DriverInbox";
 import { useLiveVehicles } from "@/lib/useLiveVehicles";
 import AcceptedVehicles from "@/components/AcceptedVehicles";
+import AffectedVehicles from "@/components/AffectedVehicles";
 
 const sampleRoutes = [
   { id: "1", name: "NH-37", from: "Guwahati", to: "Silchar", status: "high_risk", distance: "210", eta: "6h 30m", riskScore: 82 },
@@ -388,6 +389,7 @@ export default function DashboardPage() {
                 </div>
                 <DriverInbox />
                 <AcceptedVehicles />
+                <AffectedVehicles liveVehicles={liveVehicles} />
                 <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4 overflow-hidden">
                   <VehicleTracking vehicles={emergencyVehicles} onFocus={setFocusVehicle} live={liveVehicles} liveRoutes={liveRoutes as any} />
                 </div>
