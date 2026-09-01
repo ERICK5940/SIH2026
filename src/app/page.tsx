@@ -281,7 +281,7 @@ export default function DashboardPage() {
                   <h2 className="text-sm font-black tracking-tight">🛰 {t("GIS ACCESSIBILITY MAP • NER")}</h2>
                   <div className="flex items-center gap-2"><HazardSimModal onInject={async()=>{ const r=await fetch("/api/incidents"); const j=await r.json(); if(j.incidents) setIncidents(j.incidents);}} /><span className="text-[11px] font-bold px-2 py-1 rounded bg-slate-900 text-white">{t("LIVE FEED")}</span></div>
                 </div>
-                <GISMap routes={liveRoutes as any} districtScores={sampleDistrictData as any} focusId={focusVehicle} liveVehicles={liveVehicles} />
+                <GISMap routes={liveRoutes as any} districtScores={sampleDistrictData as any} focusId={focusVehicle} liveVehicles={liveVehicles} incidents={incidents} />
                 <div className="p-3 bg-slate-50 border-t"><ImpactPanel incidents={incidents} liveVehicles={liveVehicles} /></div>
               </div>
 

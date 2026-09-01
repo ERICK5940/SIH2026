@@ -309,6 +309,7 @@ export function IncidentDashboard() {
                     {incident.district ? ` / ${incident.district}` : ""}
                   </p>
                 )}
+                {(() => { const trust = (incident.photoUrl?20:0)+(incident.state?10:0)+(incident.district?10:0)+(incident.description?.length>20?15:0)+(incident.authority?15:0)+30; const pct=Math.min(98,trust); const col=pct>=80?"bg-emerald-100 text-emerald-700":pct>=60?"bg-amber-100 text-amber-700":"bg-red-100 text-red-700"; return <span className={`inline-flex mt-2 px-2 py-0.5 rounded text-[10px] font-black border ${col}`}>Trust {pct}% {incident.authority?`• ${incident.authority}`:"• citizen"}</span>; })()}
               </div>
               <div className="w-12 h-12 rounded bg-zinc-100 flex items-center justify-center">
                 {incident.photoUrl ? (

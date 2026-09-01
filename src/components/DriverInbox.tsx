@@ -29,15 +29,18 @@ export function DriverInbox() {
             <p className="text-xs font-black text-slate-900 truncate">{n.title}</p>
             <p className="text-[11px] font-semibold text-slate-600 truncate">{n.body}</p>
           </div>
-          <button
-            onClick={async () => {
-              await fetch("/api/reroute", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ vehicleId: n.vehicleId }) });
-              setNotes((prev) => prev.filter((x) => x.id !== n.id));
-            }}
-            className="shrink-0 px-3 py-1.5 rounded bg-emerald-600 text-white text-xs font-black hover:bg-emerald-700"
-          >
-            Accept
-          </button>
+          <div className="flex items-center gap-1 shrink-0">
+            <button onClick={() => { try{ const u=new SpeechSynthesisUtterance(n.body); u.lang = (localStorage.getItem("ner-lang")==="as"?"as-IN": localStorage.getItem("ner-lang")==="hi"?"hi-IN":"en-IN"); speechSynthesis.speak(u);}catch{} }} className="px-2 py-1.5 rounded bg-sky-600 text-white text-[11px] font-black">🔊</button>
+            <button
+              onClick={async () => {
+                await fetch("/api/reroute", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ vehicleId: n.vehicleId }) });
+                setNotes((prev) => prev.filter((x) => x.id !== n.id));
+              }}
+              className="px-3 py-1.5 rounded bg-emerald-600 text-white text-xs font-black hover:bg-emerald-700"
+            >
+              Accept
+            </button>
+          </div>
         </div>
       ))}
       <p className="text-[10px] font-semibold text-slate-500">Auto falls back to SMS if offline • Multilingual (EN/HI/AS) via LanguageSwitcher</p>

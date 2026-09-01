@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { HUBS } from "@/lib/hubs";
 
 type RouteStatus = "accessible" | "delayed" | "high_risk" | "blocked" | "emergency";
 interface Route { id: string; name: string; from: string; to: string; status: RouteStatus; distance: string; eta: string; riskScore: number; }
-interface GISMapProps { routes: Route[]; districtScores: Record<string, number>; focusId?: string | null; liveVehicles?: Record<string, any>; }
+interface GISMapProps { routes: Route[]; districtScores: Record<string, number>; focusId?: string | null; liveVehicles?: Record<string, any>; incidents?: any[]; }
 
 const statusColors: Record<RouteStatus, string> = { accessible: "#10b981", delayed: "#f59e0b", high_risk: "#f97316", blocked: "#ef4444", emergency: "#0ea5e9" };
 const statusLabels: Record<RouteStatus, string> = { accessible: "Accessible", delayed: "Delayed", high_risk: "High Risk", blocked: "Blocked", emergency: "Emergency" };
@@ -18,11 +19,12 @@ const routeLatLng: Record<string, [number, number][]> = {
   "NH-31": [[26.14,91.73],[25.5,91.88],[24.8,91.95],[24.35,91.95],[23.84,91.28]],
 };
 
-function LeafletMap({ routes, focusId, liveVehicles }: { routes: Route[]; focusId?: string | null; liveVehicles?: Record<string, any> }) {
+function LeafletMap({ routes, focusId, liveVehicles, incidents }: { routes: Route[]; focusId?: string | null; liveVehicles?: Record<string, any>; incidents?: any[] }) {
   const mapRef = React.useRef<HTMLDivElement>(null);
   const mapInstanceRef = React.useRef<any>(null);
   const leafletRef = React.useRef<any>(null);
   const vehicleLayerRef = React.useRef<any>(null);
+  const droneLayerRef = React.useRef<any>(null);
 
   useEffect(() => {
     if (mapInstanceRef.current) return;
@@ -113,17 +115,36 @@ function LeafletMap({ routes, focusId, liveVehicles }: { routes: Route[]; focusI
     if(focusId){ const f=toShow.find((v:any)=>v.id===focusId); if(f) map.flyTo([f.lat,f.lng],9,{duration:0.8}); }
   },[liveVehicles, focusId]);
 
+  // Drone corridor 30km when blocked — different vs SHIELD
+  React.useEffect(()=>{
+    const map = mapInstanceRef.current; const leaflet = leafletRef.current;
+    if(!map||!leaflet) return;
+    if(!droneLayerRef.current) droneLayerRef.current = leaflet.layerGroup().addTo(map);
+    else droneLayerRef.current.clearLayers();
+    if(!incidents || !incidents.length) return;
+    const hav=(a:number,b:number,c:number,d:number)=>{ const R=6371; const dLa=(c-a)*Math.PI/180; const dLo=(d-b)*Math.PI/180; const s=Math.sin(dLa/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dLo/2)**2; return 2*R*Math.asin(Math.sqrt(s)); };
+    incidents.filter((inc:any)=> inc.accessibilityStatus==="blocked" && inc.location).slice(0,2).forEach((inc:any)=>{
+      const {latitude, longitude} = inc.location;
+      // drone range 30km blue dashed
+      leaflet.circle([latitude, longitude], {radius:30000, color:"#0ea5e9", fillColor:"#0ea5e9", fillOpacity:0.12, weight:2, dashArray:"6 6"}).addTo(droneLayerRef.current).bindTooltip(`Drone 30km • ${inc.type} blocked`,{sticky:true});
+      // nearest hub arc
+      let best=HUBS[0]; let bd=Infinity; for(const h of HUBS){ const d=hav(latitude,longitude,h.lat,h.lng); if(d<bd){bd=d; best=h;} }
+      leaflet.polyline([[latitude,longitude],[best.lat,best.lng]], {color:"#0ea5e9", weight:3, opacity:0.9, dashArray:"8 8"}).addTo(droneLayerRef.current).bindTooltip(`Drone: ${best.name} → incident ${Math.round(bd)}km 12kg 18min`,{sticky:true});
+      leaflet.marker([best.lat,best.lng], {icon: leaflet.divIcon({html:`<div style="background:#0ea5e9;color:white;font-size:9px;font-weight:900;padding:2px 5px;border-radius:4px;">🚁 ${best.name}</div>`, className:""})}).addTo(droneLayerRef.current);
+    });
+  },[incidents]);
+
   return <div ref={mapRef} className="w-full h-[420px] bg-slate-100" />;
 }
 
-export function GISMap({ routes, focusId, liveVehicles }: GISMapProps) {
+export function GISMap({ routes, focusId, liveVehicles, incidents }: GISMapProps) {
   return (
     <div className="space-y-0">
       <div className="relative bg-slate-900 rounded-lg overflow-hidden border border-slate-800">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-3 py-2.5 bg-slate-900 border-b border-white/10">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-            <span className="text-[11px] font-black tracking-widest text-white whitespace-nowrap">NER • EXACT OUTLINE • LIVE GPS</span>
+            <span className="text-[11px] font-black tracking-widest text-white whitespace-nowrap">NER • EXACT OUTLINE • LIVE GPS • 🚁 DRONE READY</span>
             <span className="text-[11px] font-bold px-2.5 py-1 rounded bg-white text-slate-900 whitespace-nowrap shadow-sm">7 STATES • OSM • LIVE</span>
             {focusId && <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-500 text-white whitespace-nowrap">FOCUS: {focusId}</span>}
           </div>
@@ -134,7 +155,7 @@ export function GISMap({ routes, focusId, liveVehicles }: GISMapProps) {
             <span className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-widest text-red-400 whitespace-nowrap"><span className="h-2 w-2 rounded-full bg-red-500" /> Blocked</span>
           </div>
         </div>
-        <LeafletMap routes={routes} focusId={focusId} liveVehicles={liveVehicles} />
+        <LeafletMap routes={routes} focusId={focusId} liveVehicles={liveVehicles} incidents={incidents} />
         <div className="relative flex flex-wrap items-center justify-between gap-2 px-3 py-2 bg-slate-800 border-t border-white/10">
           <span className="text-[11px] font-bold tracking-widest text-white">5 CORRIDORS • EXACT NH GEOMETRY • 7 STATES OUTLINE</span>
           <span className="text-[11px] font-mono font-bold text-emerald-300">© OSM • udit-001/india-maps-data • GPS: LIVE</span>
