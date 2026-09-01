@@ -17,6 +17,8 @@ import { DriverInbox } from "@/components/DriverInbox";
 import { useLiveVehicles } from "@/lib/useLiveVehicles";
 import AcceptedVehicles from "@/components/AcceptedVehicles";
 import AffectedVehicles from "@/components/AffectedVehicles";
+import ImpactPanel from "@/components/ImpactPanel";
+import HazardSimModal from "@/components/HazardSimModal";
 
 const sampleRoutes = [
   { id: "1", name: "NH-37", from: "Guwahati", to: "Silchar", status: "high_risk", distance: "210", eta: "6h 30m", riskScore: 82 },
@@ -275,9 +277,10 @@ export default function DashboardPage() {
               <div className="col-span-12 xl:col-span-8 bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
                 <div className="px-4 py-3 border-b border-slate-200 flex items-center justify-between bg-white">
                   <h2 className="text-sm font-black tracking-tight">🛰 GIS ACCESSIBILITY MAP • NER</h2>
-                  <span className="text-[11px] font-bold px-2 py-1 rounded bg-slate-900 text-white">LIVE FEED</span>
+                  <div className="flex items-center gap-2"><HazardSimModal onInject={async()=>{ const r=await fetch("/api/incidents"); const j=await r.json(); if(j.incidents) setIncidents(j.incidents);}} /><span className="text-[11px] font-bold px-2 py-1 rounded bg-slate-900 text-white">LIVE FEED</span></div>
                 </div>
                 <GISMap routes={liveRoutes as any} districtScores={sampleDistrictData as any} focusId={focusVehicle} liveVehicles={liveVehicles} />
+                <div className="p-3 bg-slate-50 border-t"><ImpactPanel incidents={incidents} liveVehicles={liveVehicles} /></div>
               </div>
 
               <div className="col-span-12 xl:col-span-4 bg-white border border-slate-200 rounded-lg shadow-sm p-4">
