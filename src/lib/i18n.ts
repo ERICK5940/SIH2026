@@ -58,6 +58,11 @@ export const translations: Record<Lang, Record<string, string>> = {
     "ESSENTIAL SUPPLIES": "आवश्यक आपूर्ति",
     "Last sync:": "अंतिम सिंक:",
     "LIVE FEED": "लाइव फीड",
+    "Districts Monitored": "मॉनिटर किए गए जिले",
+    "Roads Open": "सड़कें खुली",
+    "Roads Disrupted": "बाधित सड़कें",
+    "Active Incidents": "सक्रिय घटनाएं",
+    "High-Risk Corridors": "उच्च-जोखिम कॉरिडोर",
   },
   as: {
     "NER LOGISTICS INTELLIGENCE COMMAND CENTER":
@@ -73,12 +78,17 @@ export const translations: Record<Lang, Record<string, string>> = {
     "ACTIVE DISRUPTIONS": "সক্ৰিয় ব্যাঘাত",
     "VEHICLES IN TRANSIT": "পৰিবহণত থকা বাহন",
     "DELAYED DELIVERIES": "পলম হোৱা ডেলিভাৰী",
-    "GIS ACCESSIBILITY MAP • NER": "জিআইএছ প্ৰৱেশ মানচিত্র • এনইআৰ",
+    "GIS ACCESSIBILITY MAP • NER": "জিআইএছ প্ৰৱেশ মানচিত্ৰ • এনইআৰ",
     "DISTRICTS AT RISK": "বিপদত থকা জিলাসমূহ",
     "FIELD INTELLIGENCE • OFFLINE QUEUE": "ফিল্ড ইনটেলিজেন্স • অফলাইন শাৰী",
     "ESSENTIAL SUPPLIES": "অত্যাৱশ্যকীয় যোগান",
     "Last sync:": "শেষ ছিংক:",
     "LIVE FEED": "লাইভ ফিড",
+    "Districts Monitored": "নিৰীক্ষণত থকা জিলা",
+    "Roads Open": "খোলা ৰাস্তা",
+    "Roads Disrupted": "ব্যাহত ৰাস্তা",
+    "Active Incidents": "সক্ৰিয় ঘটনা",
+    "High-Risk Corridors": "উচ্চ বিপদ কৰিডৰ",
   },
 };
 

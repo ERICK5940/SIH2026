@@ -20,6 +20,7 @@ import AffectedVehicles from "@/components/AffectedVehicles";
 import ImpactPanel from "@/components/ImpactPanel";
 import HazardSimModal from "@/components/HazardSimModal";
 import { HUBS } from "@/lib/hubs";
+import { useTranslation } from "@/lib/i18n";
 
 const sampleRoutes = [
   { id: "1", name: "NH-37", from: "Guwahati", to: "Silchar", status: "high_risk", distance: "210", eta: "6h 30m", riskScore: 82 },
@@ -100,6 +101,7 @@ export default function DashboardPage() {
   const [originHub, setOriginHub] = React.useState(HUBS[0].id);
   const [destHub, setDestHub] = React.useState(HUBS[5].id);
   const [commodity, setCommodity] = React.useState<"medicines"|"food"|"construction">("medicines");
+  const { t } = useTranslation();
   const liveVehiclesRaw = useLiveVehicles(2500);
   // Merge live lat/lng with full vehicle records so map knows delay/ETA/status
   const liveVehicles = React.useMemo(() => {
@@ -199,8 +201,8 @@ export default function DashboardPage() {
             </button>
             <div className="h-9 w-9 rounded bg-white text-slate-900 grid place-items-center font-black text-sm">NER</div>
             <div className="min-w-0">
-              <h1 className="text-[15px] lg:text-[16px] font-bold tracking-tight leading-none truncate">NER LOGISTICS INTELLIGENCE COMMAND CENTER</h1>
-              <p className="text-[11px] font-semibold tracking-widest opacity-80">NORTH EASTERN REGION • REAL-TIME MONITORING</p>
+              <h1 className="text-[15px] lg:text-[16px] font-bold tracking-tight leading-none truncate">{t("NER LOGISTICS INTELLIGENCE COMMAND CENTER")}</h1>
+              <p className="text-[11px] font-semibold tracking-widest opacity-80">{t("NORTH EASTERN REGION • REAL-TIME MONITORING")}</p>
             </div>
             <span className={`hidden md:inline-flex ml-2 px-2.5 py-1 rounded text-[11px] font-bold tracking-widest ${isEmergency ? "bg-white text-red-700 animate-pulse" : "bg-emerald-500 text-white"}`}>
               {isEmergency ? "● EMERGENCY ACTIVE" : "● LIVE"}
@@ -265,7 +267,7 @@ export default function DashboardPage() {
                 ];
                 return kpis.map((k) => (
                   <div key={k.label} className={`bg-white border border-slate-200 border-l-4 ${k.accent} rounded-lg p-3 shadow-sm`}>
-                    <p className="text-[10px] font-black tracking-widest text-slate-500">{k.label.toUpperCase()}</p>
+                    <p className="text-[10px] font-black tracking-widest text-slate-500">{t(k.label).toUpperCase()}</p>
                     <p className={`text-[22px] font-black leading-none mt-1 ${k.valueColor}`}>{k.value}</p>
                     <p className="text-[11px] font-semibold text-slate-700 mt-1 truncate">{k.sub}</p>
                     <p className="text-[10px] text-slate-500 mt-1 truncate">{k.badge}</p>
