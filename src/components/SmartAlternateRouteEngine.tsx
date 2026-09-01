@@ -38,23 +38,24 @@ interface RouteRecommendation {
 }
 
 function calculateRouteScore(
-  route: RouteOption,
+  route: any,
   weatherSeverity: "clear" | "cloudy" | "rain" | "storm"
 ): number {
   // Score formula: Travel Time + Risk Score + Accessibility + Delay Probability
-  // Lower score = better route
+  // Lower score = better route — handles both RouteOption and liveRoutes (string distance) shapes
 
   // Normalize travel time (assume max reasonable time of 600 minutes = 10 hours)
-  const timeScore = route.travelTime / 6;
+  const rawTime = (route as any).travelTime ?? (parseInt(String((route as any).distance)) * 2) ?? 300;
+  const timeScore = rawTime / 6;
 
   // Risk score (inverted - lower risk is better, but we want lower total score)
-  const risk = route.riskScore;
+  const risk = (route as any).riskScore ?? 50;
 
   // Accessibility (inverted - higher accessibility is better)
-  const accessibility = 100 - route.accessibility;
+  const accessibility = 100 - ((route as any).accessibility ?? 70);
 
   // Delay probability (lower is better)
-  const delay = route.delayProbability;
+  const delay = (route as any).delayProbability ?? 20;
 
   // Weather adjustment
   let weatherAdjustment = 0;
