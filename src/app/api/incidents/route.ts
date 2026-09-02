@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 const g = globalThis as any;
 if (!g.__INCIDENTS__) g.__INCIDENTS__ = [
   { id: "1", type: "landslide", description: "Major landslide reported on NH-37", severity: "high", accessibilityStatus: "blocked", timestamp: "2026-08-26T09:17:00.000Z", location: { latitude: 26.2, longitude: 92.9 }, offline: false },
@@ -7,7 +8,7 @@ if (!g.__INCIDENTS__) g.__INCIDENTS__ = [
 ];
 
 export async function GET() {
-  return NextResponse.json({ incidents: g.__INCIDENTS__ });
+  return NextResponse.json({ incidents: g.__INCIDENTS__ }, { headers: { "Cache-Control": "no-store, max-age=0" } });
 }
 
 export async function POST(req: NextRequest) {

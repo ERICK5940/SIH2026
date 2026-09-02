@@ -195,16 +195,18 @@ export default function DashboardPage() {
     return () => clearInterval(id);
   }, []);
 
-  // Load incidents
+  // Load incidents poll 5s no-store so field report appears without hard refresh
   React.useEffect(() => {
     const loadIncidents = async () => {
       try {
-        const r = await fetch("/api/incidents");
+        const r = await fetch("/api/incidents", { cache: "no-store" });
         const j = await r.json();
         if (j.incidents) setIncidents(j.incidents);
       } catch {}
     };
     loadIncidents();
+    const id = setInterval(loadIncidents, 5000);
+    return () => clearInterval(id);
   }, []);
   const scrollTo = (id: string) => {
     setActiveNav(id);
