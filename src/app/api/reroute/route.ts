@@ -1,9 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 const g = globalThis as any;
 if (!g.__REROUTES__) g.__REROUTES__ = new Map();
 if (!g.__NOTIFICATIONS__) g.__NOTIFICATIONS__ = [];
+// file fallback for Vercel serverless instance reset (persist across instances)
+const FILE = path.join(process.cwd(), "public", "models", "reroutes.json");
+function loadFile(){
+  try{ if(fs.existsSync(FILE)){ const j=JSON.parse(fs.readFileSync(FILE,"utf-8")); (j.reroutes||[]).forEach((r:any)=> g.__REROUTES__.set(r.vehicleId, r)); g.__NOTIFICATIONS__ = j.notifications||[]; } }catch{}
+}
+function saveFile(){
+  try{ fs.mkdirSync(path.dirname(FILE),{recursive:true}); fs.writeFileSync(FILE, JSON.stringify({reroutes: Array.from((g.__REROUTES__ as Map<string,any>).values()), notifications: g.__NOTIFICATIONS__})); }catch{}
+}
+loadFile();
 
 export async function POST(req: NextRequest) {
   try {
@@ -31,6 +42,7 @@ export async function POST(req: NextRequest) {
       timestamp: new Date().toISOString(),
     };
     g.__NOTIFICATIONS__.unshift(notification);
+    saveFile();
     
     // Update live vehicle status to rerouted (for VehicleTracking + GISMap)
     if (!g.__LIVE_VEHICLES__) g.__LIVE_VEHICLES__ = new Map();
@@ -48,6 +60,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
+  loadFile();
   return NextResponse.json({ reroutes: Array.from((g.__REROUTES__ as Map<string, any>).values()), notifications: g.__NOTIFICATIONS__ }, { headers: { "Cache-Control": "no-store, max-age=0" } });
 }
 
@@ -63,6 +76,7 @@ export async function PATCH(req: NextRequest) {
     }
     // remove driver inbox entries for this vehicle
     g.__NOTIFICATIONS__ = (g.__NOTIFICATIONS__ as any[]).filter((n: any) => n.vehicleId !== vehicleId);
+    saveFile();
     return NextResponse.json({ ok: true });
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 });
