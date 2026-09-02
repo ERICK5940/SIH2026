@@ -105,6 +105,7 @@ export default function DashboardPage() {
   React.useEffect(()=>{
     const o = HUBS.find(h=>h.id===originHub); const d = HUBS.find(h=>h.id===destHub);
     if(!o||!d) return;
+    if(o.id===d.id){ setHubRoute(null); return; }
     // keep NH mapping for fallback
     const od=o.district, dd=d.district;
     if(od==="Assam" && dd==="Manipur") setSelectedRouteId("NH-37");
@@ -404,7 +405,7 @@ export default function DashboardPage() {
                       </select>
                       <span className={`ml-auto text-[10px] font-black px-2 py-1 rounded ${commodity==="medicines"?"bg-red-600 text-white":"bg-slate-700 text-white"}`}>{commodity==="medicines"?"3.5x Risk Aversion":"Standard"}</span>
                     </div>
-                    {(() => { const mult = commodity==="medicines"?3.5: commodity==="food"?1.2:1; const baseAlts = hubRoute?.alts?.length ? hubRoute.alts : (sampleAlternativesByRoute[selectedRouteId] || sampleAlternatives); const alts = baseAlts.map((a:any)=> ({...a, riskScore: Math.min(98, Math.round(a.riskScore * (mult>1 ? (a.status==="accessible"?1: mult*0.6):1)))})); const cur = hubRoute?.main || liveRoutesBase.find((r:any)=> r.name===selectedRouteId) || liveRoutesBase[0]; return (
+                    {originHub===destHub ? <div className="p-6 text-sm font-black text-red-600">⚠️ Origin and Destination cannot be same — select different hubs</div> : (() => { const mult = commodity==="medicines"?3.5: commodity==="food"?1.2:1; const baseAlts = hubRoute?.alts?.length ? hubRoute.alts : (sampleAlternativesByRoute[selectedRouteId] || sampleAlternatives); const alts = baseAlts.map((a:any)=> ({...a, riskScore: Math.min(98, Math.round(a.riskScore * (mult>1 ? (a.status==="accessible"?1: mult*0.6):1)))})); const cur = hubRoute?.main || liveRoutesBase.find((r:any)=> r.name===selectedRouteId) || liveRoutesBase[0]; return (
                     <SmartAlternateRouteEngine
                       currentRoute={cur as any}
                       availableAlternatives={alts}
