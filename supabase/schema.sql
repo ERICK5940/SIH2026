@@ -39,6 +39,7 @@ create table if not exists incidents (
   lat double precision, lng double precision,
   geom geometry(Point,4326) generated always as (ST_SetSRID(ST_MakePoint(lng,lat),4326)) stored,
   photo_url text, offline boolean default false,
+  state text, district text, road text, authority text, role text,
   created_at timestamp with time zone default now()
 );
 
