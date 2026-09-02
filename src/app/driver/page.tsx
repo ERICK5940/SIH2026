@@ -26,11 +26,11 @@ export default function DriverApp() {
     if (!logged) return;
     const poll = async () => {
       try {
-        const r = await fetch("/api/reroute");
+        const r = await fetch("/api/reroute", { cache: "no-store" });
         const j = await r.json();
         const mine = (j.notifications || []).filter((n: any) => n.vehicleId === logged);
         setInbox(mine);
-        const vRes = await fetch("/api/gps/ingest");
+        const vRes = await fetch("/api/gps/ingest", { cache: "no-store" });
         const vj = await vRes.json();
         const v = (vj.live || []).find((x: any) => x.id === logged);
         if (v) setVehicle((prev: any) => ({ ...prev, currentLocation: v.currentLocation, lat: v.lat, lng: v.lng }));
