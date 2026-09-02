@@ -100,6 +100,17 @@ export default function DashboardPage() {
   const [destHub, setDestHub] = React.useState(HUBS[5].id);
   const [commodity, setCommodity] = React.useState<"medicines"|"food"|"construction">("medicines");
   const { t } = useTranslation();
+  // Auto wire hub pair -> NH corridor (so UI not just dummy)
+  React.useEffect(()=>{
+    const o = HUBS.find(h=>h.id===originHub)?.district; const d = HUBS.find(h=>h.id===destHub)?.district;
+    if(o==="Assam" && d==="Manipur") setSelectedRouteId("NH-37");
+    else if(o==="Arunachal Pradesh" && d==="Assam") setSelectedRouteId("NH-52");
+    else if(o==="Tripura" && d==="Assam") setSelectedRouteId("NH-31");
+    else if(o==="Assam" && d==="Arunachal Pradesh") setSelectedRouteId("NH-157");
+    else if(o==="Assam" && d==="Nagaland") setSelectedRouteId("NH-29");
+    else if(o==="Meghalaya" && d==="Assam") setSelectedRouteId("NH-37");
+    else setSelectedRouteId("NH-37");
+  },[originHub, destHub]);
   const liveVehiclesRaw = useLiveVehicles(2500);
   // Merge live lat/lng with full vehicle records so map knows delay/ETA/status
   const liveVehicles = React.useMemo(() => {
