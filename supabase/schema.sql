@@ -50,9 +50,9 @@ create table if not exists incidents (
 alter table routes enable row level security;
 alter table vehicles enable row level security;
 alter table incidents enable row level security;
-create policy "open" on routes for all using (true) with check (true);
-create policy "open" on vehicles for all using (true) with check (true);
-create policy "open" on incidents for all using (true) with check (true);
+drop policy if exists "open" on routes; create policy "open" on routes for all using (true) with check (true);
+drop policy if exists "open" on vehicles; create policy "open" on vehicles for all using (true) with check (true);
+drop policy if exists "open" on incidents; create policy "open" on incidents for all using (true) with check (true);
 
 -- Seed NER (run once)
 insert into districts(name,roads,weather_risk,disruptions,connectivity,emergency_access) values
