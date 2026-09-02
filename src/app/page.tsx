@@ -13,7 +13,6 @@ import { EmergencyModeToggle } from "@/components/EmergencyMode";
 import { LiveGPSTracker } from "@/components/LiveGPSTracker";
 import { CommandNav } from "@/components/CommandNav";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { DriverInbox } from "@/components/DriverInbox";
 import { useLiveVehicles } from "@/lib/useLiveVehicles";
 import ImpactPanel from "@/components/ImpactPanel";
 import HazardSimModal from "@/components/HazardSimModal";
@@ -434,7 +433,6 @@ export default function DashboardPage() {
                   <AlertCenter alerts={liveAlerts as any} onAction={handleAlertAction} />
                   {isEmergency && <p className="text-[11px] font-bold text-red-600 mt-2">⚠ EMERGENCY: showing only BLOCKED/HIGH RISK corridors + critical vehicles</p>}
                 </div>
-                <DriverInbox />
                 <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4 overflow-hidden">
                   <VehicleTracking vehicles={emergencyVehicles} onFocus={setFocusVehicle} live={liveVehicles} liveRoutes={liveRoutes as any} />
                 </div>

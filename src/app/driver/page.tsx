@@ -116,6 +116,7 @@ export default function DriverApp() {
                   <p className="text-sm font-black text-slate-900">{n.title}</p>
                   <p className="text-xs font-semibold text-slate-700 mt-1">{n.body}</p>
                   <div className="flex gap-2 mt-3">
+                    <button onClick={() => { try{ const u=new SpeechSynthesisUtterance(n.body); u.lang=(localStorage.getItem("ner-lang")==="as"?"as-IN":localStorage.getItem("ner-lang")==="hi"?"hi-IN":"en-IN"); speechSynthesis.speak(u);}catch{} }} className="px-3 py-2 rounded bg-sky-600 text-white text-xs font-black">🔊</button>
                     <button
                       onClick={async () => {
                         await fetch("/api/reroute", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ vehicleId: n.vehicleId }) });
