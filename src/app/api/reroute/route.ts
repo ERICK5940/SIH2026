@@ -6,8 +6,8 @@ export const revalidate = 0;
 const g = globalThis as any;
 if (!g.__REROUTES__) g.__REROUTES__ = new Map();
 if (!g.__NOTIFICATIONS__) g.__NOTIFICATIONS__ = [];
-// file fallback for Vercel serverless instance reset (persist across instances)
-const FILE = path.join(process.cwd(), "public", "models", "reroutes.json");
+// file fallback for Vercel serverless — must be /tmp (public is read-only)
+const FILE = path.join("/tmp", "reroutes.json");
 function loadFile(){
   try{ if(fs.existsSync(FILE)){ const j=JSON.parse(fs.readFileSync(FILE,"utf-8")); (j.reroutes||[]).forEach((r:any)=> g.__REROUTES__.set(r.vehicleId, r)); g.__NOTIFICATIONS__ = j.notifications||[]; } }catch{}
 }
