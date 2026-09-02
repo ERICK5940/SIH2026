@@ -113,16 +113,28 @@ export default function DashboardPage() {
     else if(od==="Assam" && dd==="Arunachal Pradesh") setSelectedRouteId("NH-157");
     else if(od==="Assam" && dd==="Nagaland") setSelectedRouteId("NH-29");
     else setSelectedRouteId("NH-37");
-    // OSRM hub-to-hub live
+    // OSRM hub-to-hub live + hub-specific alternates via intermediate hubs
     (async()=>{
+      const viaHubs = HUBS.filter(h=> h.id!==o.id && h.id!==d.id).slice(0,2);
+      const hubDist = (a:any,b:any)=>{ const toRad=(x:number)=>x*Math.PI/180; const R=6371; const dLa=toRad(b.lat-a.lat), dLo=toRad(b.lng-a.lng); const s=Math.sin(dLa/2)**2+Math.cos(toRad(a.lat))*Math.cos(toRad(b.lat))*Math.sin(dLo/2)**2; return Math.round(2*R*Math.asin(Math.sqrt(s))); };
       try{
-        const url=`https://router.project-osrm.org/route/v1/driving/${o.lng},${o.lat};${d.lng},${d.lat}?overview=false&alternatives=3`;
+        const url=`https://router.project-osrm.org/route/v1/driving/${o.lng},${o.lat};${d.lng},${d.lat}?overview=false&alternatives=2`;
         const r=await fetch(url); const j=await r.json();
-        if(j.routes?.[0]){ const main=j.routes[0]; const alts=j.routes.slice(1,3).map((rt:any,i:number)=>({id:`hub-alt-${i}`, name:`Alt via Hub ${i+1}`, distance:Math.round(rt.distance/1000), travelTime:Math.round(rt.duration/60), status: i===0?"accessible":"delayed", riskScore: 30+i*15, accessibility: 85-i*10, delayProbability: 12+i*8, weatherRisk: 10})); setHubRoute({ main: {id:"hub-main", name:`${o.name} → ${d.name}`, distance:Math.round(main.distance/1000), travelTime:Math.round(main.duration/60), status:"accessible", riskScore: 28, accessibility:90, delayProbability:10, weatherRisk:8, from:o.name, to:d.name}, alts});
+        if(j.routes?.[0]){
+          const main=j.routes[0];
+          // Build hub-specific alts via intermediate hubs (not generic Alt via Hub 1)
+          const alts = viaHubs.map((via,i)=>{
+            const d1=hubDist(o, via), d2=hubDist(via, d);
+            return {id:`hub-alt-${via.id}`, name:`Via ${via.name}`, distance: d1+d2, travelTime: Math.round((d1+d2)*1.4), status: i===0?"accessible":"delayed" as any, riskScore: 32+i*12, accessibility: 85-i*10, delayProbability: 12+i*8, weatherRisk: 9+i*2 };
+          });
+          // also add OSRM alt if exists
+          if(j.routes[1]) alts.push({id:"osrm-alt", name:`OSRM Alt ${Math.round(j.routes[1].distance/1000)}km`, distance:Math.round(j.routes[1].distance/1000), travelTime:Math.round(j.routes[1].duration/60), status:"delayed", riskScore: 45, accessibility:75, delayProbability:18, weatherRisk:11});
+          setHubRoute({ main: {id:"hub-main", name:`${o.name} → ${d.name}`, distance:Math.round(main.distance/1000), travelTime:Math.round(main.duration/60), status:"accessible", riskScore: 28, accessibility:90, delayProbability:10, weatherRisk:8, from:o.name, to:d.name}, alts});
         } else throw new Error();
       }catch{
-        // fallback Turf straight-line
-        const toRad=(x:number)=>x*Math.PI/180; const R=6371; const dLat=toRad(d.lat-o.lat), dLon=toRad(d.lng-o.lng); const a=Math.sin(dLat/2)**2+Math.cos(toRad(o.lat))*Math.cos(toRad(d.lat))*Math.sin(dLon/2)**2; const km=Math.round(2*R*Math.asin(Math.sqrt(a))); setHubRoute({ main:{id:"hub-main", name:`${o.name} → ${d.name}`, distance:km, travelTime:Math.round(km*1.4), status:"accessible", riskScore: 32, accessibility:88, delayProbability:12, weatherRisk:9, from:o.name, to:d.name}, alts:[]});
+        const km=hubDist(o,d);
+        const alts = viaHubs.map((via,i)=>{ const d1=hubDist(o,via), d2=hubDist(via,d); return {id:`via-${via.id}`, name:`Via ${via.name}`, distance:d1+d2, travelTime:Math.round((d1+d2)*1.4), status: i===0?"accessible":"delayed" as any, riskScore: 32+i*12, accessibility:85-i*10, delayProbability:12+i*8, weatherRisk:9}; });
+        setHubRoute({ main:{id:"hub-main", name:`${o.name} → ${d.name}`, distance:km, travelTime:Math.round(km*1.4), status:"accessible", riskScore: 32, accessibility:88, delayProbability:12, weatherRisk:9, from:o.name, to:d.name}, alts});
       }
     })();
   },[originHub, destHub]);
