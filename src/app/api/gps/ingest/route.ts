@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 // In-memory live store (no DB needed for demo - works without paid subscription)
 // When Supabase env is set, you can extend to push there
 const g = globalThis as any;
@@ -64,5 +65,5 @@ export async function GET() {
     // update store in place
     store.set(id, { ...v, lat, lng, currentLocation: p<0.3 ? route[0].join(",").slice(0,12) : p<0.65 ? "En route • NH" : "Near destination", updatedAt: new Date().toISOString() });
   }
-  return NextResponse.json({ live: Array.from(store.values()) });
+  return NextResponse.json({ live: Array.from(store.values()) }, { headers: { "Cache-Control": "no-store, max-age=0" } });
 }

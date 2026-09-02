@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 const g = globalThis as any;
 if (!g.__REROUTES__) g.__REROUTES__ = new Map();
 if (!g.__NOTIFICATIONS__) g.__NOTIFICATIONS__ = [];
@@ -47,7 +48,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  return NextResponse.json({ reroutes: Array.from((g.__REROUTES__ as Map<string, any>).values()), notifications: g.__NOTIFICATIONS__ });
+  return NextResponse.json({ reroutes: Array.from((g.__REROUTES__ as Map<string, any>).values()), notifications: g.__NOTIFICATIONS__ }, { headers: { "Cache-Control": "no-store, max-age=0" } });
 }
 
 // Driver accepts - removes inbox notification so no repeat
