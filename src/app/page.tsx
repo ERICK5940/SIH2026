@@ -99,17 +99,32 @@ export default function DashboardPage() {
   const [originHub, setOriginHub] = React.useState(HUBS[0].id);
   const [destHub, setDestHub] = React.useState(HUBS[5].id);
   const [commodity, setCommodity] = React.useState<"medicines"|"food"|"construction">("medicines");
+  const [hubRoute, setHubRoute] = React.useState<any>(null);
   const { t } = useTranslation();
-  // Auto wire hub pair -> NH corridor (so UI not just dummy)
+  // Hub pair -> live OSRM route (full mesh 7 hubs =21 pairs) — not just 3 NH
   React.useEffect(()=>{
-    const o = HUBS.find(h=>h.id===originHub)?.district; const d = HUBS.find(h=>h.id===destHub)?.district;
-    if(o==="Assam" && d==="Manipur") setSelectedRouteId("NH-37");
-    else if(o==="Arunachal Pradesh" && d==="Assam") setSelectedRouteId("NH-52");
-    else if(o==="Tripura" && d==="Assam") setSelectedRouteId("NH-31");
-    else if(o==="Assam" && d==="Arunachal Pradesh") setSelectedRouteId("NH-157");
-    else if(o==="Assam" && d==="Nagaland") setSelectedRouteId("NH-29");
-    else if(o==="Meghalaya" && d==="Assam") setSelectedRouteId("NH-37");
+    const o = HUBS.find(h=>h.id===originHub); const d = HUBS.find(h=>h.id===destHub);
+    if(!o||!d) return;
+    // keep NH mapping for fallback
+    const od=o.district, dd=d.district;
+    if(od==="Assam" && dd==="Manipur") setSelectedRouteId("NH-37");
+    else if(od==="Arunachal Pradesh" && dd==="Assam") setSelectedRouteId("NH-52");
+    else if(od==="Tripura" && dd==="Assam") setSelectedRouteId("NH-31");
+    else if(od==="Assam" && dd==="Arunachal Pradesh") setSelectedRouteId("NH-157");
+    else if(od==="Assam" && dd==="Nagaland") setSelectedRouteId("NH-29");
     else setSelectedRouteId("NH-37");
+    // OSRM hub-to-hub live
+    (async()=>{
+      try{
+        const url=`https://router.project-osrm.org/route/v1/driving/${o.lng},${o.lat};${d.lng},${d.lat}?overview=false&alternatives=3`;
+        const r=await fetch(url); const j=await r.json();
+        if(j.routes?.[0]){ const main=j.routes[0]; const alts=j.routes.slice(1,3).map((rt:any,i:number)=>({id:`hub-alt-${i}`, name:`Alt via Hub ${i+1}`, distance:Math.round(rt.distance/1000), travelTime:Math.round(rt.duration/60), status: i===0?"accessible":"delayed", riskScore: 30+i*15, accessibility: 85-i*10, delayProbability: 12+i*8, weatherRisk: 10})); setHubRoute({ main: {id:"hub-main", name:`${o.name} → ${d.name}`, distance:Math.round(main.distance/1000), travelTime:Math.round(main.duration/60), status:"accessible", riskScore: 28, accessibility:90, delayProbability:10, weatherRisk:8, from:o.name, to:d.name}, alts});
+        } else throw new Error();
+      }catch{
+        // fallback Turf straight-line
+        const toRad=(x:number)=>x*Math.PI/180; const R=6371; const dLat=toRad(d.lat-o.lat), dLon=toRad(d.lng-o.lng); const a=Math.sin(dLat/2)**2+Math.cos(toRad(o.lat))*Math.cos(toRad(d.lat))*Math.sin(dLon/2)**2; const km=Math.round(2*R*Math.asin(Math.sqrt(a))); setHubRoute({ main:{id:"hub-main", name:`${o.name} → ${d.name}`, distance:km, travelTime:Math.round(km*1.4), status:"accessible", riskScore: 32, accessibility:88, delayProbability:12, weatherRisk:9, from:o.name, to:d.name}, alts:[]});
+      }
+    })();
   },[originHub, destHub]);
   const liveVehiclesRaw = useLiveVehicles(2500);
   // Merge live lat/lng with full vehicle records so map knows delay/ETA/status
@@ -389,9 +404,9 @@ export default function DashboardPage() {
                       </select>
                       <span className={`ml-auto text-[10px] font-black px-2 py-1 rounded ${commodity==="medicines"?"bg-red-600 text-white":"bg-slate-700 text-white"}`}>{commodity==="medicines"?"3.5x Risk Aversion":"Standard"}</span>
                     </div>
-                    {(() => { const mult = commodity==="medicines"?3.5: commodity==="food"?1.2:1; const alts = (sampleAlternativesByRoute[selectedRouteId] || sampleAlternatives).map((a:any)=> ({...a, riskScore: Math.min(98, Math.round(a.riskScore * (mult>1 ? (a.status==="accessible"?1: mult*0.6):1)))})); return (
+                    {(() => { const mult = commodity==="medicines"?3.5: commodity==="food"?1.2:1; const baseAlts = hubRoute?.alts?.length ? hubRoute.alts : (sampleAlternativesByRoute[selectedRouteId] || sampleAlternatives); const alts = baseAlts.map((a:any)=> ({...a, riskScore: Math.min(98, Math.round(a.riskScore * (mult>1 ? (a.status==="accessible"?1: mult*0.6):1)))})); const cur = hubRoute?.main || liveRoutesBase.find((r:any)=> r.name===selectedRouteId) || liveRoutesBase[0]; return (
                     <SmartAlternateRouteEngine
-                      currentRoute={liveRoutesBase.find((r) => r.name === selectedRouteId) as any || liveRoutesBase[0] as any}
+                      currentRoute={cur as any}
                       availableAlternatives={alts}
                       weather={(liveWeatherForAlternate as any) || sampleWeather}
                       vehicleLocation={focusVehicle ? liveVehicles[focusVehicle]?.currentLocation : undefined}
