@@ -151,9 +151,10 @@ export default function DashboardPage() {
   const emergencyVehicles = React.useMemo(()=> isEmergency ? sampleVehicles.filter((v:any)=> (v.cargo==="medicines"||v.cargo==="food") && v.delayMinutes>0) : sampleVehicles, [isEmergency]);
   const liveAlerts = React.useMemo(()=>{
     const a:any[] = [];
+    const vehMap:Record<string,string>={"NH-37":"NER-1024","NH-52":"NER-1025","NH-157":"NER-1027","NH-29":"NER-1026","NH-31":"NER-1028"};
     liveRoutesBase.forEach((r:any)=>{
-      if(r.status==="blocked") a.push({ id:`a-${r.name}`, level:"critical", category:"route_blocked", title:"Route Blocked", message:`${r.name} blocked — live ${r.riskScore}%`, action:"Reroute via Alternative Corridor B", timestamp: new Date().toISOString(), routeId:r.name, vehicleId: r.name==="NH-37"?"NER-1024":r.name==="NH-157"?"NER-1027":undefined });
-      else if(r.status==="high_risk") a.push({ id:`a-${r.name}`, level:"warning", category:"weather", title:"High Risk", message:`${r.name} high risk ${r.riskScore}%`, action:"Monitor conditions", timestamp: new Date().toISOString(), routeId:r.name });
+      if(r.status==="blocked") a.push({ id:`a-${r.name}`, level:"critical", category:"route_blocked", title:"Route Blocked", message:`${r.name} blocked — live ${r.riskScore}%`, action:"Reroute via Alternative Corridor B", timestamp: new Date().toISOString(), routeId:r.name, vehicleId: vehMap[r.name] });
+      else if(r.status==="high_risk") a.push({ id:`a-${r.name}`, level:"warning", category:"weather", title:"High Risk", message:`${r.name} high risk ${r.riskScore}%`, action:"Reroute via Alternative Corridor B", timestamp: new Date().toISOString(), routeId:r.name, vehicleId: vehMap[r.name] });
     });
     if(a.length===0) a.push({ id:"1", level:"informational", category:"field_update", title:"All Clear", message:"No critical blocks — live monitoring", action:"Update dashboard", timestamp: new Date().toISOString() });
     // merge field incidents
