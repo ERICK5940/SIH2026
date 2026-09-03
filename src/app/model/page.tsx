@@ -50,10 +50,11 @@ export default function ModelLive() {
           </div>
         </div>
         <div className="bg-white border rounded p-4">
-          <h3 className="text-sm font-black">7 District Live Risk</h3>
+          <h3 className="text-sm font-black">7 District Live Risk — rain*1.8 + severity(50/30/15) +5 = %</h3>
           <div className="space-y-2 mt-2">
-            {(live?.districts||[]).slice(0,7).map((d:any)=><div key={d.name} className="flex items-center gap-2"><span className="text-xs w-36 truncate">{d.name}</span><div className="flex-1 h-2 bg-slate-200 rounded"><div className="h-full bg-orange-500" style={{width:`${Math.min(100,d.liveRisk||d.rainfall)}%`}} /></div><span className="text-xs font-bold">{d.liveRisk??d.rainfall}%</span></div>)}
+            {(live?.districts||[]).slice(0,7).map((d:any)=>{ const sevW=d.severity==="storm"?50:d.severity==="rain"?30:d.severity==="cloudy"?15:0; const calc=Math.min(95, Math.round((d.rainfall||0)*1.8 + sevW +5)); const val=d.liveRisk ?? calc; return <div key={d.name} className="flex items-center gap-2"><span className="text-xs w-36 truncate">{d.name}</span><div className="flex-1 h-2 bg-slate-200 rounded"><div className="h-full bg-orange-500" style={{width:`${val}%`}} /></div><span className="text-xs font-bold">{val}% <span className="font-normal text-[10px]">({d.rainfall}mm {d.severity})</span></span></div>;})}
           </div>
+          <p className="text-[11px] text-slate-500 mt-2">Not direct mm→% — 0.3mm Rain =0.54+30+5=35% (floor 0% when liveRisk missing, now calc shown)</p>
         </div>
         <div className="bg-white border rounded p-4">
           <h3 className="text-sm font-black">All 5 Routes — Live Inputs → Real Prediction (not showcase)</h3>
