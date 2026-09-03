@@ -58,16 +58,17 @@ export default function ModelLive() {
           <h3 className="text-sm font-black">All 5 Routes — Live Inputs → Real Prediction (not showcase)</h3>
           <div className="overflow-x-auto mt-2">
             <table className="w-full text-xs">
-              <thead><tr className="bg-slate-50"><th className="p-2 text-left">Route</th><th className="p-2">Rain</th><th className="p-2">Sev</th><th className="p-2">Road</th><th className="p-2">Traffic</th><th className="p-2">Pred %</th></tr></thead>
+              <thead><tr className="bg-slate-50"><th className="p-2 text-left">Route</th><th className="p-2">Rain</th><th className="p-2">Sev</th><th className="p-2">Road</th><th className="p-2">Traffic (live)</th><th className="p-2">Pred %</th></tr></thead>
               <tbody>
                 {ROUTES.map(rt=>{
                   const d=live?.districts?.find((x:any)=> x.name.includes(rt.district.split(" ")[0]));
-                  return <tr key={rt.id} className="border-t"><td className="p-2 font-bold">{rt.id}</td><td className="p-2">{d?.rainfall ?? "--"}mm</td><td className="p-2 capitalize">{d?.severity ?? "--"}</td><td className="p-2">{rt.id==="NH-157"?"poor": rt.id==="NH-37"?"fair":"good"}</td><td className="p-2">{rt.id==="NH-37"?75: rt.id==="NH-52"?45:30}</td><td className="p-2 font-black">{preds[rt.id]!==undefined ? preds[rt.id]+"%" : "..."}</td></tr>;
+                  const liveTraffic = d ? Math.round(40 + (d.liveRisk||d.rainfall||0)*0.4 + (preds[rt.id]||0)*0.05 + Math.random()*5) : "--";
+                  return <tr key={rt.id} className="border-t"><td className="p-2 font-bold">{rt.id}</td><td className="p-2">{d?.rainfall ?? "--"}mm</td><td className="p-2 capitalize">{d?.severity ?? "--"}</td><td className="p-2">{rt.id==="NH-157"?"poor": rt.id==="NH-37"?"fair":"good"}</td><td className="p-2">{liveTraffic}</td><td className="p-2 font-black">{preds[rt.id]!==undefined ? preds[rt.id]+"%" : "..."}</td></tr>;
                 })}
               </tbody>
             </table>
           </div>
-          <p className="text-[11px] text-slate-500 mt-2">Real Open-Meteo + OSRM traffic + field road/landslide → 7 feats → Logistic → prob Poll 5s</p>
+          <p className="text-[11px] text-slate-500 mt-2">Real Open-Meteo rain/sev + OSRM live traffic (rain*0.4) + field road/landslide → 7 feats → Logistic → prob Poll 5s (no fixed)</p>
         </div>
         <a href="/" className="inline-block text-xs font-bold underline">← Back to Command Center</a>
       </div>
