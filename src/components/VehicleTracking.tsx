@@ -76,7 +76,7 @@ export function VehicleTracking({ vehicles, onFocus, live, liveRoutes }: { vehic
                 <th className="px-2 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">ETA</th>
                 <th className="px-2 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Delay</th>
                 <th className="px-2 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Status</th>
-                <th className="px-2 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap sticky right-0 bg-slate-50 z-10 shadow-[-2px_0_4px_rgba(0,0,0,0.05)]">Focus</th>
+                <th className="px-2 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Focus</th>
               </tr>
             </thead>
             <tbody>
@@ -89,7 +89,7 @@ export function VehicleTracking({ vehicles, onFocus, live, liveRoutes }: { vehic
                   <td className="px-3 py-2.5 text-xs font-bold text-slate-900 whitespace-nowrap">{fmtHrsMins(vehicle.etaMinutes)}</td>
                   <td className="px-3 py-2.5 text-xs font-black whitespace-nowrap" style={{ color: vehicle.delayMinutes > 0 ? "#dc2626" : "#16a34a" }}>{fmtHrsMins(vehicle.delayMinutes)}</td>
                   <td className="px-3 py-2.5 whitespace-nowrap"><span className={`inline-flex px-2 py-1 rounded text-[11px] font-bold border whitespace-nowrap ${statusBadge[vehicle.status]}`}>{vehicleStatusLabels[vehicle.status]}</span></td>
-                  <td className="px-3 py-2.5 whitespace-nowrap sticky right-0 bg-white z-10 shadow-[-2px_0_4px_rgba(0,0,0,0.05)]">
+                  <td className="px-3 py-2.5 whitespace-nowrap">
                     <button onClick={() => onFocus?.(vehicle.id)} className="px-2 py-1 rounded bg-slate-900 text-white text-[11px] font-bold hover:bg-black">📍 Focus</button>
                   </td>
                 </tr>
