@@ -29,13 +29,14 @@ export async function POST(req: NextRequest) {
     const incident = {
       id: Date.now().toString(),
       ...body,
+      lifecycle: body.lifecycle || "reported",
       timestamp: new Date().toISOString(),
     };
     // Try Supabase first — retry without extra cols if schema old
     try {
       const supa = await getSupabase();
       if (supa) {
-        let { error } = await supa.from("incidents").insert({ id: incident.id, type: incident.type, description: incident.description, severity: incident.severity, accessibility_status: incident.accessibilityStatus, lat: incident.location?.latitude, lng: incident.location?.longitude, photo_url: incident.photoUrl, offline: !!incident.offline, state: incident.state, district: incident.district, road: incident.road, authority: incident.authority, role: incident.role });
+        let { error } = await supa.from("incidents").insert({ id: incident.id, type: incident.type, description: incident.description, severity: incident.severity, accessibility_status: incident.accessibilityStatus, lat: incident.location?.latitude, lng: incident.location?.longitude, photo_url: incident.photoUrl, offline: !!incident.offline, state: incident.state, district: incident.district, road: incident.road, authority: incident.authority, role: incident.role, lifecycle: incident.lifecycle });
         if (error) {
           const retry = await supa.from("incidents").insert({ id: incident.id, type: incident.type, description: incident.description, severity: incident.severity, accessibility_status: incident.accessibilityStatus, lat: incident.location?.latitude, lng: incident.location?.longitude, photo_url: incident.photoUrl, offline: !!incident.offline });
           if (!retry.error) return NextResponse.json({ ok: true, incident });
@@ -47,4 +48,16 @@ export async function POST(req: NextRequest) {
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
+}
+export async function PATCH(req: NextRequest) {
+  try {
+    const { id, lifecycle } = await req.json();
+    try {
+      const supa = await getSupabase();
+      if (supa) { const { error } = await supa.from("incidents").update({ lifecycle }).eq("id", id); if (!error) return NextResponse.json({ ok: true }); }
+    } catch {}
+    const idx = g.__INCIDENTS__.findIndex((x:any)=> x.id===id);
+    if (idx>=0) g.__INCIDENTS__[idx].lifecycle = lifecycle;
+    return NextResponse.json({ ok: true });
+  } catch (e:any){ return NextResponse.json({error:e.message},{status:500}); }
 }

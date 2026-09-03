@@ -310,6 +310,12 @@ export function IncidentDashboard() {
                   </p>
                 )}
                 {(() => { const trust = (incident.photoUrl?20:0)+(incident.state?10:0)+(incident.district?10:0)+(incident.description?.length>20?15:0)+(incident.authority?15:0)+30; const pct=Math.min(98,trust); const col=pct>=80?"bg-emerald-100 text-emerald-700":pct>=60?"bg-amber-100 text-amber-700":"bg-red-100 text-red-700"; return <span className={`inline-flex mt-2 px-2 py-0.5 rounded text-[10px] font-black border ${col}`}>Trust {pct}% {incident.authority?`• ${incident.authority}`:"• citizen"}</span>; })()}
+                <div className="mt-2 flex items-center gap-1 text-[10px] font-bold">
+                  {["reported","verified","assigned","response","resolved"].map((st,i)=>{
+                    const cur=(incident.lifecycle||"reported"); const idx=["reported","verified","assigned","response","resolved"].indexOf(cur); const done=i<=idx; return <span key={st} className={`px-1.5 py-0.5 rounded ${done?"bg-slate-900 text-white":"bg-slate-100 text-slate-500"}`}>{st}</span>;
+                  })}
+                </div>
+                {(() => { const order=["reported","verified","assigned","response","resolved"]; const cur=incident.lifecycle||"reported"; const idx=order.indexOf(cur); const next=order[idx+1]; if(!next) return <p className="text-[11px] font-black text-emerald-600 mt-1">✓ Resolved</p>; return <button onClick={async()=>{ await fetch("/api/incidents",{method:"PATCH", headers:{"Content-Type":"application/json"}, body:JSON.stringify({id: incident.id, lifecycle: next})}); window.dispatchEvent(new Event("incidents-updated")); location.reload(); }} className="mt-2 px-2 py-1 rounded bg-sky-600 text-white text-[11px] font-black">→ {next}</button>; })()}
               </div>
               <div className="w-12 h-12 rounded bg-zinc-100 flex items-center justify-center">
                 {incident.photoUrl ? (
