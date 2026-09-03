@@ -267,15 +267,16 @@ export function IncidentDashboard() {
   React.useEffect(() => {
     const load = async () => {
       try {
-        const r = await fetch("/api/incidents");
+        const r = await fetch("/api/incidents", { cache: "no-store" });
         const j = await r.json();
         if (j.incidents) setIncidents(j.incidents);
       } catch {}
     };
     load();
+    const id = setInterval(load, 4000);
     const handler = (e: CustomEvent) => setIncidents(e.detail);
     window.addEventListener("incidents-updated", handler as EventListener);
-    return () => window.removeEventListener("incidents-updated", handler as EventListener);
+    return () => { clearInterval(id); window.removeEventListener("incidents-updated", handler as EventListener); };
   }, []);
 
   return (
@@ -315,7 +316,7 @@ export function IncidentDashboard() {
                     const cur=(incident.lifecycle||"reported"); const idx=["reported","verified","assigned","response","resolved"].indexOf(cur); const done=i<=idx; return <span key={st} className={`px-1.5 py-0.5 rounded ${done?"bg-slate-900 text-white":"bg-slate-100 text-slate-500"}`}>{st}</span>;
                   })}
                 </div>
-                {(() => { const order=["reported","verified","assigned","response","resolved"]; const cur=incident.lifecycle||"reported"; const idx=order.indexOf(cur); const next=order[idx+1]; if(!next) return <p className="text-[11px] font-black text-emerald-600 mt-1">✓ Resolved</p>; return <button onClick={async(e)=>{ e.preventDefault(); await fetch("/api/incidents",{method:"PATCH", headers:{"Content-Type":"application/json"}, body:JSON.stringify({id: incident.id, lifecycle: next})}); }} className="mt-2 px-2 py-1 rounded bg-sky-600 text-white text-[11px] font-black cursor-pointer">→ {next}</button>; })()}
+                {(() => { const order=["reported","verified","assigned","response","resolved"]; const cur=incident.lifecycle||"reported"; const idx=order.indexOf(cur); const next=order[idx+1]; if(!next) return <p className="text-[11px] font-black text-emerald-600 mt-1">✓ Resolved</p>; return <button onClick={async(e)=>{ e.preventDefault(); await fetch("/api/incidents",{method:"PATCH", headers:{"Content-Type":"application/json"}, body:JSON.stringify({id: incident.id, lifecycle: next})}); try{ const r=await fetch("/api/incidents",{cache:"no-store"}); const j=await r.json(); if(j.incidents) window.dispatchEvent(new CustomEvent("incidents-updated",{detail:j.incidents})); }catch{} }} className="mt-2 px-2 py-1 rounded bg-sky-600 text-white text-[11px] font-black cursor-pointer hover:bg-sky-700">→ {next}</button>; })()}
               </div>
               <div className="w-12 h-12 rounded bg-zinc-100 flex items-center justify-center">
                 {incident.photoUrl ? (
