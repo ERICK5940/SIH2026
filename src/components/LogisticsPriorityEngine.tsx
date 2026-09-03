@@ -48,11 +48,22 @@ function fmtHrsMins(mins: number): string {
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")} hrs`;
 }
 
-export function LogisticsPriorityEngine({ vehicles }: { vehicles: VehicleRecord[] }) {
+const VEH_ROUTE_LP: Record<string,string> = {"NER-1024":"NH-37","NER-1025":"NH-52","NER-1026":"NH-29","NER-1027":"NH-157","NER-1028":"NH-31"};
+export function LogisticsPriorityEngine({ vehicles, live, liveRoutes }: { vehicles: VehicleRecord[]; live?: Record<string,any>; liveRoutes?: any[] }) {
   const priorityScores = React.useMemo(() => vehicles.map((vehicle) => {
-    const { score, label, action } = calculatePriorityScore(vehicle.cargo, vehicle.delayMinutes, vehicle.accessibility, vehicle.populationAffected);
-    return { vehicleId: vehicle.id, cargo: vehicle.cargo, delayMinutes: vehicle.delayMinutes, priorityScore: score, priorityLabel: label, recommendedAction: action };
-  }), [vehicles]);
+    const lv = live?.[vehicle.id];
+    const delay = lv?.delayMinutes ?? vehicle.delayMinutes;
+    const access = lv?.accessibility ?? vehicle.accessibility;
+    // add live route risk bonus
+    const route = VEH_ROUTE_LP[vehicle.id];
+    const lr = liveRoutes?.find((r:any)=> r.name===route);
+    const riskBonus = lr ? (lr.status==="blocked"?18 : lr.status==="high_risk"?12 : lr.status==="delayed"?6 : 0) : 0;
+    const base = calculatePriorityScore(vehicle.cargo, delay, access, vehicle.populationAffected);
+    const score = Math.min(100, base.score + riskBonus);
+    const label = score>=80?"critical":score>=60?"high":score>=40?"medium":"low";
+    const action = label==="critical"?"Immediate rerouting required — critical supply at risk":label==="high"?"Priority rerouting recommended":label==="medium"?"Monitor and plan alternate routing":"Standard monitoring sufficient";
+    return { vehicleId: vehicle.id, cargo: vehicle.cargo, delayMinutes: delay, priorityScore: score, priorityLabel: label, recommendedAction: action };
+  }), [vehicles, live, liveRoutes]);
   const sortedScores = [...priorityScores].sort((a, b) => b.priorityScore - a.priorityScore);
 
   return (

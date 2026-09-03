@@ -430,7 +430,7 @@ export default function DashboardPage() {
                     />); })()}
                   </>
                 )}
-                {aiTab==="priority" && <LogisticsPriorityEngine vehicles={emergencyVehicles} />}
+                {aiTab==="priority" && <LogisticsPriorityEngine vehicles={emergencyVehicles} live={liveVehicles} liveRoutes={liveRoutes as any} />}
               </div>
             </section>
 
