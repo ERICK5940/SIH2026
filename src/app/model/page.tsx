@@ -28,13 +28,13 @@ export default function ModelLive() {
         }
       }catch{}
     };
-    load(); const id=setInterval(load,5000); return()=>clearInterval(id);
+    load(); const id=setInterval(load,1000); return()=>clearInterval(id);
   },[]);
   return (
     <div className="min-h-screen bg-slate-50 p-4">
       <div className="max-w-5xl mx-auto space-y-4">
-        <h1 className="text-xl font-black">Model Data Flows — Live</h1>
-        <p className="text-xs text-slate-600">Inputs: rainfall, severity, landslide, flood, road, traffic, hist → Logistic 7-feature → prob • Poll 5s</p>
+        <h1 className="text-xl font-black">Model Data Flows — Live (sec-level)</h1>
+        <p className="text-xs text-slate-600">Inputs: rainfall, severity, landslide, flood, road, traffic, hist → Logistic 7-feature → prob • Poll 1s • {new Date().toLocaleTimeString("en-IN",{timeZone:"Asia/Kolkata",hour12:false})} IST</p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div className="bg-white border rounded p-3"><p className="text-xs font-bold">Rainfall (mm)</p><p className="text-2xl font-black">{live?.primary?.rainfall ?? "--"}</p><p className="text-[11px]">{live?.primary?.location}</p></div>
           <div className="bg-white border rounded p-3"><p className="text-xs font-bold">Severity</p><p className="text-lg font-black capitalize">{live?.primary?.severity}</p></div>
