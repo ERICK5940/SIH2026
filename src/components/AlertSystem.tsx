@@ -121,11 +121,7 @@ export function AlertCenter({
                 <td className="p-3 text-zinc-500 text-xs max-w-[320px] break-all whitespace-normal leading-snug">{alert.message}</td>
                 <td className="p-3">
                   {alert.action ? (
-                    alert.action.toLowerCase().includes("reroute") ? (
-                      <button onClick={() => onAction?.(alert)} className="px-3 py-1.5 rounded bg-emerald-600 text-white text-xs font-black hover:bg-emerald-700">{alert.action}</button>
-                    ) : (
-                      <span className="text-xs font-bold text-slate-700">{alert.action}</span>
-                    )
+                    <span className="text-xs font-bold text-slate-700">{alert.action}</span>
                   ) : (
                     <span className="text-zinc-400 text-xs">No action</span>
                   )}
