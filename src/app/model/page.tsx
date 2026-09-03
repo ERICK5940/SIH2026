@@ -37,11 +37,10 @@ export default function ModelLive() {
       <div className="max-w-5xl mx-auto space-y-4">
         <h1 className="text-xl font-black">Model Data Flows — Live (sec-level)</h1>
         <p className="text-xs text-slate-600" suppressHydrationWarning>Inputs: rainfall, severity, landslide, flood, road, traffic, hist → Logistic 7-feature → prob • Poll 1s • {now} IST</p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className="bg-white border rounded p-3"><p className="text-xs font-bold">Rainfall (mm)</p><p className="text-2xl font-black">{live?.primary?.rainfall ?? "--"}</p><p className="text-[11px]">{live?.primary?.location}</p></div>
-          <div className="bg-white border rounded p-3"><p className="text-xs font-bold">Severity</p><p className="text-lg font-black capitalize">{live?.primary?.severity}</p></div>
-          <div className="bg-white border rounded p-3"><p className="text-xs font-bold">Traffic (avg)</p><p className="text-lg font-black">68/100</p></div>
-          <div className="bg-white border rounded p-3"><p className="text-xs font-bold">Model</p><p className="text-xs font-bold">Logistic 7-feat 579 real 99.1%</p></div>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+          {(live?.districts||[]).slice(0,7).map((d:any)=><div key={d.name} className="bg-white border rounded p-2"><p className="text-[10px] font-bold truncate">{d.name}</p><p className="text-lg font-black">{d.rainfall ?? 0}mm</p><p className="text-[11px] capitalize">{d.severity}</p><p className="text-[10px] text-slate-500">{d.liveRisk ?? 0}% risk</p></div>)}
+          {!live?.districts && <div className="bg-white border rounded p-3"><p className="text-xs font-bold">Rainfall</p><p>--</p></div>}
+          <div className="bg-white border rounded p-2 col-span-2 md:col-span-1"><p className="text-xs font-bold">Model</p><p className="text-[11px] font-bold">Logistic 7-feat 579 real 99.1%</p><p className="text-[11px]">Traffic avg 68/100</p></div>
         </div>
         <div className="bg-white border rounded p-4">
           <h3 className="text-sm font-black">Live Rainfall (last 20 polls)</h3>
