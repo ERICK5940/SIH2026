@@ -446,7 +446,7 @@ export default function DashboardPage() {
                   <AlertCenter alerts={liveAlerts as any} onAction={handleAlertAction} />
                   {isEmergency && <p className="text-[11px] font-bold text-red-600 mt-2">⚠ EMERGENCY: showing only BLOCKED/HIGH RISK corridors + critical vehicles</p>}
                 </div>
-                <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4 overflow-hidden">
+                <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4">
                   <VehicleTracking vehicles={emergencyVehicles} onFocus={setFocusVehicle} live={liveVehicles} liveRoutes={liveRoutes as any} />
                 </div>
                 {/* EssentialSuppliesMonitor hidden for compact mode — same data as Logistics Priority, revert commit 6eb8157 to restore */}
