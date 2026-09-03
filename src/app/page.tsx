@@ -18,6 +18,7 @@ import ImpactPanel from "@/components/ImpactPanel";
 import HazardSimModal from "@/components/HazardSimModal";
 import { HUBS } from "@/lib/hubs";
 import { useTranslation } from "@/lib/i18n";
+import SupplyGapPanel from "@/components/SupplyGapPanel";
 
 const sampleRoutes = [
   { id: "1", name: "NH-37", from: "Guwahati", to: "Silchar", status: "high_risk", distance: "210", eta: "6h 30m", riskScore: 82 },
@@ -370,6 +371,8 @@ export default function DashboardPage() {
                 {!districtsExpanded && <p className="text-[11px] text-slate-500 mt-2 font-semibold">Compact: 3 lowest scores only • click Show all 7</p>}
               </div>
             </section>
+
+            <section className="grid grid-cols-12 gap-4"><div className="col-span-12"><SupplyGapPanel vehicles={sampleVehicles} incidents={incidents} /></div></section>
 
             {/* LiveGPSTracker merged into VehicleTracking — hidden for compact mode (revert commit 6eb8157 to restore) */}
 
