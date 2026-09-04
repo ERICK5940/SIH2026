@@ -261,23 +261,25 @@ export function IncidentReportForm({ onReport }: IncidentReportFormProps) {
   );
 }
 
-export function IncidentDashboard() {
-  const [incidents, setIncidents] = React.useState<any[]>([]);
+export function IncidentDashboard({ incidents: propIncidents }: { incidents?: any[] } = {}) {
+  const [incidentsInner, setIncidentsInner] = React.useState<any[]>([]);
 
   React.useEffect(() => {
+    if (propIncidents) return; // prop-driven, no self fetch
     const load = async () => {
       try {
         const r = await fetch("/api/incidents", { cache: "no-store" });
         const j = await r.json();
-        if (j.incidents) setIncidents(j.incidents);
+        if (j.incidents) setIncidentsInner(j.incidents);
       } catch {}
     };
     load();
     const id = setInterval(load, 4000);
-    const handler = (e: CustomEvent) => setIncidents(e.detail);
+    const handler = (e: CustomEvent) => setIncidentsInner(e.detail);
     window.addEventListener("incidents-updated", handler as EventListener);
     return () => { clearInterval(id); window.removeEventListener("incidents-updated", handler as EventListener); };
-  }, []);
+  }, [propIncidents]);
+  const incidents = propIncidents ?? incidentsInner;
 
   return (
     <div>

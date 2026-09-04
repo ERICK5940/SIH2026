@@ -9,13 +9,24 @@ if (!g.__INCIDENTS__) g.__INCIDENTS__ = [
 ];
 
 export async function GET() {
-  // Try Supabase first if env set — else fallback to in-memory (handles Vercel serverless restart)
+  // Single source: if Supabase enabled, always use it (seed if empty), else in-memory — no flicker
   try {
     const supa = await getSupabase();
     if (supa) {
       const { data, error } = await supa.from("incidents").select("*").order("created_at", { ascending: false }).limit(50);
       if (!error && data) {
-        const mapped = data.map((r:any)=> ({ id:r.id, type:r.type, description:r.description, severity:r.severity, accessibilityStatus:r.accessibility_status, location:{latitude:r.lat, longitude:r.lng}, photoUrl:r.photo_url, timestamp:r.created_at, state:r.state, district:r.district, road:r.road, offline:!!r.offline, authority:r.authority, role:r.role }));
+        if (data.length === 0) {
+          // seed 2 samples once
+          for (const s of g.__INCIDENTS__) {
+            await supa.from("incidents").insert({ id: s.id, type: s.type, description: s.description, severity: s.severity, accessibility_status: s.accessibilityStatus, lat: s.location.latitude, lng: s.location.longitude, offline: !!s.offline });
+          }
+          const { data: seeded } = await supa.from("incidents").select("*").order("created_at", { ascending: false }).limit(50);
+          if (seeded) {
+            const mapped = seeded.map((r:any)=> ({ id:r.id, type:r.type, description:r.description, severity:r.severity, accessibilityStatus:r.accessibility_status, location:{latitude:r.lat, longitude:r.lng}, photoUrl:r.photo_url, timestamp:r.created_at, state:r.state, district:r.district, road:r.road, offline:!!r.offline, authority:r.authority, role:r.role, lifecycle: r.lifecycle }));
+            return NextResponse.json({ incidents: mapped }, { headers: { "Cache-Control": "no-store, max-age=0" } });
+          }
+        }
+        const mapped = data.map((r:any)=> ({ id:r.id, type:r.type, description:r.description, severity:r.severity, accessibilityStatus:r.accessibility_status, location:{latitude:r.lat, longitude:r.lng}, photoUrl:r.photo_url, timestamp:r.created_at, state:r.state, district:r.district, road:r.road, offline:!!r.offline, authority:r.authority, role:r.role, lifecycle: r.lifecycle }));
         return NextResponse.json({ incidents: mapped }, { headers: { "Cache-Control": "no-store, max-age=0" } });
       }
     }

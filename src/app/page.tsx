@@ -442,7 +442,7 @@ export default function DashboardPage() {
               <div id="vehicles" className="col-span-12 lg:col-span-5 bg-white border border-slate-200 rounded-lg shadow-sm p-4 scroll-mt-20">
                 <h2 className="text-sm font-black tracking-tight mb-3">{t("FIELD INTELLIGENCE • INCIDENT REPORTS")}</h2>
                 <p className="text-[11px] font-bold tracking-widest text-slate-500 mb-3">Reports from <a href="/field" className="underline text-sky-700">/field</a> • geo-tagged + photo</p>
-                <IncidentDashboard />
+                <IncidentDashboard incidents={incidents} />
               </div>
               <div className="col-span-12 lg:col-span-7 space-y-4">
                 <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4">
