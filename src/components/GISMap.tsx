@@ -6,7 +6,7 @@ import { BRIDGES } from "@/lib/bridges";
 
 type RouteStatus = "accessible" | "delayed" | "high_risk" | "blocked" | "emergency";
 interface Route { id: string; name: string; from: string; to: string; status: RouteStatus; distance: string; eta: string; riskScore: number; }
-interface GISMapProps { routes: Route[]; districtScores: Record<string, number>; focusId?: string | null; liveVehicles?: Record<string, any>; incidents?: any[]; }
+interface GISMapProps { routes: Route[]; districtScores: Record<string, number>; focusId?: string | null; liveVehicles?: Record<string, any>; incidents?: any[]; alternateRoute?: any; }
 
 const statusColors: Record<RouteStatus, string> = { accessible: "#10b981", delayed: "#f59e0b", high_risk: "#f97316", blocked: "#ef4444", emergency: "#0ea5e9" };
 const statusLabels: Record<RouteStatus, string> = { accessible: "Accessible", delayed: "Delayed", high_risk: "High Risk", blocked: "Blocked", emergency: "Emergency" };
@@ -20,13 +20,15 @@ const routeLatLng: Record<string, [number, number][]> = {
   "NH-31": [[26.14,91.73],[25.5,91.88],[24.8,91.95],[24.35,91.95],[23.84,91.28]],
 };
 
-function LeafletMap({ routes, focusId, liveVehicles, incidents }: { routes: Route[]; focusId?: string | null; liveVehicles?: Record<string, any>; incidents?: any[] }) {
+function LeafletMap({ routes, focusId, liveVehicles, incidents, alternateRoute }: { routes: Route[]; focusId?: string | null; liveVehicles?: Record<string, any>; incidents?: any[]; alternateRoute?: any }) {
   const mapRef = React.useRef<HTMLDivElement>(null);
   const mapInstanceRef = React.useRef<any>(null);
   const leafletRef = React.useRef<any>(null);
   const vehicleLayerRef = React.useRef<any>(null);
   const droneLayerRef = React.useRef<any>(null);
   const bridgeLayerRef = React.useRef<any>(null);
+  const alternateLayerRef = React.useRef<any>(null);
+  const incidentLayerRef = React.useRef<any>(null);
 
   useEffect(() => {
     if (mapInstanceRef.current) return;
@@ -149,10 +151,42 @@ function LeafletMap({ routes, focusId, liveVehicles, incidents }: { routes: Rout
     });
   },[]);
 
+  // Landslide zones — pointer specify landslide
+  React.useEffect(()=>{
+    const map = mapInstanceRef.current; const leaflet = leafletRef.current;
+    if(!map||!leaflet) return;
+    if(!incidentLayerRef.current) incidentLayerRef.current = leaflet.layerGroup().addTo(map);
+    else incidentLayerRef.current.clearLayers();
+    if(!incidents) return;
+    incidents.forEach((inc:any)=>{
+      if(!inc.location) return;
+      const isLand = inc.type==="landslide";
+      const col = inc.accessibilityStatus==="blocked" ? "#ef4444" : isLand ? "#f97316" : "#f59e0b";
+      const icon = isLand ? "⛰️" : inc.type==="flood" ? "🌊" : "📍";
+      const label = isLand ? "LANDSLIDE ZONE" : inc.type.toUpperCase();
+      leaflet.circleMarker([inc.location.latitude, inc.location.longitude], {radius:9, color:col, fillColor:col, fillOpacity:0.85, weight:2}).addTo(incidentLayerRef.current).bindTooltip(`<b>${icon} ${label}</b><br/>${inc.description||inc.type}<br/>${inc.state||""} ${inc.district||""}`,{sticky:true});
+      leaflet.marker([inc.location.latitude, inc.location.longitude], {icon: leaflet.divIcon({html:`<div style="background:${col};color:white;font-size:9px;font-weight:900;padding:2px 5px;border-radius:4px;border:1px solid white;">${icon} ${isLand?"Landslide":"Flood"}</div>`, className:""})}).addTo(incidentLayerRef.current);
+    });
+  },[incidents]);
+
+  // Alternate route visualization — green dashed when AI recommends
+  React.useEffect(()=>{
+    const map = mapInstanceRef.current; const leaflet = leafletRef.current;
+    if(!map||!leaflet) return;
+    if(!alternateLayerRef.current) alternateLayerRef.current = leaflet.layerGroup().addTo(map);
+    else alternateLayerRef.current.clearLayers();
+    if(!alternateRoute) return;
+    const base = routeLatLng[alternateRoute.name] || routeLatLng["NH-37"];
+    if(!base) return;
+    const offset = base.map(([lat,lng]:[number,number])=>[lat+0.12, lng+0.15] as [number,number]);
+    leaflet.polyline(offset, {color:"#10b981", weight:5, opacity:0.9, dashArray:"10 6"}).addTo(alternateLayerRef.current).bindTooltip(`<b>AI Alternate: ${alternateRoute.name}</b><br/>${alternateRoute.distance}km • ${alternateRoute.status}`,{sticky:true});
+    leaflet.polyline(offset, {color:"white", weight:7, opacity:0.4}).addTo(alternateLayerRef.current);
+  },[alternateRoute]);
+
   return <div ref={mapRef} className="w-full h-[420px] bg-slate-100" />;
 }
 
-export function GISMap({ routes, focusId, liveVehicles, incidents }: GISMapProps) {
+export function GISMap({ routes, focusId, liveVehicles, incidents, alternateRoute }: GISMapProps) {
   return (
     <div className="space-y-0">
       <div className="relative bg-slate-900 rounded-lg overflow-hidden border border-slate-800">
@@ -170,7 +204,7 @@ export function GISMap({ routes, focusId, liveVehicles, incidents }: GISMapProps
             <span className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-widest text-red-400 whitespace-nowrap"><span className="h-2 w-2 rounded-full bg-red-500" /> Blocked</span>
           </div>
         </div>
-        <LeafletMap routes={routes} focusId={focusId} liveVehicles={liveVehicles} incidents={incidents} />
+        <LeafletMap routes={routes} focusId={focusId} liveVehicles={liveVehicles} incidents={incidents} alternateRoute={alternateRoute} />
         <div className="relative flex flex-wrap items-center justify-between gap-2 px-3 py-2 bg-slate-800 border-t border-white/10">
           <span className="text-[11px] font-bold tracking-widest text-white">5 CORRIDORS • 4 BRIDGES • 7 STATES OUTLINE</span>
           <span className="text-[11px] font-mono font-bold text-emerald-300">© OSM • GPS: LIVE • 🌉 4 monitored</span>
