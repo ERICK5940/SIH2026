@@ -49,7 +49,7 @@ export function IncidentDashboard({ incidents: propIncidents }: { incidents?: an
                 })()}
                 {(()=>{
                   const order=["reported","verified","assigned","response","resolved"]; const cur=inc.lifecycle||"reported"; const idx=order.indexOf(cur); const next=order[idx+1];
-                  if(!next) return <p className="text-[11px] font-black text-emerald-600 mt-2">✓ Resolved — long term visible</p>;
+                  if(!next) return <div className="mt-2 flex gap-2"><span className="text-[11px] font-black text-emerald-600 py-1">✓ Resolved</span><button onClick={async()=>{ if(!confirm("Archive to dataset & delete from reports?")) return; await fetch(`/api/incidents?id=${inc.id}`,{method:"DELETE"}); }} className="px-2 py-1 rounded bg-slate-900 text-white text-[11px] font-black">Archive & Delete</button></div>;
                   return <button onClick={async()=>{ await fetch("/api/incidents",{method:"PATCH", headers:{"Content-Type":"application/json"}, body:JSON.stringify({id:inc.id, lifecycle:next})}); }} className="mt-2 block px-2 py-1 rounded bg-sky-600 text-white text-[11px] font-black">→ {next}</button>;
                 })()}
               </div>

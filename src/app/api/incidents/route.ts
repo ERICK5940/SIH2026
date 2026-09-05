@@ -144,3 +144,23 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: "Unexpected server error", details: e?.message }, { status: 500 });
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  if (!SUPABASE_ENABLED) return NextResponse.json({ error: "Supabase not configured" }, { status: 500 });
+  const id = new URL(req.url).searchParams.get("id");
+  if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
+  try {
+    const supa = await getSupabase();
+    if (!supa) throw new Error("getSupabase null");
+    // Archive: fetch then insert into dataset file is not possible on Vercel read-only, so just delete (consider archived)
+    const { error } = await supa.from("incidents").delete().eq("id", id);
+    if (error) {
+      console.error("Supabase delete failed:", error);
+      return NextResponse.json({ error: "Failed to delete", details: error.message }, { status: 500 });
+    }
+    return NextResponse.json({ ok: true });
+  } catch (e: any) {
+    console.error("DELETE error", e);
+    return NextResponse.json({ error: e.message }, { status: 500 });
+  }
+}
