@@ -43,6 +43,14 @@ create table if not exists incidents (
   lifecycle text default 'reported',
   created_at timestamp with time zone default now()
 );
+-- Backward-compat for DBs created before 2026-09-03 schema update:
+alter table incidents add column if not exists photo_url text;
+alter table incidents add column if not exists offline boolean default false;
+alter table incidents add column if not exists state text;
+alter table incidents add column if not exists district text;
+alter table incidents add column if not exists road text;
+alter table incidents add column if not exists authority text;
+alter table incidents add column if not exists role text;
 alter table incidents add column if not exists lifecycle text default 'reported';
 
 -- Enable Realtime (Supabase free includes it)

@@ -92,7 +92,8 @@ export default function DashboardPage() {
   const [focusVehicle, setFocusVehicle] = React.useState<string | null>(null);
   const [liveWeather, setLiveWeather] = React.useState<any>(null);
   const [liveDistricts, setLiveDistricts] = React.useState<Record<string, any>>({});
-  const [incidents, setIncidents] = React.useState<any[]>(sampleIncidents);
+  const [incidents, setIncidents] = React.useState<any[]>([]); // Start empty, will load from Supabase — single source of truth, no sample flicker
+  const [incidentsSync, setIncidentsSync] = React.useState<"idle"|"syncing"|"error">("idle");
   const [selectedRouteId, setSelectedRouteId] = React.useState<string>("NH-37");
   const [aiTab, setAiTab] = React.useState<"predict"|"alternate"|"priority">("predict");
   const [districtsExpanded, setDistrictsExpanded] = React.useState(false);
@@ -208,14 +209,32 @@ export default function DashboardPage() {
     return () => clearInterval(id);
   }, []);
 
-  // Load incidents poll 5s no-store so field report appears without hard refresh
+  // Load incidents poll 5s no-store — single Supabase source, never wipe valid state with empty/error
   React.useEffect(() => {
     const loadIncidents = async () => {
+      setIncidentsSync("syncing");
       try {
         const r = await fetch("/api/incidents", { cache: "no-store" });
+        if (!r.ok) {
+          console.error("Incidents sync failed:", r.status);
+          const err = await r.json().catch(() => ({}));
+          console.error(err);
+          setIncidentsSync("error");
+          return; // keep current incidents
+        }
         const j = await r.json();
-        if (j.incidents) setIncidents(j.incidents);
-      } catch {}
+        if (!Array.isArray(j.incidents)) {
+          console.error("Invalid incidents payload", j);
+          setIncidentsSync("error");
+          return;
+        }
+        setIncidents(j.incidents);
+        setIncidentsSync("idle");
+      } catch (e) {
+        console.error("Incidents sync error", e);
+        setIncidentsSync("error");
+        // keep current incidents
+      }
     };
     loadIncidents();
     const id = setInterval(loadIncidents, 5000);
@@ -440,7 +459,12 @@ export default function DashboardPage() {
             {/* ROW 4: FIELD INTELLIGENCE + ALERTS - form removed, dedicated /field page is source */}
             <section id="alerts" className="grid grid-cols-12 gap-4 scroll-mt-20">
               <div id="vehicles" className="col-span-12 lg:col-span-5 bg-white border border-slate-200 rounded-lg shadow-sm p-4 scroll-mt-20">
-                <h2 className="text-sm font-black tracking-tight mb-3">{t("FIELD INTELLIGENCE • INCIDENT REPORTS")}</h2>
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-sm font-black tracking-tight">{t("FIELD INTELLIGENCE • INCIDENT REPORTS")}</h2>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${incidentsSync==="syncing" ? "bg-sky-100 text-sky-700" : incidentsSync==="error" ? "bg-red-100 text-red-700" : "bg-emerald-100 text-emerald-700"}`}>
+                    {incidentsSync==="syncing" ? "Syncing…" : incidentsSync==="error" ? "Sync error — keeping data" : `${incidents.length} reports`}
+                  </span>
+                </div>
                 <p className="text-[11px] font-bold tracking-widest text-slate-500 mb-3">Reports from <a href="/field" className="underline text-sky-700">/field</a> • geo-tagged + photo</p>
                 <IncidentDashboard incidents={incidents} />
               </div>
