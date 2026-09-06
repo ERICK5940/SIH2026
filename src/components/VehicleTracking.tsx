@@ -67,13 +67,12 @@ export function VehicleTracking({ vehicles, onFocus, live, liveRoutes }: { vehic
       <div className="overflow-x-auto -mx-4 px-4">
         <div className="min-w-[800px] rounded-lg border border-slate-200 overflow-hidden">
           <table className="w-full text-left">
-            <colgroup><col style={{width:"95px"}}/><col style={{width:"150px"}}/><col style={{width:"100px"}}/><col style={{width:"130px"}}/><col style={{width:"85px"}}/><col style={{width:"80px"}}/><col style={{width:"100px"}}/><col style={{width:"80px"}}/></colgroup>
+            <colgroup><col style={{width:"95px"}}/><col style={{width:"160px"}}/><col style={{width:"110px"}}/><col style={{width:"90px"}}/><col style={{width:"85px"}}/><col style={{width:"100px"}}/><col style={{width:"85px"}}/></colgroup>
             <thead>
               <tr className="bg-slate-50 border-b border-slate-200">
                 <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Vehicle</th>
                 <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Route</th>
                 <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Cargo</th>
-                <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Destination</th>
                 <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">ETA</th>
                 <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Delay</th>
                 <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Status</th>
@@ -86,7 +85,6 @@ export function VehicleTracking({ vehicles, onFocus, live, liveRoutes }: { vehic
                   <td className="px-3 py-2.5 font-black text-slate-900 text-xs whitespace-nowrap">{vehicle.id}</td>
                   <td className="px-3 py-2.5 whitespace-nowrap">{(() => { const rn = VEHICLE_ROUTE[vehicle.id]; const lr = rn ? routeMap[rn] : null; const st = lr ? lr.status : null; const label = st ? st.toUpperCase().replace("_"," ") : null; const col = st ? (LIVE_STATUS_COLOR[st]||"#6b7280") : "#6b7280"; return rn ? <span className="inline-flex px-2 py-1 rounded text-[10px] font-black border border-white shadow-sm text-white whitespace-nowrap" style={{background: col}} title={label||rn}>{rn} • {label||"—"}</span> : <span className="text-[11px] text-slate-400">—</span>; })()}</td>
                   <td className="px-3 py-2.5 whitespace-nowrap"><span className={`inline-flex px-2 py-1 rounded text-[11px] font-bold border whitespace-nowrap ${cargoBadge[vehicle.cargo]}`}>{vehicle.cargo}</span></td>
-                  <td className="px-3 py-2.5 text-xs font-semibold text-slate-700 whitespace-nowrap max-w-[110px] truncate">{vehicle.destination}</td>
                   <td className="px-3 py-2.5 text-xs font-bold text-slate-900 whitespace-nowrap">{fmtHrsMins(vehicle.etaMinutes)}</td>
                   <td className="px-3 py-2.5 text-xs font-black whitespace-nowrap" style={{ color: vehicle.delayMinutes > 0 ? "#dc2626" : "#16a34a" }}>{fmtHrsMins(vehicle.delayMinutes)}</td>
                   <td className="px-3 py-2.5 whitespace-nowrap"><span className={`inline-flex px-2 py-1 rounded text-[11px] font-bold border whitespace-nowrap ${statusBadge[vehicle.status]}`}>{vehicleStatusLabels[vehicle.status]}</span></td>
