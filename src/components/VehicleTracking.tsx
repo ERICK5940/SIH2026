@@ -64,10 +64,10 @@ export function VehicleTracking({ vehicles, onFocus, live, liveRoutes }: { vehic
         <h2 className="text-sm font-black tracking-tight text-slate-900">Vehicle Tracking — LIVE</h2>
         <span className="text-[11px] font-bold tracking-widest bg-emerald-600 text-white px-2 py-1 rounded animate-pulse">{display.length} LIVE</span>
       </div>
-      <div className="overflow-x-auto -mx-4 px-4">
-        <div className="min-w-[800px] rounded-lg border border-slate-200 overflow-hidden">
+      <div className="-mx-4 px-4">
+        <div className="w-full rounded-lg border border-slate-200 overflow-hidden">
           <table className="w-full text-left">
-            <colgroup><col style={{width:"95px"}}/><col style={{width:"160px"}}/><col style={{width:"110px"}}/><col style={{width:"90px"}}/><col style={{width:"85px"}}/><col style={{width:"100px"}}/><col style={{width:"85px"}}/></colgroup>
+            <colgroup><col style={{width:"85px"}}/><col style={{width:"145px"}}/><col style={{width:"95px"}}/><col style={{width:"75px"}}/><col style={{width:"75px"}}/><col style={{width:"90px"}}/><col style={{width:"75px"}}/></colgroup>
             <thead>
               <tr className="bg-slate-50 border-b border-slate-200">
                 <th className="px-3 py-2 text-[11px] font-black tracking-widest text-slate-600 whitespace-nowrap">Vehicle</th>
