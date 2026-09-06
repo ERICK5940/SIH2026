@@ -53,15 +53,18 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  // advance each vehicle a tiny step (~0.007 per ~2.5s ≈ 40km/h, no teleport — bounce back, not jump)
+  // time-based 40km/h (not per-request count) — smooth, no teleport even with many pollers
   const nowMs = Date.now();
+  const lastTick = (g.__GPS_LAST_TICK__ ??= nowMs);
+  const elapsedSec = Math.min(10, (nowMs - lastTick) / 1000); // cap 10s
+  g.__GPS_LAST_TICK__ = nowMs;
+  const delta = elapsedSec * 0.0028; // 0.007 per 2.5s = 0.0028 per sec ≈ 40km/h
   for(const [id, v] of store.entries()){
     const route = ROUTES[id]; if(!route) continue;
-    // if vehicle was rerouted, keep on its new assignedRoute text but still follow original geometry for demo (no break)
     const lastUpdate = new Date(v.updatedAt).getTime();
-    if(nowMs - lastUpdate < 30000 && v._real) continue; // real GPS recently, don't simulate
+    if(nowMs - lastUpdate < 30000 && v._real) continue;
     let p = pg.get(id) ?? 0; let dir = pgDir.get(id) ?? 1;
-    p += dir * 0.007; // ~40km/h
+    p += dir * delta;
     if(p>=0.99){ p=0.99; dir=-1; } else if(p<=0){ p=0; dir=1; }
     pg.set(id, p); pgDir.set(id, dir);
     const [lat,lng]=posAt(route, p);
