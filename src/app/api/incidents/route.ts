@@ -45,11 +45,12 @@ export async function GET() {
       console.error("Supabase incidents SELECT failed:", error);
       return NextResponse.json({ error: "Failed to fetch incidents", details: error.message }, { status: 500, headers: { "Cache-Control": "no-store, max-age=0" } });
     }
-    // Seed 2 demo incidents if table empty so ImpactPanel has data to show affected count changing
+    // Seed 2 demo incidents if table empty so ImpactPanel has data to show affected count changing — one on vehicle travel path
     if ((data ?? []).length === 0) {
       const samples = [
         { id: "1", type: "landslide", description: "Major landslide reported on NH-37", severity: "high", accessibility_status: "blocked", lat: 26.2, lng: 92.9, offline: false, lifecycle: "reported" },
         { id: "2", type: "flood", description: "Heavy rainfall causing flooding in lower Assam", severity: "medium", accessibility_status: "delayed", lat: 26.1, lng: 91.7, offline: false, lifecycle: "reported" },
+        { id: "3", type: "landslide", description: "Landslide on NH-37 travel corridor (vehicle path)", severity: "high", accessibility_status: "blocked", lat: 25.9, lng: 92.3, offline: false, lifecycle: "reported" },
       ];
       for (const s of samples) await supa.from("incidents").upsert(s, { onConflict: "id" });
       const { data: seeded } = await supa.from("incidents").select("*").order("created_at", { ascending: false }).limit(50);
