@@ -25,7 +25,6 @@ function LeafletMap({ routes, focusId, liveVehicles, incidents, alternateRoute }
   const mapInstanceRef = React.useRef<any>(null);
   const leafletRef = React.useRef<any>(null);
   const vehicleLayerRef = React.useRef<any>(null);
-  const droneLayerRef = React.useRef<any>(null);
   const bridgeLayerRef = React.useRef<any>(null);
   const alternateLayerRef = React.useRef<any>(null);
   const incidentLayerRef = React.useRef<any>(null);
@@ -131,24 +130,7 @@ function LeafletMap({ routes, focusId, liveVehicles, incidents, alternateRoute }
     }
   },[liveVehicles, focusId]);
 
-  // Drone corridor 30km when blocked — different vs SHIELD
-  React.useEffect(()=>{
-    const map = mapInstanceRef.current; const leaflet = leafletRef.current;
-    if(!map||!leaflet) return;
-    if(!droneLayerRef.current) droneLayerRef.current = leaflet.layerGroup().addTo(map);
-    else droneLayerRef.current.clearLayers();
-    if(!incidents || !incidents.length) return;
-    const hav=(a:number,b:number,c:number,d:number)=>{ const R=6371; const dLa=(c-a)*Math.PI/180; const dLo=(d-b)*Math.PI/180; const s=Math.sin(dLa/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dLo/2)**2; return 2*R*Math.asin(Math.sqrt(s)); };
-    incidents.filter((inc:any)=> inc.accessibilityStatus==="blocked" && inc.location).slice(0,2).forEach((inc:any)=>{
-      const {latitude, longitude} = inc.location;
-      // drone range 30km blue dashed
-      leaflet.circle([latitude, longitude], {radius:30000, color:"#0ea5e9", fillColor:"#0ea5e9", fillOpacity:0.12, weight:2, dashArray:"6 6"}).addTo(droneLayerRef.current).bindTooltip(`Drone 30km • ${inc.type} blocked`,{sticky:true});
-      // nearest hub arc
-      let best=HUBS[0]; let bd=Infinity; for(const h of HUBS){ const d=hav(latitude,longitude,h.lat,h.lng); if(d<bd){bd=d; best=h;} }
-      leaflet.polyline([[latitude,longitude],[best.lat,best.lng]], {color:"#0ea5e9", weight:3, opacity:0.9, dashArray:"8 8"}).addTo(droneLayerRef.current).bindTooltip(`Drone: ${best.name} → incident ${Math.round(bd)}km 12kg 18min`,{sticky:true});
-      leaflet.marker([best.lat,best.lng], {icon: leaflet.divIcon({html:`<div style="background:#0ea5e9;color:white;font-size:9px;font-weight:900;padding:2px 5px;border-radius:4px;">🚁 ${best.name}</div>`, className:""})}).addTo(droneLayerRef.current);
-    });
-  },[incidents]);
+  // Drone layer removed for longer 100km routes (as requested) — longer distance not suitable for 30km drone
 
   // Bridge monitoring layer — always visible
   React.useEffect(()=>{
@@ -205,7 +187,7 @@ export function GISMap({ routes, focusId, liveVehicles, incidents, alternateRout
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-3 py-2.5 bg-slate-900 border-b border-white/10">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-            <span className="text-[11px] font-black tracking-widest text-white whitespace-nowrap">NER • EXACT OUTLINE • LIVE GPS • 🚁 DRONE READY</span>
+            <span className="text-[11px] font-black tracking-widest text-white whitespace-nowrap">NER • EXACT OUTLINE • LIVE GPS</span>
             <span className="text-[11px] font-bold px-2.5 py-1 rounded bg-white text-slate-900 whitespace-nowrap shadow-sm">7 STATES • OSM • LIVE</span>
             {focusId && <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-500 text-white whitespace-nowrap">FOCUS: {focusId}</span>}
           </div>
