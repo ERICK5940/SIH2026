@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { affectedVehicles, nearestHubs } from "@/lib/spatial";
 import { useTranslation } from "@/lib/i18n";
 
