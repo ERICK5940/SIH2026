@@ -53,20 +53,19 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  // time-based 40km/h (not per-request count) — smooth, no teleport even with many pollers
+  // deterministic time-based 40km/h — same across Vercel instances, no teleport, staggered per vehicle
   const nowMs = Date.now();
-  const lastTick = (g.__GPS_LAST_TICK__ ??= nowMs);
-  const elapsedSec = Math.min(10, (nowMs - lastTick) / 1000); // cap 10s
-  g.__GPS_LAST_TICK__ = nowMs;
-  const delta = elapsedSec * 0.0028; // 0.007 per 2.5s = 0.0028 per sec ≈ 40km/h
+  const cycleMs = 600000; // 10 min per full route
+  const baseT = (nowMs % cycleMs) / cycleMs; // 0..1 deterministic
   for(const [id, v] of store.entries()){
     const route = ROUTES[id]; if(!route) continue;
     const lastUpdate = new Date(v.updatedAt).getTime();
     if(nowMs - lastUpdate < 30000 && v._real) continue;
-    let p = pg.get(id) ?? 0; let dir = pgDir.get(id) ?? 1;
-    p += dir * delta;
-    if(p>=0.99){ p=0.99; dir=-1; } else if(p<=0){ p=0; dir=1; }
-    pg.set(id, p); pgDir.set(id, dir);
+    // stagger 5 vehicles 0.2 offset so not all together
+    const offset = (parseInt(id.slice(-1),10) * 0.17) % 1;
+    const t = (baseT + offset) % 1;
+    // bounce 0→1→0 using tri wave
+    const p = t < 0.5 ? t*2 : 2 - t*2; // 0→1→0 smooth
     const [lat,lng]=posAt(route, p);
     // update store in place
     store.set(id, { ...v, lat, lng, currentLocation: p<0.3 ? route[0].join(",").slice(0,12) : p<0.65 ? "En route • NH" : "Near destination", updatedAt: new Date().toISOString() });
