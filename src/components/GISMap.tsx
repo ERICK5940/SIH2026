@@ -116,7 +116,19 @@ function LeafletMap({ routes, focusId, liveVehicles, incidents, alternateRoute }
       m.bindTooltip(`<b>${v.id} • ${v._route||""}</b> ${v.cargo||""}<br/>on <b>${v._route||""}</b> • ${fmt(v.etaMinutes||0)} • ${v.delayMinutes?fmt(v.delayMinutes)+" delay":"On time"}<br/>${v.status}`,{sticky:true});
       if(isFocused) m.openTooltip();
     });
-    if(focusId){ const f=toShow.find((v:any)=>v.id===focusId); if(f) map.flyTo([f.lat,f.lng],9,{duration:0.8}); }
+    // fly only when focus changes, not every 2.5s live tick (prevents shake)
+    if(focusId){
+      const f=toShow.find((v:any)=>v.id===focusId);
+      if(f && (GISMap as any)._lastFocus !== focusId){
+        (GISMap as any)._lastFocus = focusId;
+        map.flyTo([f.lat,f.lng],9,{duration:0.8});
+      } else if(f && (GISMap as any)._lastFocus === focusId){
+        // gentle pan without shake, no fly
+        map.panTo([f.lat,f.lng], {animate:true, duration:0.5});
+      }
+    } else {
+      (GISMap as any)._lastFocus = null;
+    }
   },[liveVehicles, focusId]);
 
   // Drone corridor 30km when blocked — different vs SHIELD
