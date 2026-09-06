@@ -14,7 +14,7 @@ export default function ImpactPanel({ incidents, liveVehicles }: { incidents: an
     return { aff, hubs, pop };
   }, [last, liveVehicles]);
 
-  if (!last) return null;
+  if (!last) return <div className="bg-white border border-slate-200 rounded-lg p-3"><h3 className="text-xs font-black tracking-widest">{t("IMPACT ANALYSIS • TURF BUFFER 80KM")}</h3><p className="text-[11px] text-slate-500 mt-1">No incidents yet — demo: 0 affected, 0 pop, nearest hub Guwahati</p><div className="grid grid-cols-3 gap-2 mt-3"><div className="bg-slate-50 border rounded p-2 text-center"><p className="text-[11px] font-bold">Affected vehicles</p><p className="text-lg font-black">0</p></div><div className="bg-slate-50 border rounded p-2 text-center"><p className="text-[11px] font-bold">Population affected</p><p className="text-lg font-black">0</p></div><div className="bg-slate-50 border rounded p-2 text-center"><p className="text-[11px] font-bold">Nearest safe hubs (3)</p><p className="text-[11px]">Guwahati • Shillong • Dibrugarh</p></div></div></div>;
   if (!impact) return <div className="text-xs text-zinc-500 p-3">No location for impact</div>;
 
   return (
