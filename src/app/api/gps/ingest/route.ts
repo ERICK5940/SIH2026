@@ -7,13 +7,13 @@ const g = globalThis as any;
 if (!g.__LIVE_VEHICLES__) g.__LIVE_VEHICLES__ = new Map();
 const store: Map<string, any> = g.__LIVE_VEHICLES__;
 
-// 5 NER corridors as waypoint polylines (no teleport, smooth interpolate)
+// 5 NER corridors as waypoint polylines — dense points for real road-like movement (no 2-point teleport)
 const ROUTES: Record<string, [number,number][]> = {
-  "NER-1024": [[26.14,91.73],[25.9,92.3],[25.77,93.17],[25.2,92.9],[24.83,92.80]], // NH-37 Guwahati->Silchar via Lumding
-  "NER-1025": [[27.48,94.91],[27.5,95.1],[27.49,95.37]], // NH-52 Dibrugarh->Tinsukia
-  "NER-1026": [[26.75,94.21],[26.55,94.35],[26.32,94.52]], // NH-29 Jorhat->Mokokchung
-  "NER-1027": [[26.63,92.80],[26.85,93.2],[27.08,93.62]], // NH-157 Tezpur->Itanagar
-  "NER-1028": [[26.2,92.9],[25.5,92.5],[24.5,92.0],[23.83,91.28]], // NH-31 Assam->Tripura
+  "NER-1024": [[26.1445,91.736],[26.08,91.95],[25.95,92.25],[25.88,92.60],[25.77,93.17],[25.55,93.35],[25.30,93.05],[25.05,92.88],[24.83,92.80]], // NH-37 Guwahati->Silchar via Lumding (9 pts)
+  "NER-1025": [[27.48,94.91],[27.55,95.02],[27.62,95.15],[27.68,95.28],[27.49,95.37]], // NH-52 Dibrugarh->Tinsukia (5 pts)
+  "NER-1026": [[26.75,94.21],[26.68,94.28],[26.55,94.35],[26.42,94.44],[26.32,94.52]], // NH-29 Jorhat->Mokokchung (5 pts)
+  "NER-1027": [[26.63,92.80],[26.75,93.05],[26.88,93.30],[27.00,93.48],[27.08,93.62]], // NH-157 Tezpur->Itanagar (5 pts)
+  "NER-1028": [[26.20,92.90],[25.95,92.75],[25.55,92.50],[25.10,92.25],[24.60,91.95],[23.83,91.28]], // NH-31 Assam->Tripura (6 pts)
 };
 // per-vehicle progress 0..1, persisted in global so no reset on reload
 const pg: Map<string, number> = (g.__GPS_PROGRESS__ ??= new Map());
