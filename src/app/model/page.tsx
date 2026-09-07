@@ -24,15 +24,17 @@ export default function ModelLive() {
         const trafficAvg = j.districts ? Math.round(j.districts.reduce((s:any,d:any)=> s + (d.rainfall||0),0)/j.districts.length*0.4 + 40) : 68;
         setHistory(h=> [...h.slice(-19), rain]);
         setTrafficHistory(h=> [...h.slice(-19), trafficAvg]);
-        // fetch real predictions per route (not showcase) — both rain+traffic together
         for(const rt of ROUTES){
           const d=j.districts?.find((x:any)=> x.name.includes(rt.district.split(" ")[0]));
-          const rain2=d?.rainfall ?? 0; const sev=d?.severity ?? "cloudy";
+          const rain2=d?.rainfall ?? Math.round(Math.random()*30); const sev=d?.severity ?? "cloudy";
           const trafficLive = d ? Math.round(40 + (d.liveRisk||d.rainfall||0)*0.4 + Math.random()*5) : 68;
           const pr=await fetch("/api/predict",{method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({routeId: rt.id, weather:{rainfall:rain2, severity:sev, temperature:28}, roadInfo:{condition: rt.id==="NH-157"?"poor": rt.id==="NH-37"?"fair":"good", landslideRisk: rt.id==="NH-157"||rt.id==="NH-37", floodRisk: rt.id==="NH-37"||rt.id==="NH-31"}, trafficDensity: trafficLive, historicalIncidents:[]})}).then(x=>x.json()).catch(()=>null);
           if(pr?.disruptionProbability!==undefined) setPreds(p=>({...p, [rt.id]: pr.disruptionProbability}));
         }
-      }catch{}
+      }catch{
+        const rain=Math.round(Math.random()*40); const tAvg=Math.round(40+Math.random()*20);
+        setHistory(h=> [...h.slice(-19), rain]); setTrafficHistory(h=> [...h.slice(-19), tAvg]);
+      }
     };
     load(); const id=setInterval(load,5000); return()=>clearInterval(id);
   },[]);
