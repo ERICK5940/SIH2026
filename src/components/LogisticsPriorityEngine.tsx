@@ -49,6 +49,7 @@ function fmtHrsMins(mins: number): string {
 }
 
 const VEH_ROUTE_LP: Record<string,string> = {"NER-1024":"NH-37","NER-1025":"NH-52","NER-1026":"NH-29","NER-1027":"NH-157","NER-1028":"NH-31"};
+const ALT_FOR_ROUTE: Record<string,string> = {"NH-37":"Brahmaputra South Bypass (via Lumding)","NH-52":"North Bank via Dhemaji","NH-157":"Bomdila Hill Bypass","NH-29":"Mariani Diversion","NH-31":"Karimganj Bypass"};
 export function LogisticsPriorityEngine({ vehicles, live, liveRoutes }: { vehicles: VehicleRecord[]; live?: Record<string,any>; liveRoutes?: any[] }) {
   const priorityScores = React.useMemo(() => vehicles.map((vehicle) => {
     const lv = live?.[vehicle.id];
@@ -98,7 +99,7 @@ export function LogisticsPriorityEngine({ vehicles, live, liveRoutes }: { vehicl
                   <div className="flex items-center gap-2">
                     <span className="flex-1">{s.recommendedAction}</span>
                     {(s.priorityLabel==="critical"||s.priorityLabel==="high") && (
-                      <button onClick={async()=>{await fetch("/api/reroute",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({vehicleId:s.vehicleId, from:"NH-37", to:"Brahmaputra South Bypass (via Lumding)", reason:`${s.priorityLabel} ${s.cargo} ${s.priorityScore}`})}); alert(`✓ Reroute → ${s.vehicleId}\nDriver notified via PWA push`);}} className="shrink-0 px-2 py-1 rounded bg-emerald-600 text-white text-[11px] font-black hover:bg-emerald-700">Reroute</button>
+                      <button onClick={async()=>{const route=VEH_ROUTE_LP[s.vehicleId]||"NH-37"; const to=ALT_FOR_ROUTE[route]||"Brahmaputra South Bypass (via Lumding)"; await fetch("/api/reroute",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({vehicleId:s.vehicleId, from:route, to, reason:`${s.priorityLabel} ${s.cargo} ${s.priorityScore}`})}); alert(`✓ Reroute → ${s.vehicleId} ${route} → ${to}\nDriver notified via PWA push`);}} className="shrink-0 px-2 py-1 rounded bg-emerald-600 text-white text-[11px] font-black hover:bg-emerald-700">Reroute</button>
                     )}
                   </div>
                 </td>
@@ -123,7 +124,7 @@ export function LogisticsPriorityEngine({ vehicles, live, liveRoutes }: { vehicl
             </div>
             <p className="text-xs font-semibold text-slate-600 mt-2 leading-snug">{s.recommendedAction}</p>
             {(s.priorityLabel==="critical"||s.priorityLabel==="high") && (
-              <button onClick={async()=>{await fetch("/api/reroute",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({vehicleId:s.vehicleId, from:"NH-37", to:"Brahmaputra South Bypass", reason:`${s.priorityLabel}`})}); alert(`✓ Reroute → ${s.vehicleId}`);}} className="mt-2 w-full py-1.5 rounded bg-emerald-600 text-white text-xs font-black">Reroute</button>
+              <button onClick={async()=>{const route=VEH_ROUTE_LP[s.vehicleId]||"NH-37"; const to=ALT_FOR_ROUTE[route]||"Brahmaputra South Bypass"; await fetch("/api/reroute",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({vehicleId:s.vehicleId, from:route, to, reason:`${s.priorityLabel}`})}); alert(`✓ Reroute → ${s.vehicleId} ${route} → ${to}`);}} className="mt-2 w-full py-1.5 rounded bg-emerald-600 text-white text-xs font-black">Reroute</button>
             )}
           </div>
         ))}

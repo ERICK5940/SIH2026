@@ -177,8 +177,11 @@ export default function DashboardPage() {
   }, [liveRoutesBase, incidents]);
   const handleAlertAction = async (alert:any)=>{
     if(alert.action?.toLowerCase().includes("reroute") && alert.vehicleId){
-      await fetch("/api/reroute",{method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({vehicleId: alert.vehicleId, from: alert.routeId, to: "Brahmaputra South Bypass (via Lumding)", reason: alert.title})});
-      alert(`✓ Reroute sent to ${alert.vehicleId} for ${alert.routeId}`);
+      // send actual Smart Alternate recommended for that route (hub-aware if exists)
+      const alts = hubRoute?.alts?.length ? hubRoute.alts : (sampleAlternativesByRoute[alert.routeId] || sampleAlternatives);
+      const to = (alts[0] as any)?.name || "Brahmaputra South Bypass (via Lumding)";
+      await fetch("/api/reroute",{method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({vehicleId: alert.vehicleId, from: alert.routeId, to, reason: alert.title})});
+      alert(`✓ Reroute sent to ${alert.vehicleId} for ${alert.routeId} → ${to}`);
     }
   };
   // Memoize weather objects to prevent predictor flicker (new object ref every render)
