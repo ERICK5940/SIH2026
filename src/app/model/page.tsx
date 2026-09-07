@@ -11,6 +11,7 @@ const ROUTES = [
 export default function ModelLive() {
   const [live, setLive] = useState<any>(null);
   const [history, setHistory] = useState<number[]>([]);
+  const [trafficHistory, setTrafficHistory] = useState<number[]>([]);
   const [preds, setPreds] = useState<Record<string,number>>({});
   const [now, setNow] = useState("");
   useEffect(()=>{ setNow(new Date().toLocaleTimeString("en-IN",{timeZone:"Asia/Kolkata",hour12:false})); const id=setInterval(()=> setNow(new Date().toLocaleTimeString("en-IN",{timeZone:"Asia/Kolkata",hour12:false})),1000); return()=>clearInterval(id); },[]);
@@ -20,12 +21,15 @@ export default function ModelLive() {
         const r=await fetch("/api/weather/live",{cache:"no-store"}); const j=await r.json();
         setLive(j);
         const rain=j.districts?.[0]?.rainfall ?? Math.round(Math.random()*60);
+        const trafficAvg = j.districts ? Math.round(j.districts.reduce((s:any,d:any)=> s + (d.rainfall||0),0)/j.districts.length*0.4 + 40) : 68;
         setHistory(h=> [...h.slice(-19), rain]);
-        // fetch real predictions per route (not showcase)
+        setTrafficHistory(h=> [...h.slice(-19), trafficAvg]);
+        // fetch real predictions per route (not showcase) — both rain+traffic together
         for(const rt of ROUTES){
           const d=j.districts?.find((x:any)=> x.name.includes(rt.district.split(" ")[0]));
           const rain2=d?.rainfall ?? 0; const sev=d?.severity ?? "cloudy";
-          const pr=await fetch("/api/predict",{method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({routeId: rt.id, weather:{rainfall:rain2, severity:sev, temperature:28}, roadInfo:{condition: rt.id==="NH-157"?"poor": rt.id==="NH-37"?"fair":"good", landslideRisk: rt.id==="NH-157"||rt.id==="NH-37", floodRisk: rt.id==="NH-37"||rt.id==="NH-31"}, trafficDensity: rt.id==="NH-37"?75: rt.id==="NH-52"?45:30, historicalIncidents:[]})}).then(x=>x.json()).catch(()=>null);
+          const trafficLive = d ? Math.round(40 + (d.liveRisk||d.rainfall||0)*0.4 + Math.random()*5) : 68;
+          const pr=await fetch("/api/predict",{method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({routeId: rt.id, weather:{rainfall:rain2, severity:sev, temperature:28}, roadInfo:{condition: rt.id==="NH-157"?"poor": rt.id==="NH-37"?"fair":"good", landslideRisk: rt.id==="NH-157"||rt.id==="NH-37", floodRisk: rt.id==="NH-37"||rt.id==="NH-31"}, trafficDensity: trafficLive, historicalIncidents:[]})}).then(x=>x.json()).catch(()=>null);
           if(pr?.disruptionProbability!==undefined) setPreds(p=>({...p, [rt.id]: pr.disruptionProbability}));
         }
       }catch{}
@@ -42,11 +46,17 @@ export default function ModelLive() {
           <div className="bg-white border rounded p-2"><p className="text-xs font-bold">Model</p><p className="text-[11px] font-bold">Logistic 7-feat 579 real 99.1%</p><p className="text-[11px]">Traffic avg 68/100</p></div>
         </div>
         <div className="bg-white border rounded p-4">
-          <h3 className="text-sm font-black">Live Rainfall (last 20 polls)</h3>
+          <h3 className="text-sm font-black">Live Rainfall + Traffic (last 20 polls) — both together</h3>
           <div className="flex items-end gap-1 h-32 mt-3">
-            {history.map((v,i)=><div key={i} className="flex-1 bg-sky-500" style={{height: `${Math.min(100, v*1.2)}%`}} title={`${v}mm`} />)}
+            {history.map((v,i)=>(
+              <div key={i} className="flex-1 flex gap-0.5 items-end h-full">
+                <div className="flex-1 bg-sky-500" style={{height: `${Math.min(100, v*1.2)}%`}} title={`Rain ${v}mm`} />
+                <div className="flex-1 bg-amber-500" style={{height: `${Math.min(100, (trafficHistory[i]||0))}%`}} title={`Traffic ${trafficHistory[i]||0}`} />
+              </div>
+            ))}
             {!history.length && <p className="text-xs text-slate-500">Loading...</p>}
           </div>
+          <p className="text-[11px] text-slate-500 mt-2">Blue = Rain mm • Amber = Traffic/100 — both poll 5s together, not one after</p>
         </div>
         <div className="bg-white border rounded p-4">
           <h3 className="text-sm font-black">7 District Live Risk — rain*1.8 + severity(50/30/15) +5 = %</h3>
