@@ -154,10 +154,10 @@ function LeafletMap({ routes, focusId, liveVehicles, incidents, alternateRoute }
     if(!incidents) return;
     incidents.forEach((inc:any)=>{
       if(!inc.location) return;
-      const isLand = inc.type==="landslide";
-      const col = inc.accessibilityStatus==="blocked" ? "#ef4444" : isLand ? "#f97316" : "#f59e0b";
-      const icon = isLand ? "⛰️" : inc.type==="flood" ? "🌊" : "📍";
-      const label = isLand ? "LANDSLIDE ZONE" : inc.type.toUpperCase();
+      const iconMap:Record<string,string>={landslide:"⛰️", flood:"🌊", road_block:"🚧", accident:"🚗", maintenance:"🔧", other:"📍"};
+      const icon = iconMap[inc.type] || "📍";
+      const col = inc.accessibilityStatus==="blocked" ? "#ef4444" : inc.type==="landslide" ? "#f97316" : "#f59e0b";
+      const label = inc.type==="road_block"?"ROAD BLOCK":inc.type.toUpperCase();
       leaflet.circleMarker([inc.location.latitude, inc.location.longitude], {radius:9, color:col, fillColor:col, fillOpacity:0.85, weight:2}).addTo(incidentLayerRef.current).bindTooltip(`<b>${icon} ${label}</b><br/>${inc.description||inc.type}<br/>${inc.state||""} ${inc.district||""}`,{sticky:true});
       leaflet.marker([inc.location.latitude, inc.location.longitude], {icon: leaflet.divIcon({html:`<div style="background:${col};color:white;font-size:9px;font-weight:900;padding:2px 5px;border-radius:4px;border:1px solid white;">${icon} ${isLand?"Landslide":"Flood"}</div>`, className:""})}).addTo(incidentLayerRef.current);
     });
