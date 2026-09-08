@@ -52,7 +52,7 @@ export default function ModelLive() {
           <div className="flex items-end gap-1 h-32 mt-3">
             {history.map((v,i)=>(
               <div key={i} className="flex-1 flex gap-0.5 items-end h-full">
-                <div className="flex-1 bg-sky-500" style={{height: `${Math.min(100, v*1.2)}%`}} title={`Rain ${v}mm`} />
+                <div className="flex-1 bg-sky-500" style={{height: `${Math.min(100, Math.max(8, v*4))}%`}} title={`Rain ${v}mm`} />
                 <div className="flex-1 bg-amber-500" style={{height: `${Math.min(100, (trafficHistory[i]||0))}%`}} title={`Traffic ${trafficHistory[i]||0}`} />
               </div>
             ))}
