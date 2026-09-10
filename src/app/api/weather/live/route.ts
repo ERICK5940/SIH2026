@@ -80,17 +80,9 @@ export async function GET(request: Request) {
       }
     });
   } catch (e: any) {
-    // Fallback cache last success 5 min so model page shows last real not 0/default — no interval gap
-    const g = (globalThis as any);
-    if (g.__WEATHER_LAST__ && Date.now() - g.__WEATHER_LAST__.ts < 300000) {
-      return NextResponse.json({ live: true, cached: true, timestamp: new Date().toISOString(), source: "cache 5m (429 fallback)", primary: g.__WEATHER_LAST__.primary, nerAvg: g.__WEATHER_LAST__.nerAvg, districts: g.__WEATHER_LAST__.districts }, { 
-        status: 200,
-        headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' }
-      });
-    }
-    const fallbackDistricts = NER_POINTS.map(p=> ({ name: p.name, severity: (["clear","cloudy","rain"] as const)[Math.floor(Math.random()*3)], rainfall: Math.round(Math.random()*40), temp: 28, code: 3 }));
-    return NextResponse.json({ live: false, error: e.message, fallback: { severity: "rain", rainfall: 45, temperature: 28 }, districts: fallbackDistricts, primary: { location: "Guwahati/Assam", severity: "cloudy", rainfall: fallbackDistricts[0].rainfall, temperature: 28 } }, { 
-      status: 200,
+    // No inputs = no default — return 503 so model page shows waiting, not fake 0
+    return NextResponse.json({ live: false, error: e.message }, { 
+      status: 503,
       headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' }
     });
   }
