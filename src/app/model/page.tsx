@@ -14,12 +14,12 @@ export default function ModelLive() {
   const [trafficHistory, setTrafficHistory] = useState<number[]>([]);
   const [preds, setPreds] = useState<Record<string,number>>({});
   const [now, setNow] = useState("");
-  useEffect(()=>{ setNow(new Date().toLocaleTimeString("en-IN",{timeZone:"Asia/Kolkata",hour12:false})); const id=setInterval(()=> setNow(new Date().toLocaleTimeString("en-IN",{timeZone:"Asia/Kolkata",hour12:false})),1000); return()=>clearInterval(id); },[]);
   useEffect(()=>{
     const load=async()=>{
       try{
         const r=await fetch("/api/weather/live",{cache:"no-store"}); const j=await r.json();
         setLive(j);
+        setNow(new Date().toLocaleTimeString("en-IN",{timeZone:"Asia/Kolkata",hour12:false}));
         const rain=j.districts?.[0]?.rainfall ?? Math.round(Math.random()*60);
         const trafficAvg = j.districts ? Math.round(j.districts.reduce((s:any,d:any)=> s + (d.rainfall||0),0)/j.districts.length*0.4 + 40) : 68;
         setHistory(h=> [...h.slice(-19), rain]);
@@ -34,6 +34,7 @@ export default function ModelLive() {
       }catch{
         const rain=Math.round(Math.random()*40); const tAvg=Math.round(40+Math.random()*20);
         setHistory(h=> [...h.slice(-19), rain]); setTrafficHistory(h=> [...h.slice(-19), tAvg]);
+        setNow(new Date().toLocaleTimeString("en-IN",{timeZone:"Asia/Kolkata",hour12:false}));
       }
     };
     load(); const id=setInterval(load,5000); return()=>clearInterval(id);
