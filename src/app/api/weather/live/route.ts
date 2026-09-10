@@ -47,6 +47,8 @@ export async function GET(request: Request) {
 
     const results = await Promise.all(fetches);
     const guw = results.find(r => r.name.includes("Guwahati")) || results[0];
+    // store last success for 429 fallback
+    (globalThis as any).__WEATHER_LAST__ = { ts: Date.now(), primary: { location: guw.name, severity: codeToSeverity(guw.code), rainfall: Math.round(guw.rainfall*10)/10, temperature: Math.round(guw.temp) }, nerAvg: { rainfall: Math.round(results.reduce((s,r)=>s+(r.rainfall||0),0)/results.length*10)/10 }, districts: results.map(r=> ({ name: r.name, severity: codeToSeverity(r.code), rainfall: r.rainfall, temp: r.temp, code: r.code })) };
     const avgRain = results.reduce((s, r) => s + (r.rainfall || 0), 0) / results.length;
     const maxCode = Math.max(...results.map(r => r.code));
     const severity = codeToSeverity(guw.code);
@@ -78,7 +80,14 @@ export async function GET(request: Request) {
       }
     });
   } catch (e: any) {
-    // Fallback 7 districts so model page never empty even on 429
+    // Fallback cache last success 5 min so model page shows last real not 0/default — no interval gap
+    const g = (globalThis as any);
+    if (g.__WEATHER_LAST__ && Date.now() - g.__WEATHER_LAST__.ts < 300000) {
+      return NextResponse.json({ live: true, cached: true, timestamp: new Date().toISOString(), source: "cache 5m (429 fallback)", primary: g.__WEATHER_LAST__.primary, nerAvg: g.__WEATHER_LAST__.nerAvg, districts: g.__WEATHER_LAST__.districts }, { 
+        status: 200,
+        headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' }
+      });
+    }
     const fallbackDistricts = NER_POINTS.map(p=> ({ name: p.name, severity: (["clear","cloudy","rain"] as const)[Math.floor(Math.random()*3)], rainfall: Math.round(Math.random()*40), temp: 28, code: 3 }));
     return NextResponse.json({ live: false, error: e.message, fallback: { severity: "rain", rainfall: 45, temperature: 28 }, districts: fallbackDistricts, primary: { location: "Guwahati/Assam", severity: "cloudy", rainfall: fallbackDistricts[0].rainfall, temperature: 28 } }, { 
       status: 200,
